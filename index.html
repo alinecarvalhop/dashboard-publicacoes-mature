@@ -1453,34 +1453,34 @@ break;
   }
   );
 }
-// ─── TRUE QUARTILES (EQUAL N) ─────────────────────────────────────────────────
-// higherBetter: true = Q1 is highest value, false = Q1 is lowest value
-function assignQuartiles(rows, key, higherBetter){
-  const valid = rows.filter(r => r[key] != null);
-  valid.sort((a,b) => higherBetter ? b[key]-a[key] : a[key]-b[key]);
-  const n = valid.length;
-  if(!n) return;
-  valid.forEach((r,i) => {
-    r['_q_'+key] = Math.min(4, Math.floor(i * 4 / n) + 1);
-  });
+// ─── TRUE QUARTILES POR GRUPO (CANAL+TURNO) ──────────────────────────────────────────
+// Q1-Q4 calculado DENTRO de cada combo: Chat TM | Chat TT | C2C TM | C2C TT
+// higherBetter: true = Q1 é maior valor (NPS/PR), false = Q1 é menor valor (TMO/TDI)
+function assignQuartilesByGroup(rows, key, higherBetter){
+  rows.forEach(r => { r['_q_'+key] = null; });
+  const groups = {};
   rows.forEach(r => {
- if(r[key]==null) r['_q_'+key] = null;
- });
+    if(r[key] == null) return;
+    const g = (r.CANAL||'') + '|' + (r.TURNO||'');
+    if(!groups[g]) groups[g] = [];
+    groups[g].push(r);
+  });
+  Object.values(groups).forEach(grp => {
+    grp.sort((a,b) => higherBetter ? b[key]-a[key] : a[key]-b[key]);
+    const n = grp.length;
+    grp.forEach((r,i) => {
+      r['_q_'+key] = Math.min(4, Math.floor(i * 4 / n) + 1);
+    });
+  });
 }
 function computeAllQuartiles(rows){
-  assignQuartiles(rows, 'NL', true);
-   
-// NPS Lineal: higher=better
-  assignQuartiles(rows, 'NC', true);
-// NPS Colab: higher=better
-  assignQuartiles(rows, 'TDI', false);
-// TDI: lower=better
-  assignQuartiles(rows, 'PR', true);
-// Produtividade: higher=better
-  assignQuartiles(rows, 'TMO', false);
-// TMO: lower=better
+  assignQuartilesByGroup(rows, 'NL',  true);   // NPS Lineal:    maior = melhor
+  assignQuartilesByGroup(rows, 'NC',  true);   // NPS Colab:     maior = melhor
+  assignQuartilesByGroup(rows, 'TDI', false);  // TDI:           menor = melhor
+  assignQuartilesByGroup(rows, 'PR',  true);   // Produtividade: maior = melhor
+  assignQuartilesByGroup(rows, 'TMO', false);  // TMO:           menor = melhor
 }
-// ─── FILTER UI ────────────────────────────────────────────────────────────────
+// ─── FILTER // ─── FILTER UI ────────────────────────────────────────────────────────────────
 function populateFilters(){
   const meses   = [...new Set(ALL.map(r=>r.MES))].sort();
   const canais  = [...new Set(ALL.map(r=>r.CANAL))].sort();
