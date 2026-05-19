@@ -1415,16 +1415,6 @@ function parseCSV(csv){
   });
 }
 const ALL = parseCSV(CSV);
-// ─── JOIN TMO into ALL ───────────────────────────────────────────────────────
-const _tmoMap = {};
-TMO_LDAP.forEach(t => {
-  const k = t.mes + "|" + t.ldap + "|" + t.turno;
-  _tmoMap[k] = t.tmo_on;  // minutes online TMO
-});
-ALL.forEach(r => {
-  const k = r.MES + "|" + r.LDAP + "|" + r.TURNO;
-  r.TMO = (_tmoMap[k] != null) ? +_tmoMap[k] : null;
-});
 // ─── FILTER STATE ─────────────────────────────────────────────────────────────
 let F = {
  mes:'', canal:'', turno:'', leader:'', ldap:'', dia:'', semana:'' };
@@ -1643,7 +1633,17 @@ function turnoBadge(t){
  return `<span style="background:${col}22;color:${col};padding:1px 7px;border-radius:9px;font-size:10px;font-weight:700">${t}</span>`;
  }
 function renderAgentTable(){
+  // ── join TMO_LDAP into rows (safe: TMO_LDAP already defined here) ──
+  const _tmoMap = {};
+  TMO_LDAP.forEach(t => {
+    const k = t.mes + "|" + t.ldap + "|" + t.turno;
+    _tmoMap[k] = t.tmo_on;
+  });
   const rows = getFiltered();
+  rows.forEach(r => {
+    const k = r.MES + "|" + r.LDAP + "|" + r.TURNO;
+    r.TMO = (_tmoMap[k] != null) ? +_tmoMap[k] : null;
+  });
   computeAllQuartiles(rows);
   
 // Summary  
