@@ -1480,6 +1480,14 @@ function computeAllQuartiles(rows){
   assignQuartilesByGroup(rows, 'PR',  true);   // Produtividade: maior = melhor
   assignQuartilesByGroup(rows, 'TMO', false);  // TMO:           menor = melhor
 }
+// ─── assignQuartiles (global, usado por pctQ / calcDispersion nas abas diagnóstico) ──────
+function assignQuartiles(rows, key, higherBetter){
+  const valid = rows.filter(r => r[key] != null);
+  valid.sort((a,b) => higherBetter ? b[key]-a[key] : a[key]-b[key]);
+  const n = valid.length;
+  valid.forEach((r,i) => { r['_q_'+key] = Math.min(4, Math.floor(i * 4 / n) + 1); });
+  rows.filter(r => r[key] == null).forEach(r => { r['_q_'+key] = null; });
+}
 // ─── FILTER // ─── FILTER UI ────────────────────────────────────────────────────────────────
 function populateFilters(){
   const meses   = [...new Set(ALL.map(r=>r.MES))].sort();
