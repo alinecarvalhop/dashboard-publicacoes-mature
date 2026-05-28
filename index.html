@@ -2203,68 +2203,75 @@ k:'help',      lbl:'Ajudas',        cor:'#00A650', desc:'Suporte como mentor/aju
 k:'op_failure',lbl:'Falha Operac.', cor:'#EF5350', desc:'Falhas operacionais'}];
 // Detalhamento por Líder — Abr/26
 const TEMPO_LEADER = [  {
-leader:'alicarvalho',  canal:'CHAT', ags:11, login:958.5,  online:736.9, break:139.0, coaching:17.9, training:1.3,  event:33.0, help:0,   op_failure:0,   break_pct:14.51, to_pct:76.88},  {
-leader:'thaidossanto', canal:'CHAT', ags:10, login:755.6,  online:555.6, break:106.0, coaching:14.6, training:0.2,  event:16.0, help:1.1, op_failure:0,   break_pct:14.03, to_pct:73.68},  {
-leader:'bkaroline',    canal:'CHAT', ags:12, login:1063.5, online:732.7, break:155.0, coaching:13.3, training:0.9,  event:38.9, help:0.1, op_failure:0,   break_pct:14.57, to_pct:68.90},  {
-leader:'isabmot',      canal:'CHAT', ags:11, login:858.3,  online:600.9, break:120.1, coaching:13.9, training:0.6,  event:35.4, help:0,   op_failure:0,   break_pct:14.00, to_pct:70.01},  {
-leader:'lrossetto',    canal:'C2C',  ags:21, login:1863.2, online:945.3, break:307.5, coaching:49.3, training:426.7,event:37.1, help:5.7, op_failure:0,   break_pct:16.51, to_pct:51.04}];
-// Detalhamento por LDAP — Abr/26 (completo)
+leader:'alicarvalho',  canal:'CHAT', ags:10, login:919.3,  online:711.7, break:167.1, coaching:20.6,  training:8.8,  event:11.2, help:0.0,   op_failure:0.0,   break_pct:18.18, to_pct:77.41},    {
+leader:'thaidossanto',  canal:'CHAT', ags:10, login:874.6,  online:684.6, break:135.7, coaching:27.6,  training:2.6,  event:14.8, help:9.22,   op_failure:0.0,   break_pct:15.52, to_pct:78.28},    {
+leader:'bkaroline',  canal:'CHAT', ags:11, login:1114.0,  online:865.4, break:199.0, coaching:22.5,  training:6.9,  event:19.9, help:0.2,   op_failure:0.0,   break_pct:17.87, to_pct:77.69},    {
+leader:'isabmot',  canal:'CHAT', ags:10, login:966.8,  online:788.5, break:152.0, coaching:11.1,  training:1.0,  event:14.2, help:0.0,   op_failure:0.0,   break_pct:15.73, to_pct:81.56},    {
+leader:'lrossetto',  canal:'C2C', ags:21, login:2279.8,  online:1716.9, break:352.8, coaching:68.1,  training:99.3,  event:39.0, help:3.69,   op_failure:0.0,   break_pct:15.47, to_pct:75.31}];
+// Detalhamento por LDAP — Mai/26 (parcial ate 28/05)
 const TEMPO_LDAP = [  {
-ldap:'albarbosa',    leader:'lrossetto',    canal:'C2C', turno:'TM', login:147.36, online:38.90,  break:58.24, coaching:2.54,  training:41.76, event:3.41,  help:0.01, op_failure:0, break_pct:39.52, to_pct:26.41},  {
-ldap:'claudoliveir', leader:'lrossetto',    canal:'C2C', turno:'TM', login:60.76,  online:40.19,  break:11.44, coaching:1.96,  training:0.57,  event:0.64,  help:0,    op_failure:0, break_pct:18.82, to_pct:66.14},  {
-ldap:'acruz',        leader:'thaidossanto', canal:'CHAT',turno:'TM', login:11.35,  online:6.71,   break:2.00,  coaching:0.88,  training:0.07,  event:0,     help:0,    op_failure:0, break_pct:17.66, to_pct:59.07},  {
-ldap:'leibarcelos',  leader:'bkaroline',    canal:'CHAT',turno:'TM', login:13.94,  online:11.57,  break:2.37,  coaching:0,     training:0,     event:0,     help:0,    op_failure:0, break_pct:17.02, to_pct:82.98},  {
-ldap:'aaugustinho',  leader:'alicarvalho',  canal:'CHAT',turno:'TM', login:75.19,  online:57.85,  break:12.55, coaching:2.12,  training:0,     event:2.67,  help:0,    op_failure:0, break_pct:16.69, to_pct:76.94},  {
-ldap:'ccnnasciment', leader:'isabmot',      canal:'CHAT',turno:'TT', login:36.18,  online:26.56,  break:5.93,  coaching:0.89,  training:0,     event:2.81,  help:0,    op_failure:0, break_pct:16.38, to_pct:73.40},  {
-ldap:'mudiniz',      leader:'lrossetto',    canal:'C2C', turno:'TM', login:59.21,  online:47.60,  break:9.51,  coaching:1.61,  training:0,     event:0.34,  help:0.15, op_failure:0, break_pct:16.05, to_pct:80.65},  {
-ldap:'czago',        leader:'bkaroline',    canal:'CHAT',turno:'TT', login:93.86,  online:9.14,   break:15.02, coaching:0.82,  training:0,     event:1.18,  help:0,    op_failure:0, break_pct:16.00, to_pct:9.74},  {
-ldap:'pmarinho',     leader:'lrossetto',    canal:'C2C', turno:'TM', login:33.02,  online:19.58,  break:5.22,  coaching:1.67,  training:6.07,  event:0.48,  help:0,    op_failure:0, break_pct:15.81, to_pct:59.29},  {
-ldap:'marcovenicio', leader:'lrossetto',    canal:'C2C', turno:'TM', login:99.36,  online:60.53,  break:15.58, coaching:2.16,  training:0,     event:4.07,  help:0,    op_failure:0, break_pct:15.67, to_pct:60.92},  {
-ldap:'jecosta',      leader:'lrossetto',    canal:'C2C', turno:'TM', login:86.95,  online:66.03,  break:13.60, coaching:6.10,  training:0,     event:0.64,  help:0,    op_failure:0, break_pct:15.64, to_pct:75.94},  {
-ldap:'amcaldeira',   leader:'thaidossanto', canal:'CHAT',turno:'TM', login:84.94,  online:67.79,  break:13.20, coaching:1.54,  training:0,     event:1.89,  help:0,    op_failure:0, break_pct:15.54, to_pct:79.82},  {
-ldap:'kavalle',      leader:'lrossetto',    canal:'C2C', turno:'TM', login:105.49, online:47.54,  break:16.33, coaching:1.14,  training:36.25, event:1.38,  help:0,    op_failure:0, break_pct:15.48, to_pct:45.07},  {
-ldap:'lecandido',    leader:'bkaroline',    canal:'CHAT',turno:'TT', login:99.07,  online:57.51,  break:15.31, coaching:1.98,  training:0.51,  event:5.28,  help:0,    op_failure:0, break_pct:15.45, to_pct:58.04},  {
-ldap:'lteixeira',    leader:'lrossetto',    canal:'C2C', turno:'TM', login:68.85,  online:0,      break:10.20, coaching:0,     training:57.15, event:1.49,  help:0,    op_failure:0, break_pct:14.82, to_pct:0},  {
-ldap:'cchimenez',    leader:'thaidossanto', canal:'CHAT',turno:'TM', login:103.91, online:59.36,  break:15.38, coaching:1.28,  training:0,     event:1.45,  help:0,    op_failure:0, break_pct:14.80, to_pct:57.12},  {
-ldap:'marlaraujo',   leader:'alicarvalho',  canal:'CHAT',turno:'TM', login:102.36, online:80.29,  break:15.08, coaching:1.28,  training:0,     event:5.30,  help:0,    op_failure:0, break_pct:14.73, to_pct:78.44},  {
-ldap:'uizfsilva',    leader:'alicarvalho',  canal:'CHAT',turno:'TM', login:100.44, online:81.29,  break:14.73, coaching:1.03,  training:0,     event:3.38,  help:0,    op_failure:0, break_pct:14.67, to_pct:80.94},  {
-ldap:'losouza',      leader:'alicarvalho',  canal:'CHAT',turno:'TM', login:105.87, online:83.54,  break:15.51, coaching:1.68,  training:0,     event:3.97,  help:0,    op_failure:0, break_pct:14.65, to_pct:78.91},  {
-ldap:'cafarias',     leader:'alicarvalho',  canal:'CHAT',turno:'TM', login:87.73,  online:68.57,  break:12.81, coaching:2.26,  training:0,     event:1.21,  help:0,    op_failure:0, break_pct:14.60, to_pct:78.16},  {
-ldap:'jamonteiro',   leader:'thaidossanto', canal:'CHAT',turno:'TM', login:76.40,  online:61.94,  break:11.13, coaching:1.72,  training:0,     event:0.97,  help:0,    op_failure:0, break_pct:14.57, to_pct:81.07},  {
-ldap:'amarquini',    leader:'lrossetto',    canal:'C2C', turno:'TM', login:108.31, online:42.98,  break:15.67, coaching:2.70,  training:41.33, event:2.87,  help:0,    op_failure:0, break_pct:14.47, to_pct:39.68},  {
-ldap:'gabrielaaiol', leader:'lrossetto',    canal:'C2C', turno:'TM', login:110.10, online:48.51,  break:15.85, coaching:1.41,  training:39.68, event:1.31,  help:0,    op_failure:0, break_pct:14.39, to_pct:44.06},  {
-ldap:'vdpiedade',    leader:'bkaroline',    canal:'CHAT',turno:'TM', login:106.59, online:86.05,  break:15.27, coaching:0,     training:0,     event:5.16,  help:0,    op_failure:0, break_pct:14.32, to_pct:80.73},  {
-ldap:'vfarias',      leader:'alicarvalho',  canal:'CHAT',turno:'TM', login:104.31, online:84.88,  break:14.91, coaching:1.17,  training:0,     event:3.25,  help:0,    op_failure:0, break_pct:14.30, to_pct:81.38},  {
-ldap:'tsgarbim',     leader:'lrossetto',    canal:'C2C', turno:'TM', login:65.87,  online:53.31,  break:9.41,  coaching:2.62,  training:0,     event:0.43,  help:0,    op_failure:0, break_pct:14.29, to_pct:80.93},  {
-ldap:'giselesosant', leader:'lrossetto',    canal:'C2C', turno:'TM', login:109.35, online:48.24,  break:15.57, coaching:1.70,  training:39.82, event:1.92,  help:0,    op_failure:0, break_pct:14.24, to_pct:44.12},  {
-ldap:'amcandido',    leader:'isabmot',      canal:'CHAT',turno:'TT', login:106.31, online:84.42,  break:15.10, coaching:2.43,  training:0.27,  event:3.99,  help:0,    op_failure:0, break_pct:14.21, to_pct:79.41},  {
-ldap:'bemarques',    leader:'thaidossanto', canal:'CHAT',turno:'TM', login:93.92,  online:76.97,  break:13.34, coaching:0.68,  training:0,     event:2.51,  help:0,    op_failure:0, break_pct:14.20, to_pct:81.96},  {
-ldap:'polivdaraujo', leader:'bkaroline',    canal:'CHAT',turno:'TT', login:100.47, online:82.17,  break:14.25, coaching:1.06,  training:0,     event:3.00,  help:0,    op_failure:0, break_pct:14.19, to_pct:81.78},  {
-ldap:'elaoliveira',  leader:'isabmot',      canal:'CHAT',turno:'TT', login:69.65,  online:41.77,  break:9.88,  coaching:1.11,  training:0,     event:2.83,  help:0,    op_failure:0, break_pct:14.19, to_pct:59.98},  {
-ldap:'aldmelo',      leader:'bkaroline',    canal:'CHAT',turno:'TT', login:92.68,  online:71.66,  break:13.08, coaching:1.85,  training:0,     event:3.04,  help:0.06, op_failure:0, break_pct:14.11, to_pct:77.39},  {
-ldap:'vfonorio',     leader:'isabmot',      canal:'CHAT',turno:'TM', login:109.50, online:87.27,  break:15.40, coaching:2.94,  training:0.01,  event:3.86,  help:0,    op_failure:0, break_pct:14.06, to_pct:79.70},  {
-ldap:'blvicente',    leader:'bkaroline',    canal:'CHAT',turno:'TM', login:107.61, online:85.55,  break:15.13, coaching:1.94,  training:0,     event:4.99,  help:0,    op_failure:0, break_pct:14.06, to_pct:79.50},  {
-ldap:'cdoliveira',   leader:'lrossetto',    canal:'C2C', turno:'TM', login:87.88,  online:67.60,  break:12.33, coaching:4.79,  training:0,     event:3.16,  help:0,    op_failure:0, break_pct:14.03, to_pct:76.93},  {
-ldap:'mandoliveira', leader:'isabmot',      canal:'CHAT',turno:'TT', login:93.15,  online:73.40,  break:13.04, coaching:2.51,  training:0,     event:4.20,  help:0,    op_failure:0, break_pct:14.00, to_pct:78.79},  {
-ldap:'mfvieira',     leader:'isabmot',      canal:'CHAT',turno:'TM', login:84.95,  online:67.27,  break:11.88, coaching:1.36,  training:0,     event:4.30,  help:0,    op_failure:0, break_pct:13.99, to_pct:79.20},  {
-ldap:'linessousa',   leader:'lrossetto',    canal:'C2C', turno:'TM', login:111.60, online:50.66,  break:15.61, coaching:1.01,  training:41.21, event:1.39,  help:0,    op_failure:0, break_pct:13.98, to_pct:45.39},  {
-ldap:'stdiniz',      leader:'alicarvalho',  canal:'CHAT',turno:'TM', login:103.56, online:79.93,  break:14.46, coaching:2.25,  training:0.58,  event:4.13,  help:0,    op_failure:0, break_pct:13.97, to_pct:77.18},  {
-ldap:'marfreitas',   leader:'thaidossanto', canal:'CHAT',turno:'TM', login:70.99,  online:54.38,  break:9.88,  coaching:1.62,  training:0,     event:0.90,  help:0,    op_failure:0, break_pct:13.92, to_pct:76.60},  {
-ldap:'kperrone',     leader:'thaidossanto', canal:'CHAT',turno:'TM', login:42.37,  online:32.91,  break:5.86,  coaching:0,     training:0,     event:1.94,  help:1.08, op_failure:0, break_pct:13.84, to_pct:80.21},  {
-ldap:'casbarreiros', leader:'thaidossanto', canal:'CHAT',turno:'TM', login:87.94,  online:69.58,  break:12.16, coaching:3.85,  training:0,     event:2.33,  help:0,    op_failure:0, break_pct:13.83, to_pct:79.13},  {
-ldap:'renataperei',  leader:'isabmot',      canal:'CHAT',turno:'TM', login:107.87, online:86.97,  break:14.96, coaching:0.79,  training:0,     event:5.14,  help:0,    op_failure:0, break_pct:13.87, to_pct:80.62},  {
-ldap:'juslima',      leader:'thaidossanto', canal:'CHAT',turno:'TM', login:101.97, online:56.52,  break:13.98, coaching:1.79,  training:0.11,  event:2.77,  help:0,    op_failure:0, break_pct:13.71, to_pct:55.43},  {
-ldap:'gbmontilha',   leader:'bkaroline',    canal:'CHAT',turno:'TM', login:109.97, online:89.55,  break:15.07, coaching:1.77,  training:0,     event:3.51,  help:0.06, op_failure:0, break_pct:13.71, to_pct:81.49},  {
-ldap:'vltrevizan',   leader:'lrossetto',    canal:'C2C', turno:'TM', login:98.45,  online:69.84,  break:13.44, coaching:5.65,  training:0,     event:2.33,  help:5.11, op_failure:0, break_pct:13.65, to_pct:76.12},  {
-ldap:'vitnasciment', leader:'lrossetto',    canal:'C2C', turno:'TM', login:113.02, online:48.10,  break:15.32, coaching:3.39,  training:42.17, event:1.56,  help:0,    op_failure:0, break_pct:13.56, to_pct:42.56},  {
-ldap:'maybalazshaz', leader:'bkaroline',    canal:'CHAT',turno:'TT', login:112.14, online:92.31,  break:15.17, coaching:1.15,  training:0,     event:3.49,  help:0,    op_failure:0, break_pct:13.53, to_pct:82.31},  {
-ldap:'phegoncalves', leader:'alicarvalho',  canal:'CHAT',turno:'TM', login:90.56,  online:73.25,  break:12.23, coaching:2.14,  training:0,     event:2.88,  help:0,    op_failure:0, break_pct:13.51, to_pct:80.89},  {
-ldap:'kroza',        leader:'bkaroline',    canal:'CHAT',turno:'TM', login:21.85,  online:18.79,  break:2.95,  coaching:0,     training:0,     event:0,     help:0,    op_failure:0, break_pct:13.50, to_pct:85.99},  {
-ldap:'luciagarcia',  leader:'lrossetto',    canal:'C2C', turno:'TT', login:103.86, online:82.64,  break:13.84, coaching:3.52,  training:0,     event:3.27,  help:0.47, op_failure:0, break_pct:13.33, to_pct:80.02},  {
-ldap:'lianadsilva',  leader:'alicarvalho',  canal:'CHAT',turno:'TM', login:90.09,  online:71.52,  break:12.00, coaching:2.38,  training:0,     event:3.97,  help:0,    op_failure:0, break_pct:13.32, to_pct:79.39},  {
-ldap:'adysantos',    leader:'lrossetto',    canal:'C2C', turno:'TM', login:111.15, online:49.34,  break:14.69, coaching:1.74,  training:41.85, event:2.54,  help:0,    op_failure:0, break_pct:13.22, to_pct:44.40},  {
-ldap:'cccsousa',     leader:'isabmot',      canal:'CHAT',turno:'TT', login:108.06, online:88.70,  break:12.29, coaching:0.51,  training:0.04,  event:4.98,  help:0,    op_failure:0, break_pct:11.37, to_pct:82.09},  {
-ldap:'ulissouza',    leader:'thaidossanto', canal:'CHAT',turno:'TM', login:81.78,  online:69.49,  break:9.09,  coaching:1.27,  training:0,     event:1.27,  help:0,    op_failure:0, break_pct:11.11, to_pct:84.97}];
+ldap:'kroza',    leader:'bkaroline',    canal:'CHAT', login:23.69,  online:5.1,  break:17.77, coaching:0,  training:0.81,  event:0,  help:0,    op_failure:0,   break_pct:75.01, to_pct:21.53},    {
+ldap:'phegoncalves',    leader:'alicarvalho',    canal:'CHAT', login:25.92,  online:5.71,  break:18.23, coaching:0,  training:1.98,  event:0,  help:0,    op_failure:0,   break_pct:70.33, to_pct:22.03},    {
+ldap:'czago',    leader:'bkaroline',    canal:'CHAT', login:40.19,  online:21.06,  break:16.64, coaching:0,  training:1.34,  event:1.14,  help:0,    op_failure:0,   break_pct:41.4, to_pct:52.4},    {
+ldap:'mariasilva',    leader:'isabmot',    canal:'CHAT', login:47.08,  online:28.39,  break:18.18, coaching:0,  training:0,  event:0.51,  help:0,    op_failure:0,   break_pct:38.62, to_pct:60.3},    {
+ldap:'acruz',    leader:'thaidossanto',    canal:'CHAT', login:44.93,  online:26.8,  break:16.86, coaching:0.63,  training:0,  event:0.64,  help:0,    op_failure:0,   break_pct:37.53, to_pct:59.65},    {
+ldap:'lyalves',    leader:'alicarvalho',    canal:'CHAT', login:56.26,  online:34.23,  break:17.64, coaching:1.13,  training:1.75,  event:1.51,  help:0,    op_failure:0,   break_pct:31.35, to_pct:60.84},    {
+ldap:'aldmelo',    leader:'bkaroline',    canal:'CHAT', login:63.59,  online:35.5,  break:18.07, coaching:4.66,  training:3.11,  event:2.25,  help:0,    op_failure:0,   break_pct:28.42, to_pct:55.83},    {
+ldap:'claudoliveir',    leader:'lrossetto',    canal:'C2C', login:118.12,  online:87.33,  break:23.61, coaching:5.1,  training:0,  event:1.99,  help:0.08,    op_failure:0,   break_pct:19.99, to_pct:73.93},    {
+ldap:'lteixeira',    leader:'lrossetto',    canal:'C2C', login:77.73,  online:10.37,  break:14.13, coaching:0,  training:53.23,  event:0,  help:0,    op_failure:0,   break_pct:18.18, to_pct:13.34},    {
+ldap:'elaoliveira',    leader:'isabmot',    canal:'CHAT', login:97.8,  online:76.9,  break:17.75, coaching:1.02,  training:0,  event:2.13,  help:0,    op_failure:0,   break_pct:18.15, to_pct:78.63},    {
+ldap:'stdiniz',    leader:'alicarvalho',    canal:'CHAT', login:114.96,  online:90.08,  break:20.07, coaching:2.58,  training:0.72,  event:1.52,  help:0,    op_failure:0,   break_pct:17.46, to_pct:78.36},    {
+ldap:'amcaldeira',    leader:'thaidossanto',    canal:'CHAT', login:111.89,  online:85.7,  break:19.17, coaching:3.98,  training:0.04,  event:3.0,  help:0,    op_failure:0,   break_pct:17.13, to_pct:76.59},    {
+ldap:'pmarinho',    leader:'lrossetto',    canal:'C2C', login:104.71,  online:81.79,  break:17.84, coaching:2.83,  training:0.3,  event:1.94,  help:0,    op_failure:0,   break_pct:17.04, to_pct:78.11},    {
+ldap:'cchimenez',    leader:'thaidossanto',    canal:'CHAT', login:58.89,  online:45.44,  break:10.02, coaching:1.99,  training:0,  event:1.44,  help:0,    op_failure:0,   break_pct:17.01, to_pct:77.16},    {
+ldap:'lecandido',    leader:'bkaroline',    canal:'CHAT', login:115.39,  online:88.37,  break:19.39, coaching:3.35,  training:0.66,  event:3.62,  help:0,    op_failure:0,   break_pct:16.8, to_pct:76.58},    {
+ldap:'mrmarques',    leader:'isabmot',    canal:'CHAT', login:95.17,  online:76.82,  break:15.96, coaching:0,  training:0.6,  event:1.79,  help:0,    op_failure:0,   break_pct:16.77, to_pct:80.72},    {
+ldap:'aaugustinho',    leader:'alicarvalho',    canal:'CHAT', login:112.55,  online:89.95,  break:18.86, coaching:1.71,  training:0,  event:2.02,  help:0,    op_failure:0,   break_pct:16.76, to_pct:79.92},    {
+ldap:'jecosta',    leader:'lrossetto',    canal:'C2C', login:116.8,  online:89.88,  break:19.54, coaching:5.05,  training:0,  event:2.12,  help:0.2,    op_failure:0,   break_pct:16.73, to_pct:76.95},    {
+ldap:'cafarias',    leader:'alicarvalho',    canal:'CHAT', login:105.31,  online:83.72,  break:17.1, coaching:3.7,  training:0.8,  event:0,  help:0,    op_failure:0,   break_pct:16.24, to_pct:79.5},    {
+ldap:'mudiniz',    leader:'lrossetto',    canal:'C2C', login:110.74,  online:86.5,  break:17.77, coaching:4.12,  training:0,  event:2.35,  help:0,    op_failure:0,   break_pct:16.05, to_pct:78.11},    {
+ldap:'marcovenicio',    leader:'lrossetto',    canal:'C2C', login:119.05,  online:96.74,  break:19.04, coaching:1.25,  training:0,  event:2.02,  help:0,    op_failure:0,   break_pct:15.99, to_pct:81.26},    {
+ldap:'kavalle',    leader:'lrossetto',    canal:'C2C', login:127.47,  online:96.08,  break:20.34, coaching:6.73,  training:2.2,  event:2.12,  help:0,    op_failure:0,   break_pct:15.96, to_pct:75.37},    {
+ldap:'marlaraujo',    leader:'alicarvalho',    canal:'CHAT', login:103.41,  online:84.46,  break:16.0, coaching:0.69,  training:0.17,  event:2.09,  help:0,    op_failure:0,   break_pct:15.47, to_pct:81.67},    {
+ldap:'uizfsilva',    leader:'alicarvalho',    canal:'CHAT', login:115.39,  online:92.81,  break:17.77, coaching:3.16,  training:0.11,  event:1.54,  help:0,    op_failure:0,   break_pct:15.4, to_pct:80.43},    {
+ldap:'camcsilva',    leader:'bkaroline',    canal:'CHAT', login:113.59,  online:92.05,  break:17.47, coaching:2.08,  training:0.16,  event:1.83,  help:0,    op_failure:0,   break_pct:15.38, to_pct:81.04},    {
+ldap:'amarquini',    leader:'lrossetto',    canal:'C2C', login:124.92,  online:91.86,  break:19.12, coaching:5.37,  training:6.63,  event:1.93,  help:0,    op_failure:0,   break_pct:15.31, to_pct:73.54},    {
+ldap:'losouza',    leader:'alicarvalho',    canal:'CHAT', login:106.67,  online:85.14,  break:16.31, coaching:2.17,  training:1.87,  event:1.18,  help:0,    op_failure:0,   break_pct:15.29, to_pct:79.82},    {
+ldap:'linessousa',    leader:'lrossetto',    canal:'C2C', login:128.5,  online:98.13,  break:19.6, coaching:5.14,  training:3.81,  event:1.82,  help:0,    op_failure:0,   break_pct:15.25, to_pct:76.37},    {
+ldap:'fenunes',    leader:'bkaroline',    canal:'CHAT', login:120.07,  online:98.23,  break:18.15, coaching:2.12,  training:0,  event:1.57,  help:0,    op_failure:0,   break_pct:15.12, to_pct:81.81},    {
+ldap:'vltrevizan',    leader:'lrossetto',    canal:'C2C', login:103.14,  online:82.43,  break:15.55, coaching:2.67,  training:0.02,  event:2.46,  help:0,    op_failure:0,   break_pct:15.08, to_pct:79.92},    {
+ldap:'wgomdsouza',    leader:'lrossetto',    canal:'C2C', login:125.37,  online:103.01,  break:18.85, coaching:1.41,  training:0,  event:2.1,  help:0,    op_failure:0,   break_pct:15.04, to_pct:82.16},    {
+ldap:'kperrone',    leader:'thaidossanto',    canal:'CHAT', login:39.51,  online:23.66,  break:5.94, coaching:0,  training:0.36,  event:0.33,  help:9.22,    op_failure:0,   break_pct:15.03, to_pct:59.88},    {
+ldap:'vitnasciment',    leader:'lrossetto',    canal:'C2C', login:100.22,  online:78.72,  break:14.97, coaching:3.7,  training:1.31,  event:1.52,  help:0,    op_failure:0,   break_pct:14.94, to_pct:78.55},    {
+ldap:'vdpiedade',    leader:'bkaroline',    canal:'CHAT', login:118.72,  online:97.27,  break:17.72, coaching:1.7,  training:0,  event:2.04,  help:0,    op_failure:0,   break_pct:14.93, to_pct:81.93},    {
+ldap:'gabrielaaiol',    leader:'lrossetto',    canal:'C2C', login:127.71,  online:100.63,  break:19.05, coaching:2.77,  training:3.43,  event:1.83,  help:0,    op_failure:0,   break_pct:14.92, to_pct:78.8},    {
+ldap:'albarbosa',    leader:'lrossetto',    canal:'C2C', login:120.36,  online:90.57,  break:17.89, coaching:4.48,  training:5.93,  event:1.49,  help:0,    op_failure:0,   break_pct:14.86, to_pct:75.25},    {
+ldap:'raisacsantos',    leader:'lrossetto',    canal:'C2C', login:123.01,  online:96.18,  break:18.23, coaching:3.8,  training:3.59,  event:1.23,  help:0,    op_failure:0,   break_pct:14.82, to_pct:78.19},    {
+ldap:'giselesosant',    leader:'lrossetto',    canal:'C2C', login:109.43,  online:82.36,  break:16.17, coaching:3.44,  training:4.93,  event:2.54,  help:0,    op_failure:0,   break_pct:14.78, to_pct:75.26},    {
+ldap:'mfvieira',    leader:'isabmot',    canal:'CHAT', login:110.16,  online:90.14,  break:16.19, coaching:2.47,  training:0,  event:1.36,  help:0,    op_failure:0,   break_pct:14.7, to_pct:81.83},    {
+ldap:'bemarques',    leader:'thaidossanto',    canal:'CHAT', login:98.21,  online:79.33,  break:14.31, coaching:4.23,  training:0,  event:0.35,  help:0,    op_failure:0,   break_pct:14.57, to_pct:80.78},    {
+ldap:'amcandido',    leader:'isabmot',    canal:'CHAT', login:110.9,  online:91.99,  break:16.14, coaching:1.14,  training:0,  event:1.63,  help:0,    op_failure:0,   break_pct:14.55, to_pct:82.95},    {
+ldap:'tsgarbim',    leader:'lrossetto',    canal:'C2C', login:79.24,  online:63.71,  break:11.49, coaching:2.04,  training:0,  event:2.0,  help:0,    op_failure:0,   break_pct:14.5, to_pct:80.4},    {
+ldap:'gbmontilha',    leader:'bkaroline',    canal:'CHAT', login:125.71,  online:103.54,  break:18.1, coaching:2.57,  training:0.15,  event:1.15,  help:0.2,    op_failure:0,   break_pct:14.4, to_pct:82.36},    {
+ldap:'polivdaraujo',    leader:'bkaroline',    canal:'CHAT', login:129.02,  online:105.84,  break:18.55, coaching:2.45,  training:0,  event:2.19,  help:0,    op_failure:0,   break_pct:14.38, to_pct:82.03},    {
+ldap:'renataperei',    leader:'isabmot',    canal:'CHAT', login:126.98,  online:106.86,  break:18.14, coaching:0,  training:0.31,  event:1.67,  help:0,    op_failure:0,   break_pct:14.29, to_pct:84.15},    {
+ldap:'vfarias',    leader:'alicarvalho',    canal:'CHAT', login:120.02,  online:97.15,  break:17.06, coaching:4.45,  training:0.03,  event:1.34,  help:0,    op_failure:0,   break_pct:14.21, to_pct:80.94},    {
+ldap:'adysantos',    leader:'lrossetto',    canal:'C2C', login:133.9,  online:103.38,  break:18.96, coaching:3.98,  training:5.59,  event:2.0,  help:0,    op_failure:0,   break_pct:14.16, to_pct:77.21},    {
+ldap:'jamonteiro',    leader:'thaidossanto',    canal:'CHAT', login:63.91,  online:52.1,  break:9.03, coaching:1.29,  training:0,  event:1.5,  help:0,    op_failure:0,   break_pct:14.13, to_pct:81.52},    {
+ldap:'blvicente',    leader:'bkaroline',    canal:'CHAT', login:128.72,  online:106.67,  break:18.18, coaching:2.03,  training:0,  event:1.83,  help:0,    op_failure:0,   break_pct:14.12, to_pct:82.87},    {
+ldap:'maybalazshaz',    leader:'bkaroline',    canal:'CHAT', login:135.29,  online:111.81,  break:19.0, coaching:1.55,  training:0.68,  event:2.25,  help:0,    op_failure:0,   break_pct:14.04, to_pct:82.64},    {
+ldap:'marfreitas',    leader:'thaidossanto',    canal:'CHAT', login:121.52,  online:97.41,  break:17.06, coaching:4.44,  training:0.65,  event:1.95,  help:0,    op_failure:0,   break_pct:14.04, to_pct:80.16},    {
+ldap:'vfonorio',    leader:'isabmot',    canal:'CHAT', login:125.44,  online:104.76,  break:17.47, coaching:0.85,  training:0,  event:2.36,  help:0,    op_failure:0,   break_pct:13.93, to_pct:83.51},    {
+ldap:'mandoliveira',    leader:'isabmot',    canal:'CHAT', login:130.8,  online:108.42,  break:18.06, coaching:2.46,  training:0,  event:1.87,  help:0,    op_failure:0,   break_pct:13.81, to_pct:82.89},    {
+ldap:'luciagarcia',    leader:'lrossetto',    canal:'C2C', login:129.21,  online:107.04,  break:17.78, coaching:1.91,  training:0,  event:2.49,  help:0,    op_failure:0,   break_pct:13.76, to_pct:82.84},    {
+ldap:'lianadsilva',    leader:'alicarvalho',    canal:'CHAT', login:58.84,  online:48.43,  break:8.06, coaching:1.0,  training:1.35,  event:0,  help:0,    op_failure:0,   break_pct:13.7, to_pct:82.31},    {
+ldap:'casbarreiros',    leader:'thaidossanto',    canal:'CHAT', login:121.16,  online:97.74,  break:16.29, coaching:4.24,  training:0.66,  event:2.24,  help:0,    op_failure:0,   break_pct:13.45, to_pct:80.67},    {
+ldap:'juslima',    leader:'thaidossanto',    canal:'CHAT', login:83.03,  online:68.12,  break:10.95, coaching:1.43,  training:0.67,  event:1.86,  help:0,    op_failure:0,   break_pct:13.19, to_pct:82.04},    {
+ldap:'csnunes',    leader:'lrossetto',    canal:'C2C', login:73.84,  online:47.83,  break:9.71, coaching:2.33,  training:8.32,  event:3.07,  help:2.58,    op_failure:0,   break_pct:13.15, to_pct:64.78},    {
+ldap:'ulissouza',    leader:'thaidossanto',    canal:'CHAT', login:131.51,  online:108.34,  break:16.1, coaching:5.38,  training:0.23,  event:1.45,  help:0,    op_failure:0,   break_pct:12.24, to_pct:82.38},    {
+ldap:'cdoliveira',    leader:'lrossetto',    canal:'C2C', login:26.34,  online:22.38,  break:3.12, coaching:0,  training:0,  event:0,  help:0.83,    op_failure:0,   break_pct:11.85, to_pct:84.97},    {
+ldap:'cccsousa',    leader:'isabmot',    canal:'CHAT', login:121.81,  online:104.19,  break:14.15, coaching:2.53,  training:0.1,  event:0.84,  help:0,    op_failure:0,   break_pct:11.62, to_pct:85.53},    {
+ldap:'ccnnasciment',    leader:'isabmot',    canal:'CHAT', login:0.62,  online:0,  break:0, coaching:0.62,  training:0,  event:0,  help:0,    op_failure:0,   break_pct:0.0, to_pct:0.0}];
 // helper: barra visual de composição de tempo
 function tempoBar(r, login){
   if(!login||login<=0) return '<span style="color:#CBD5E1;font-size:11px">—</span>';
