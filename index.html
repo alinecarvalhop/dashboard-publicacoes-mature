@@ -1991,7 +1991,10 @@ const evo = MONTHS.map(mo => {
       });
       
 // Quartil do agente dentro do time — filtra mesmo CANAL+TURNO (TM vs TM, TT vs TT)
-      const teamCopy = teamRows.filter(r=>r[m.key]!=null&&r.MES===mes&&r.CANAL===canal&&r.TURNO===turno).map(r=>({...r}));
+      // Usa canal+turno do lastRow (mês do dado), não do ref (mês mais recente)
+      const _qCanal = lastRow ? (lastRow.CANAL || canal) : canal;
+      const _qTurno = lastRow ? (lastRow.TURNO || turno) : turno;
+      const teamCopy = teamRows.filter(r=>r[m.key]!=null&&r.MES===mes&&r.CANAL===_qCanal&&r.TURNO===_qTurno).map(r=>({...r}));
       assignQuartiles(teamCopy, m.key, m.hb);
       const agentQ = teamCopy.find(r=>r.LDAP === ldapFilter);
       const q = agentQ ? agentQ['_q_'+m.key] : null;
