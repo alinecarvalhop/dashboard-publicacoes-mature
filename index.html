@@ -1417,18 +1417,18 @@ const CSV = `MES,LDAP,LEADER,CANAL,TURNO,NL,NC,TDI,PR,EM,QI,QE,QG,QF,SL,SC
 2026-06,mandoliveira,isabmot,CHAT,TT,100.0,100.0,0.0,3.31,66,,,,,2,2
 2026-06,blvicente,bkaroline,CHAT,TT,,,11.11,2.62,55,,,,,,
 2026-06,acruz,thaidossanto,CHAT,TM,100.0,100.0,0.0,4.12,66,,,,,1,1
-2026-06,losouza,alicarvalho,CHAT,TM,0.0,0.0,5.88,3.12,69,,,,,1,1
+2026-06,losouza,alicarvalho,CHAT,TM,0.0,50.0,5.88,3.12,69,,,,,1,2
 2026-06,lecandido,bkaroline,CHAT,TT,100.0,100.0,0.0,2.86,54,,,,,1,2
 2026-06,casbarreiros,thaidossanto,CHAT,TM,100.0,100.0,10.0,2.24,56,,,,,1,1
 2026-06,kavalle,lrossetto,C2C,TM,,,25.0,3.1,52,,,,,,
 2026-06,aldmelo,bkaroline,CHAT,TT,33.3,33.3,5.0,3.67,68,,,,,3,3
 2026-06,marlaraujo,alicarvalho,CHAT,TM,100.0,100.0,14.29,3.49,53,,,,,2,2
-2026-06,aaugustinho,alicarvalho,CHAT,TM,,,0.0,3.03,54,,,,,,
+2026-06,aaugustinho,alicarvalho,CHAT,TM,,100.0,0.0,3.03,54,,,,,,1
 2026-06,albarbosa,lrossetto,C2C,TM,-100.0,-100.0,10.0,2.45,48,,,,,1,1
 2026-06,vdpiedade,lrossetto,C2C,TM,100.0,0.0,0.0,2.43,69,,,,,1,2
 2026-06,pmarinho,lrossetto,C2C,TM,100.0,100.0,0.0,4.2,58,,,,,1,1
 2026-06,elaoliveira,isabmot,CHAT,TT,,,0.0,4.09,60,,,,,,
-2026-06,tsgarbim,lrossetto,C2C,TM,,,0.0,4.88,61,,,,,,
+2026-06,tsgarbim,lrossetto,C2C,TM,,0.0,0.0,4.88,61,,,,,,1
 2026-06,raisacsantos,lrossetto,C2C,TMAD,,,11.11,2.49,55,,,,,,
 2026-06,lianadsilva,alicarvalho,CHAT,TM,,,0.0,2.63,53,,,,,,
 2026-06,mariasilva,isabmot,CHAT,TT,100.0,100.0,10.53,3.04,75,,,,,1,1
@@ -1438,7 +1438,7 @@ const CSV = `MES,LDAP,LEADER,CANAL,TURNO,NL,NC,TDI,PR,EM,QI,QE,QG,QF,SL,SC
 2026-06,ccnnasciment,isabmot,CHAT,TT,,,0.0,2.21,53,,,,,,
 2026-06,wgomdsouza,lrossetto,C2C,TM,100.0,33.3,0.0,3.99,64,,,,,2,3
 2026-06,ulissouza,thaidossanto,CHAT,TM,100.0,100.0,0.0,2.36,58,,,,,1,1
-2026-06,cccsousa,isabmot,CHAT,TT,100.0,100.0,0.0,2.99,51,,,,,1,1
+2026-06,cccsousa,isabmot,CHAT,TT,100.0,100.0,0.0,2.99,51,,,,,1,2
 2026-06,bemarques,thaidossanto,CHAT,TM,,,0.0,2.51,61,,,,,,
 2026-06,polivdaraujo,bkaroline,CHAT,TT,100.0,100.0,0.0,3.13,64,,,,,1,2
 2026-06,giselesosant,lrossetto,C2C,TM,,,0.0,3.09,54,,,,,,
@@ -1453,9 +1453,9 @@ const CSV = `MES,LDAP,LEADER,CANAL,TURNO,NL,NC,TDI,PR,EM,QI,QE,QG,QF,SL,SC
 2026-06,lyalves,alicarvalho,CHAT,TM,100.0,100.0,0.0,3.26,64,,,,,1,1
 2026-06,amarquini,lrossetto,C2C,TM,100.0,100.0,0.0,2.85,52,,,,,1,1
 2026-06,adysantos,lrossetto,C2C,TM,,,33.33,2.09,48,,,,,,
-2026-06,phegoncalves,alicarvalho,CHAT,TM,100.0,100.0,0.0,1.88,63,,,,,1,1
+2026-06,phegoncalves,alicarvalho,CHAT,TM,100.0,100.0,0.0,1.88,63,,,,,1,2
 2026-06,stdiniz,alicarvalho,CHAT,TM,,100.0,0.0,2.47,60,,,,,,1
-2026-06,camcsilva,bkaroline,CHAT,TT,100.0,100.0,0.0,3.34,62,,,,,4,4
+2026-06,camcsilva,bkaroline,CHAT,TT,100.0,100.0,0.0,3.34,62,,,,,4,6
 2026-06,amcaldeira,thaidossanto,CHAT,TM,100.0,100.0,0.0,3.57,65,,,,,1,1
 2026-06,renataperei,isabmot,CHAT,TT,100.0,100.0,15.0,3.93,65,,,,,2,2
 2026-06,maybalazshaz,bkaroline,CHAT,TT,,,0.0,2.74,66,,,,,,
@@ -3493,7 +3493,7 @@ const C3=['#3483FA','#FF7B00','#00A650'];
 // Fonte: DM_CX_NPS_Y20_DETAIL + BT_CS_NPS_COLLAB_BY_REP · Jan–Mai/26
 // null = mês sem mínimo de Pesquisas (< 3)
 const CDU_LIN = [  {cdu:'Reputação', nps:[31.3,27.4,50.3,54.0,65.1,81.6], srv:[265.0,186.0,143.0,100.0,129.0,38.0]},    {cdu:'Reputação ME', nps:[48.6,62.9,69.7,56.5,60.3,86.4], srv:[173.0,97.0,76.0,62.0,68.0,22.0]},    {cdu:'Gestão de Anúncio', nps:[36.9,48.3,41.0,31.4,28.3,27.3], srv:[168.0,149.0,134.0,118.0,60.0,11.0]},    {cdu:'Potencializar', nps:[35.4,44.4,51.7,31.7,-2.0,22.2], srv:[130.0,99.0,89.0,63.0,50.0,9.0]},    {cdu:'PR - Técnica Proibida', nps:[57.8,70.5,66.7,59.7,37.5,36.4], srv:[147.0,112.0,135.0,67.0,32.0,11.0]},    {cdu:'PR - Prop. Intelectual', nps:[32.4,53.4,53.7,78.3,50.0,50.0], srv:[179.0,116.0,147.0,69.0,48.0,8.0]},    {cdu:'PR - Artigos Proibidos', nps:[32.1,38.0,68.4,17.1,47.1,-25.0], srv:[81.0,71.0,38.0,35.0,34.0,4.0]},    {cdu:'Qualidade de Foto', nps:[70.2,74.2,89.5,46.2,33.3,0.0], srv:[47.0,31.0,19.0,13.0,9.0,3.0]},    {cdu:'Antes de Publicar', nps:[0.0,38.5,0.0,0.0,-50.0,null], srv:[10.0,13.0,15.0,12.0,4.0,null]}];
-const CDU_COL = [  {cdu:'Reputação', nps:[23.9,17.2,50.7,54.3,61.9,72.5], srv:[285.0,203.0,148.0,105.0,134.0,40.0]},    {cdu:'Reputação ME', nps:[48.1,62.2,66.7,56.7,52.7,87.0], srv:[183.0,98.0,84.0,67.0,74.0,23.0]},    {cdu:'Gestão de Anúncio', nps:[30.0,41.6,40.9,25.8,18.5,38.5], srv:[190.0,166.0,137.0,128.0,65.0,13.0]},    {cdu:'Potencializar', nps:[18.6,33.9,38.4,21.4,-11.3,0.0], srv:[156.0,112.0,99.0,70.0,62.0,12.0]},    {cdu:'PR - Técnica Proibida', nps:[56.6,70.5,66.2,50.7,25.7,41.7], srv:[152.0,112.0,139.0,71.0,35.0,12.0]},    {cdu:'PR - Prop. Intelectual', nps:[17.1,48.4,38.9,72.0,38.2,55.6], srv:[211.0,124.0,167.0,75.0,55.0,9.0]},    {cdu:'PR - Artigos Proibidos', nps:[11.5,32.5,64.1,-22.6,27.5,-50.0], srv:[96.0,80.0,39.0,53.0,40.0,6.0]},    {cdu:'Qualidade de Foto', nps:[66.0,75.0,89.5,35.7,33.3,0.0], srv:[50.0,32.0,19.0,14.0,9.0,3.0]},    {cdu:'Despacho Vendas', nps:[8.0,6.1,24.3,20.0,78.6,33.3], srv:[25.0,33.0,37.0,15.0,14.0,3.0]},    {cdu:'Antes de Publicar', nps:[0.0,20.0,-16.7,-33.3,-33.3,null], srv:[16.0,15.0,18.0,18.0,3.0,null]},    {cdu:'Pós-Compra Vendedor', nps:[27.6,23.8,20.0,28.6,0.0,null], srv:[29.0,21.0,15.0,7.0,5.0,null]}];
+const CDU_COL = [  {cdu:'Reputação', nps:[23.9,17.2,50.7,54.3,61.9,74.5], srv:[285.0,203.0,148.0,105.0,134.0,47.0]},    {cdu:'Reputação ME', nps:[48.1,62.2,66.7,56.7,52.7,73.1], srv:[183.0,98.0,84.0,67.0,74.0,26.0]},    {cdu:'Gestão de Anúncio', nps:[30.0,41.6,40.9,25.8,18.5,38.5], srv:[190.0,166.0,137.0,128.0,65.0,13.0]},    {cdu:'Potencializar', nps:[18.6,33.9,38.4,21.4,-11.3,0.0], srv:[156.0,112.0,99.0,70.0,62.0,12.0]},    {cdu:'PR - Técnica Proibida', nps:[56.6,70.5,66.2,50.7,25.7,30.8], srv:[152.0,112.0,139.0,71.0,35.0,13.0]},    {cdu:'PR - Prop. Intelectual', nps:[17.1,48.4,38.9,72.0,38.2,60.0], srv:[211.0,124.0,167.0,75.0,55.0,10.0]},    {cdu:'PR - Artigos Proibidos', nps:[11.5,32.5,64.1,-22.6,27.5,-50.0], srv:[96.0,80.0,39.0,53.0,40.0,6.0]},    {cdu:'Qualidade de Foto', nps:[66.0,75.0,89.5,35.7,33.3,0.0], srv:[50.0,32.0,19.0,14.0,9.0,3.0]},    {cdu:'Despacho Vendas', nps:[8.0,6.1,24.3,20.0,78.6,33.3], srv:[25.0,33.0,37.0,15.0,14.0,3.0]},    {cdu:'Antes de Publicar', nps:[0.0,20.0,-16.7,-33.3,-33.3,null], srv:[16.0,15.0,18.0,18.0,3.0,null]},    {cdu:'Pós-Compra Vendedor', nps:[27.6,23.8,20.0,28.6,0.0,null], srv:[29.0,21.0,15.0,7.0,5.0,null]}];
 // ─── TMO POR PROCESSO (PRO_PROCESS_NAME via join NPS) ────────────────────────
 // Fonte: BT_CX_REP_METRICS_CS × DM_CX_NPS_Y20_DETAIL · Jan–Mai/26
 // PRODUTIVIDADE por processo × combo — Fonte: BT_CX_REP_METRICS_CS × DM_CX_NPS_Y20_DETAIL
@@ -4350,7 +4350,7 @@ onPct:[61.83,56.66,54.35,50.12,59.33,null],offPct:[84.86,88.30,85.09,84.36,83.00
 onPct:[60.40,60.06,58.28,59.67,61.52,null],offPct:[86.77,88.50,89.02,83.13,82.00,null],casosOn:[6252,5554,6474,1924,3352,null],casosOff:[2804,2147,2569,800,1365,null]},  c2cTM: {
 onPct:[72.96,72.36,74.87,67.10,65.01,null],offPct:[82.96,88.60,83.20,75.36,70.00,null],casosOn:[2311,1921,2352,1605,1750,null],casosOff:[1502,965,1286,633,798,null]}};
 const STATIC = {
-  npsLin:{chatTM:[46.4,50.7,55.5,46.0,47.3,62.1],chatTT:[46.4,50.7,55.5,46.0,47.3,62.1],c2cTM:[12.0,29.9,48.2,55.4,33.3,28.6]},  npsCol:{chatTM:[35.7,41.5,52.6,37.7,29.9,46.4],chatTT:[36.0,44.2,42.3,36.7,48.9,48.8],c2cTM:[9.2,13.3,36.1,28.9,-14.3,14.3]},  npsGapLin:[23.8,.9,15.2,17.6,-28.1], npsGapCol:[18.8,6.4,15.5,22.8,-22.3],  estDim:{
+  npsLin:{chatTM:[46.4,50.7,55.5,46.0,47.3,62.1],chatTT:[46.4,50.7,55.5,46.0,47.3,62.1],c2cTM:[12.0,29.9,48.2,55.4,33.3,28.6]},  npsCol:{chatTM:[35.7,41.5,52.6,37.7,null,null],chatTT:[36.0,44.2,42.3,36.7,null,null],c2cTM:[9.2,13.3,36.1,28.9,null,null]},  npsGapLin:[23.8,.9,15.2,17.6,-28.1], npsGapCol:[18.8,6.4,15.5,22.8,-22.3],  estDim:{
 i:[52,54,57,65,null],e:[23,29,36,40,null],g:[37,39,38,36,null],f:[68,67,68,62,null]},  
 // Fonte: BT_CX_REP_METRICS_CS · SUM(NUM)/SUM(DEN) por canal/turno · Jan–Mai/26
   tmo:{chatTM:[29.48,30.69,29.89,31.7,33.86,31.06],chatTT:[32.24,31.22,31.46,32.85,32.01,31.67],c2cTM:[17.54,17.94,18.39,20.22,19.99,16.66]},  tmoC:{cTM:[29.48,30.69,29.89,31.7,33.86,31.06],cTT:[32.24,31.22,31.46,32.85,32.01,31.67],c2c:[17.54,17.94,18.39,20.22,19.99,16.66],oTM:[14.07,13.06,12.59,16.0,14.54,13.78],oC2C:[14.07,13.06,12.59,16.0,14.54,13.78]},  tdi:{chatTM:[4.74,5.12,5.16,5.98,3.19,2.4],chatTT:[5.34,5.36,5.55,4.96,3.39,2.95],c2cTM:[5.1,6.94,6.33,6.58,5.19,6.94]},  to:{chatTM:[82.81,83.53,82.56,80.75,81.62,83.78],chatTT:[83.96,83.77,84.52,80.62,82.43,84.64],c2cTM:[83.07,82.82,81.86,78.88,79.42,81.17]},  toOnl:[null,2414.5,1015.2,1997.8,10215.5,3081.0],toLog:[null,3512.3,1457.4,2748.2,14397.3,3788.6]};
