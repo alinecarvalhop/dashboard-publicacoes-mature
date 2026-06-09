@@ -1525,7 +1525,7 @@ function assignQuartilesByGroup(rows, key, higherBetter, srvKey){
     if(r[key] == null) return;
     // Exclui agentes com pesquisas insuficientes (evita artefatos de mês parcial)
     if(srvKey && (r[srvKey] == null || r[srvKey] < MIN_Q_SURVEYS_NPS)) return;
-    const g = (r.CANAL||'') + '|' + (r.TURNO||'');
+    const g = (r.CANAL||'') + '|' + (r.TURNO||'') + '|' + (r.LEADER||'');
     if(!groups[g]) groups[g] = [];
     groups[g].push(r);
   });
@@ -1544,7 +1544,7 @@ function computeAllQuartiles(rows){
   assignQuartilesByGroup(rows, 'PR',  true);        // Produtividade: maior = melhor
   assignQuartilesByGroup(rows, 'TMO', false);       // TMO:           menor = melhor
 }
-// ─── assignQuartiles (agrupa por CANAL+TURNO — TM vs TM, TT vs TT) ──────────────────────
+// ─── assignQuartiles (agrupa por CANAL+TURNO+LEADER — cada líder é seu próprio universo) ──
 function assignQuartiles(rows, key, higherBetter){
   const srvKey = key === 'NL' ? 'SL' : (key === 'NC' ? 'SC' : null);
   rows.forEach(r => { r['_q_'+key] = null; });
@@ -1552,7 +1552,7 @@ function assignQuartiles(rows, key, higherBetter){
   rows.forEach(r => {
     if(r[key] == null) return;
     if(srvKey && (r[srvKey] == null || r[srvKey] < MIN_Q_SURVEYS_NPS)) return;
-    const g = (r.CANAL||'') + '|' + (r.TURNO||'');
+    const g = (r.CANAL||'') + '|' + (r.TURNO||'') + '|' + (r.LEADER||'');
     if(!groups[g]) groups[g] = [];
     groups[g].push(r);
   });
@@ -1990,11 +1990,12 @@ const evo = MONTHS.map(mo => {
         return r ? r[m.key] : null;
       });
       
-// Quartil do agente dentro do time — filtra mesmo CANAL+TURNO (TM vs TM, TT vs TT)
-      // Usa canal+turno do lastRow (mês do dado), não do ref (mês mais recente)
-      const _qCanal = lastRow ? (lastRow.CANAL || canal) : canal;
-      const _qTurno = lastRow ? (lastRow.TURNO || turno) : turno;
-      const teamCopy = teamRows.filter(r=>r[m.key]!=null&&r.MES===mes&&r.CANAL===_qCanal&&r.TURNO===_qTurno).map(r=>({...r}));
+// Quartil do agente dentro do time — filtra mesmo CANAL+TURNO+LEADER (cada líder = universo próprio)
+      // Usa canal+turno+leader do lastRow (mês do dado), não do ref (mês mais recente)
+      const _qCanal  = lastRow ? (lastRow.CANAL  || canal)  : canal;
+      const _qTurno  = lastRow ? (lastRow.TURNO  || turno)  : turno;
+      const _qLeader = lastRow ? (lastRow.LEADER || leader) : leader;
+      const teamCopy = teamRows.filter(r=>r[m.key]!=null&&r.MES===mes&&r.CANAL===_qCanal&&r.TURNO===_qTurno&&r.LEADER===_qLeader).map(r=>({...r}));
       assignQuartiles(teamCopy, m.key, m.hb);
       const agentQ = teamCopy.find(r=>r.LDAP === ldapFilter);
       const q = agentQ ? agentQ['_q_'+m.key] : null;
