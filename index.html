@@ -1712,11 +1712,23 @@ function renderAgentTable(){
     const k = r.MES + "|" + r.LDAP + "|" + r.TURNO;
     r.TMO = (_tmoMap[k] != null) ? +_tmoMap[k] : null;
   });
-  computeAllQuartiles(rows);
-  
-// Summary  
-const Q = {
-q1:0,q2:0,q3:0,q4:0};
+  // Quartis sempre calculados sobre o mês de referência (mes selecionado ou último mês)
+  const _refMesAT=F.mes||MONTHS[MONTHS.length-1];
+  const _refQAT=ALL.filter(r=>r.MES===_refMesAT&&r.TURNO!=='TMAD').map(r=>{
+    const k=r.MES+'|'+r.LDAP+'|'+r.TURNO;
+    return {...r,TMO:(_tmoMap[k]!=null)?+_tmoMap[k]:null};
+  });
+  computeAllQuartiles(_refQAT);
+  const _qmapAT={};
+  _refQAT.forEach(r=>{_qmapAT[r.LDAP+'|'+r.CANAL+'|'+r.TURNO]=r;});
+  rows.forEach(r=>{
+    const s=_qmapAT[r.LDAP+'|'+r.CANAL+'|'+r.TURNO];
+    r._q_NL=s?s._q_NL:null; r._q_NC=s?s._q_NC:null;
+    r._q_TDI=s?s._q_TDI:null; r._q_PR=s?s._q_PR:null; r._q_TMO=s?s._q_TMO:null;
+  });
+
+// Summary
+const Q = {q1:0,q2:0,q3:0,q4:0};
   rows.forEach(r=>{
  if(r._q_NL){
 Q['q'+r._q_NL]++}});
@@ -1770,18 +1782,14 @@ function buildComboMetrics(){
  return v.length?v.reduce((s,r)=>s+r[key],0)/v.length:null;
   }
   function qDist(arr, key){
-    const copy = arr.filter(r=>r[key]!=null).map(r=>({
-...r}));
+    const refMes=F.mes||MONTHS[MONTHS.length-1];
+    const copy = arr.filter(r=>r[key]!=null&&r.MES===refMes).map(r=>({...r}));
     assignQuartiles(copy, key, !['TDI'].includes(key));
-    const d={
-q1:0,q2:0,q3:0,q4:0};
-    copy.forEach(r=>{
- if(r['_q_'+key]) d['q'+r['_q_'+key]]++;
- });
+    const d={q1:0,q2:0,q3:0,q4:0};
+    copy.forEach(r=>{ if(r['_q_'+key]) d['q'+r['_q_'+key]]++; });
     return d;
   }
-  return {
- groups, avg, qDist };
+  return { groups, avg, qDist };
 }
 function fillCls(v,hb,thG,thO){
  if(v==null) return 'fb';
@@ -1854,15 +1862,13 @@ let agComboKey = null;
  return v.length?v.reduce((s,r)=>s+r[key],0)/v.length:null;
   }
   function qDist(key,hb){
- const c=rows.filter(r=>r[key]!=null).map(r=>({
-...r}));
- assignQuartiles(c,key,hb);
- const d={
-q1:0,q2:0,q3:0,q4:0};
- c.forEach(r=>{
-if(r['_q_'+key])d['q'+r['_q_'+key]]++});
- return d;
- }
+    const refMes=F.mes||MONTHS[MONTHS.length-1];
+    const c=rows.filter(r=>r[key]!=null&&r.MES===refMes).map(r=>({...r}));
+    assignQuartiles(c,key,hb);
+    const d={q1:0,q2:0,q3:0,q4:0};
+    c.forEach(r=>{ if(r['_q_'+key]) d['q'+r['_q_'+key]]++; });
+    return d;
+  }
   const targetMap = {
 NL:T.NL, NC:T.NL, TDI:T.TDI, PR:T.PR};
   const items = metrics.map(m=>{
@@ -1970,11 +1976,10 @@ const evo = MONTHS.map(mo => {
         return r ? r[m.key] : null;
       });
       
-// Quartil do agente dentro do time (usando teamRows)      
-const teamCopy = teamRows.filter(r=>r[m.key]!=null).map(r=>({
-...r}));
+// Quartil do agente dentro do time (usando teamRows do mesmo mês de referência)
+      const teamCopy = teamRows.filter(r=>r[m.key]!=null&&r.MES===mes).map(r=>({...r}));
       assignQuartiles(teamCopy, m.key, m.hb);
-      const agentQ = teamCopy.find(r=>r.LDAP === ldapFilter && r.MES===mes);
+      const agentQ = teamCopy.find(r=>r.LDAP === ldapFilter);
       const q = agentQ ? agentQ['_q_'+m.key] : null;
       if(v==null) return '';
       const fc = fillCls(v, m.hb, m.thG, m.thO);
@@ -1993,7 +1998,7 @@ const metaBadge = target!=null ? (() => {
       })() : '';
       
 // Evolução pills      
-const evoPills = evo.map((val,i) => val!=null        ? `<span style="font-size:8.5px;background:${fillCls(val,m.hb,m.thG,m.thO)==='fg'?'#E8F5E9':fillCls(val,m.hb,m.thG,m.thO)==='fo'?'#FFF8E1':'#FFF1F0'};color:${fillCls(val,m.hb,m.thG,m.thO)==='fg'?'#2E7D32':fillCls(val,m.hb,m.thG,m.thO)==='fo'?'#E65100':'#C62828'};padding:1px 5px;border-radius:6px;font-weight:700">${['Jan','Fev','Mar','Abr','Mai'][i]}: ${m.fmt(val)}</span>`        : `<span style="font-size:8.5px;color:#CBD5E1">${['Jan','Fev','Mar','Abr','Mai'][i]}: —</span>`      ).join('');
+const evoPills = evo.map((val,i) => val!=null        ? `<span style="font-size:8.5px;background:${fillCls(val,m.hb,m.thG,m.thO)==='fg'?'#E8F5E9':fillCls(val,m.hb,m.thG,m.thO)==='fo'?'#FFF8E1':'#FFF1F0'};color:${fillCls(val,m.hb,m.thG,m.thO)==='fg'?'#2E7D32':fillCls(val,m.hb,m.thG,m.thO)==='fo'?'#E65100':'#C62828'};padding:1px 5px;border-radius:6px;font-weight:700">${['Jan','Fev','Mar','Abr','Mai','Jun'][i]}: ${m.fmt(val)}</span>`        : `<span style="font-size:8.5px;color:#CBD5E1">${['Jan','Fev','Mar','Abr','Mai','Jun'][i]}: —</span>`      ).join('');
       return `<div style="background:#F0F9FF;border:1px solid #BAE6FD;border-radius:9px;padding:9px 12px;min-width:140px;flex:1">        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#0369A1;margin-bottom:4px">${m.lbl} ${metaBadge}</div>        <div style="font-size:20px;font-weight:900;color:${vc};line-height:1">${m.fmt(v)}</div>        ${q ? `<div style="margin-top:3px">${
 qb(q)}
 </div>` : ''}        ${vsTeam!=null ? `<div style="font-size:9.5px;font-weight:700;${vsTeamCls};margin-top:2px">${
@@ -2198,8 +2203,18 @@ function renderLdapTable(tabId){
   const cols = LDAP_COLS[tabId];
   if(!cols) return;
   const rows = getFiltered().filter(r=>r.TURNO!=='TMAD');
-  computeAllQuartiles(rows);
-  
+  // Quartis sempre calculados sobre o mês de referência
+  const _refMesLT=F.mes||MONTHS[MONTHS.length-1];
+  const _refQLT=ALL.filter(r=>r.MES===_refMesLT&&r.TURNO!=='TMAD').map(r=>({...r}));
+  computeAllQuartiles(_refQLT);
+  const _qmapLT={};
+  _refQLT.forEach(r=>{_qmapLT[r.LDAP+'|'+r.CANAL+'|'+r.TURNO]=r;});
+  rows.forEach(r=>{
+    const s=_qmapLT[r.LDAP+'|'+r.CANAL+'|'+r.TURNO];
+    r._q_NL=s?s._q_NL:null; r._q_NC=s?s._q_NC:null;
+    r._q_TDI=s?s._q_TDI:null; r._q_PR=s?s._q_PR:null; r._q_TMO=s?s._q_TMO:null;
+  });
+
 // sort by primary metric desc  
 const sortCol = cols.find(c=>c.sort);
   if(sortCol) rows.sort((a,b)=>{
