@@ -1544,16 +1544,23 @@ function computeAllQuartiles(rows){
   assignQuartilesByGroup(rows, 'PR',  true);        // Produtividade: maior = melhor
   assignQuartilesByGroup(rows, 'TMO', false);       // TMO:           menor = melhor
 }
-// ─── assignQuartiles (global, usado por pctQ / calcDispersion nas abas diagnóstico) ──────
+// ─── assignQuartiles (agrupa por CANAL+TURNO — TM vs TM, TT vs TT) ──────────────────────
 function assignQuartiles(rows, key, higherBetter){
   const srvKey = key === 'NL' ? 'SL' : (key === 'NC' ? 'SC' : null);
-  const valid = rows.filter(r => r[key] != null &&
-    (!srvKey || (r[srvKey] != null && r[srvKey] >= MIN_Q_SURVEYS_NPS)));
-  valid.sort((a,b) => higherBetter ? b[key]-a[key] : a[key]-b[key]);
-  const n = valid.length;
-  valid.forEach((r,i) => { r['_q_'+key] = Math.min(4, Math.floor(i * 4 / n) + 1); });
-  rows.filter(r => r[key] == null || (srvKey && (r[srvKey] == null || r[srvKey] < MIN_Q_SURVEYS_NPS)))
-      .forEach(r => { r['_q_'+key] = null; });
+  rows.forEach(r => { r['_q_'+key] = null; });
+  const groups = {};
+  rows.forEach(r => {
+    if(r[key] == null) return;
+    if(srvKey && (r[srvKey] == null || r[srvKey] < MIN_Q_SURVEYS_NPS)) return;
+    const g = (r.CANAL||'') + '|' + (r.TURNO||'');
+    if(!groups[g]) groups[g] = [];
+    groups[g].push(r);
+  });
+  Object.values(groups).forEach(grp => {
+    grp.sort((a,b) => higherBetter ? b[key]-a[key] : a[key]-b[key]);
+    const n = grp.length;
+    grp.forEach((r,i) => { r['_q_'+key] = Math.min(4, Math.floor(i * 4 / n) + 1); });
+  });
 }
 // ─── FILTER // ─── FILTER UI ────────────────────────────────────────────────────────────────
 function populateFilters(){
@@ -1983,8 +1990,8 @@ const evo = MONTHS.map(mo => {
         return r ? r[m.key] : null;
       });
       
-// Quartil do agente dentro do time (usando teamRows do mesmo mês de referência)
-      const teamCopy = teamRows.filter(r=>r[m.key]!=null&&r.MES===mes).map(r=>({...r}));
+// Quartil do agente dentro do time — filtra mesmo CANAL+TURNO (TM vs TM, TT vs TT)
+      const teamCopy = teamRows.filter(r=>r[m.key]!=null&&r.MES===mes&&r.CANAL===canal&&r.TURNO===turno).map(r=>({...r}));
       assignQuartiles(teamCopy, m.key, m.hb);
       const agentQ = teamCopy.find(r=>r.LDAP === ldapFilter);
       const q = agentQ ? agentQ['_q_'+m.key] : null;
