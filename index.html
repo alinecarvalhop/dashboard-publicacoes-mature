@@ -1517,7 +1517,7 @@ break;
 // Q1-Q4 calculado DENTRO de cada combo: Chat TM | Chat TT | C2C TM | C2C TT
 // higherBetter: true = Q1 é maior valor (NPS/PR), false = Q1 é menor valor (TMO/TDI)
 // minSurveys: mínimo de pesquisas para incluir no cálculo (NPS apenas)
-const MIN_Q_SURVEYS_NPS = 5; // mínimo de pesquisas para atribuir quartil de NPS
+const MIN_Q_SURVEYS_NPS = 1; // mínimo de pesquisas para atribuir quartil de NPS
 function assignQuartilesByGroup(rows, key, higherBetter, srvKey){
   rows.forEach(r => { r['_q_'+key] = null; });
   const groups = {};
