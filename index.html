@@ -3192,12 +3192,14 @@ function renderProduDiag(elId){
   const pos=[],evo=[],neg=[],det=[];
   const diagLbl=getDiagLabel();
   const pOn ={
-chatTM:ON_OFF.chatTM.onPct.map(v=>v/100), chatTT:ON_OFF.chatTT.onPct.map(v=>v/100), c2cTM:ON_OFF.c2cTM.onPct.map(v=>v/100)};
+chatTM:ON_OFF.chatTM.onPct.map(v=>v!=null?v/100:null), chatTT:ON_OFF.chatTT.onPct.map(v=>v!=null?v/100:null), c2cTM:ON_OFF.c2cTM.onPct.map(v=>v!=null?v/100:null)};
   const pOff={
-chatTM:ON_OFF.chatTM.offPct.map(v=>v/100),chatTT:ON_OFF.chatTT.offPct.map(v=>v/100),c2cTM:ON_OFF.c2cTM.offPct.map(v=>v/100)};
+chatTM:ON_OFF.chatTM.offPct.map(v=>v!=null?v/100:null),chatTT:ON_OFF.chatTT.offPct.map(v=>v!=null?v/100:null),c2cTM:ON_OFF.c2cTM.offPct.map(v=>v!=null?v/100:null)};
   const geralA=(k)=>pOn[k].map((_,i)=>{
-const n=(pOn[k][i]||0)*(ON_OFF[k].casosOn[i]||0)+(pOff[k][i]||0)*(ON_OFF[k].casosOff[i]||0);
-const d=Math.max(1,(ON_OFF[k].casosOn[i]||0)+(ON_OFF[k].casosOff[i]||0));
+const cOn=ON_OFF[k].casosOn[i], cOff=ON_OFF[k].casosOff[i];
+if(cOn==null&&cOff==null) return null;
+const n=(pOn[k][i]||0)*(cOn||0)+(pOff[k][i]||0)*(cOff||0);
+const d=Math.max(1,(cOn||0)+(cOff||0));
 return+(n/d).toFixed(4);
 });
   
@@ -3478,7 +3480,7 @@ return{
 label:lbl,data,backgroundColor:clr,borderRadius:4,borderSkipped:false}}
 function oL(mn,mx,cb=v=>v){
 return{
-responsive:true,maintainAspectRatio:false,plugins:{
+responsive:true,maintainAspectRatio:false,spanGaps:false,plugins:{
 legend:{
 position:'top',labels:{
 boxWidth:10,padding:11,font:{
@@ -4605,16 +4607,18 @@ v.casos?.toLocaleString()}
 // Produ ON vs OFF por canal    
 // ON_OFF.xxx.onPct e offPct estão em % (ex: 61.83) → dividir por 100 para escala 0-1    
 const pOn ={
-chatTM:ON_OFF.chatTM.onPct.map(v=>v/100), chatTT:ON_OFF.chatTT.onPct.map(v=>v/100), c2cTM:ON_OFF.c2cTM.onPct.map(v=>v/100)};
+chatTM:ON_OFF.chatTM.onPct.map(v=>v!=null?v/100:null), chatTT:ON_OFF.chatTT.onPct.map(v=>v!=null?v/100:null), c2cTM:ON_OFF.c2cTM.onPct.map(v=>v!=null?v/100:null)};
     const pOff={
-chatTM:ON_OFF.chatTM.offPct.map(v=>v/100), chatTT:ON_OFF.chatTT.offPct.map(v=>v/100), c2cTM:ON_OFF.c2cTM.offPct.map(v=>v/100)};
-    
+chatTM:ON_OFF.chatTM.offPct.map(v=>v!=null?v/100:null), chatTT:ON_OFF.chatTT.offPct.map(v=>v!=null?v/100:null), c2cTM:ON_OFF.c2cTM.offPct.map(v=>v!=null?v/100:null)};
+
 // ef_proOn / ef_proOff / ef_casosOnOff — filtrados pelos combos ativos
 const aC2=getActiveCombos();
     const proOnDs=[], proOffDs=[], casosDs=[];
     const geralArr=(pOnArr,pOffArr,casOn,casOff)=>pOnArr.map((_,i)=>{
-const n=((pOnArr[i]||0)*(casOn[i]||0)+(pOffArr[i]||0)*(casOff[i]||0));
-const d=Math.max(1,(casOn[i]||0)+(casOff[i]||0));
+const cOn=casOn[i], cOff=casOff[i];
+if(cOn==null&&cOff==null) return null;
+const n=((pOnArr[i]||0)*(cOn||0)+(pOffArr[i]||0)*(cOff||0));
+const d=Math.max(1,(cOn||0)+(cOff||0));
 return+(n/d).toFixed(4);
 });
     if(aC2.some(c=>c.key==='chatTM')){
