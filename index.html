@@ -2036,8 +2036,8 @@ const showLeaderTDI = !tabId || tabId==='tdi' || tabId==='overview';
     const leaderTDIByMes = TDI_BY_LEADER[leader] || MONTHS.map(()=>null);
     const lastLeaderTDI  = [...leaderTDIByMes].reverse().find(v=>v!=null);
     const leaderTeamRows = ALL.filter(r => r.LEADER === leader && r.TURNO !== 'TMAD');
-    const leaderAgCount  = [...new Set(leaderTeamRows.filter(r=>r.MES===MONTHS[3]).map(r=>r.LDAP))].length ||                           [...new Set(leaderTeamRows.filter(r=>r.MES===MONTHS[2]).map(r=>r.LDAP))].length;
-    const leaderEvo = leaderTDIByMes.map((val,i) => val!=null      ? `<span style="font-size:8.5px;background:${val<=T.TDI?'#E8F5E9':val<=6.5?'#FFF8E1':'#FFF1F0'};color:${val<=T.TDI?'#2E7D32':val<=6.5?'#E65100':'#C62828'};padding:1px 5px;border-radius:6px;font-weight:700">${['Jan','Fev','Mar','Abr','Mai'][i]}: ${val}%</span>`      : `<span style="font-size:8.5px;color:#CBD5E1">${['Jan','Fev','Mar','Abr','Mai'][i]}: —</span>`    ).join('');
+    const leaderAgCount  = [...new Set(leaderTeamRows.filter(r=>r.MES===MONTHS[MONTHS.length-1]).map(r=>r.LDAP))].length ||                           [...new Set(leaderTeamRows.filter(r=>r.MES===MONTHS[MONTHS.length-2]).map(r=>r.LDAP))].length;
+    const leaderEvo = leaderTDIByMes.map((val,i) => val!=null      ? `<span style="font-size:8.5px;background:${val<=T.TDI?'#E8F5E9':val<=6.5?'#FFF8E1':'#FFF1F0'};color:${val<=T.TDI?'#2E7D32':val<=6.5?'#E65100':'#C62828'};padding:1px 5px;border-radius:6px;font-weight:700">${(MONTH_LABELS[MONTHS[i]]||MONTHS[i]||'')}: ${val}%</span>`      : `<span style="font-size:8.5px;color:#CBD5E1">${(MONTH_LABELS[MONTHS[i]]||MONTHS[i]||'')}: —</span>`    ).join('');
     const ok = lastLeaderTDI!=null && lastLeaderTDI<=T.TDI;
     leaderTDICard = `<div style="background:#F5F3FF;border:1px solid #C4B5FD;border-radius:9px;padding:9px 12px;min-width:140px;flex:1">      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#6D28D9;margin-bottom:4px">        TDI% — Equipe do Leader        <span style="font-size:8.5px;font-weight:700;color:${ok?'#16A34A':'#DC2626'};background:${ok?'#F0FDF4':'#FFF1F0'};padding:1px 5px;border-radius:6px;margin-left:4px">${ok?'✓ meta':'✗ meta'}</span>      </div>      <div style="font-size:20px;font-weight:900;color:${ok?'#16A34A':'#DC2626'};line-height:1">${lastLeaderTDI!=null?lastLeaderTDI+'%':'—'}</div>      <div style="font-size:9.5px;color:#64748B;margin-top:2px">Leader: <strong>${leader}</strong> · ${leaderAgCount} ag.</div>      <div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:5px">${leaderEvo}</div>    </div>`;
   }
@@ -2392,17 +2392,16 @@ label:'CHAT TT', color:'#FF7B00', to:[69.4,63.2,67.3,62.1,65.43], jan:69.4},    
 label:'C2C',     color:'#00A650', to:[69.1,53.2,37.5,48.5,71.85], jan:69.1}
   ];
   const cards = canais.map(c=>{
-    const v = c.to[4];
- 
-// Mai    
-const prev = c.to[3];
+    const v = c.to[5]??c.to[4]??c.to[3];
+// último mês disponível
+const prev = c.to[4]??c.to[3];
  
 // Abr    
 const mom = v - prev;
     const vsJan = v - c.jan;
     const color = v>=70?'#16A34A':v>=55?'#D97706':'#DC2626';
     const bgGrad = v>=70?'linear-gradient(135deg,#16A34A,#22C55E)':v>=55?'linear-gradient(135deg,#D97706,#F59E0B)':'linear-gradient(135deg,#DC2626,#EF4444)';
-    const momStr = `${mom>=0.1?'▲':mom<=-0.1?'▼':'→'} ${mom>0?'+':''}${mom.toFixed(1)} pp vs Abr`;
+    const momStr = `${mom>=0.1?'▲':mom<=-0.1?'▼':'→'} ${mom>0?'+':''}${mom.toFixed(1)} pp vs mês ant.`;
     const momColor = mom>=0.5?'#dcfce7':mom<=-0.5?'#fee2e2':'#f1f5f9';
     const momTxtColor = mom>=0.5?'#15803D':mom<=-0.5?'#B91C1C':'#64748B';
     
@@ -2466,7 +2465,7 @@ h`:'—'}</td>    <td style="padding:7px 11px;min-width:130px">${tempoBar(r, r.l
 function renderTMOGeralBand(){
   const el = document.getElementById('gb_tmo_tab');
   if(!el) return;
-  const mes = F.mes || '2026-05';
+  const mes = F.mes || MONTHS[MONTHS.length-1];
   const idx = MONTHS.indexOf(mes);
  const i = idx>=0?idx:3;
   
@@ -2570,7 +2569,7 @@ leaderSec}
 function renderTMOComboGrid(){
   const el = document.getElementById('cg_tmo_tab');
   if(!el) return;
-  const mes = F.mes || '2026-05';
+  const mes = F.mes || MONTHS[MONTHS.length-1];
   const idx = MONTHS.indexOf(mes);
   const i = idx>=0?idx:3;
   let allCombos = [    {
@@ -2698,12 +2697,10 @@ function getMetricVal(key, wKey, monthRows, leaderLdap){
     const vals = byMes.map(({
 mo,mrs})=>({
 mo, v: getMetricVal(m.key,m.wKey,mrs,subject)}));
-    const vMai = vals.find(x=>x.mo==='2026-05')?.v;
-    const vAbr = vals.find(x=>x.mo==='2026-04')?.v;
-    const vMar = vals.find(x=>x.mo==='2026-03')?.v;
-    const vCur = vMai ?? vAbr ?? vMar;
-    const vPrev = vAbr ?? vMar;
-    const prevLbl = vAbr!=null?'Abr':vMar!=null?'Mar':null;
+    const _lastMes=MONTHS[MONTHS.length-1], _prevMes=MONTHS[MONTHS.length-2];
+    const vCur = vals.find(x=>x.mo===_lastMes)?.v ?? vals.find(x=>x.mo===_prevMes)?.v;
+    const vPrev = vals.find(x=>x.mo===_prevMes)?.v ?? vals.find(x=>x.mo===MONTHS[MONTHS.length-3])?.v;
+    const prevLbl = _prevMes ? (MONTH_LABELS[_prevMes]||_prevMes) : null;
     const mom = (vCur!=null&&vPrev!=null) ? vCur-vPrev : null;
     const aboveTgt = vCur!=null ? (m.hb?vCur>=m.tgt:vCur<=m.tgt) : null;
     return {
@@ -2760,7 +2757,7 @@ t}
 function renderOverviewDiagnostic(){
   const el = document.getElementById('ov_diag');
   if(!el) return;
-  const latest = getDiagRows('2026-05');
+  const latest = getDiagRows();
   const jan    = getDiagRows('2026-01');
   const chatTM=r=>r.CANAL==='CHAT'&&r.TURNO==='TM';
   const chatTT=r=>r.CANAL==='CHAT'&&r.TURNO==='TT';
@@ -2831,7 +2828,7 @@ const toPos=[], toNeg=[];
 k:'chatTM',lbl:'CHAT TM'},{
 k:'chatTT',lbl:'CHAT TT'},{
 k:'c2cTM',lbl:'C2C'}]    .filter(c=>aT.some(a=>a.key===c.k))    .forEach(c=>{
-      const v=STATIC.to[c.k][4]??STATIC.to[c.k][3], vj=STATIC.to[c.k][0];
+      const v=STATIC.to[c.k][5]??STATIC.to[c.k][4]??STATIC.to[c.k][3], vj=STATIC.to[c.k][0];
       if(v>=70) toPos.push(`${c.lbl}: ${v}% (+${(v-vj).toFixed(2)} pp vs Jan)`);
       else if(v>=60) toPos.push(`${c.lbl}: ${v}%`);
       else toNeg.push(`${c.lbl}: ${v}% — abaixo de 60% (Jan: ${vj}%)`);
@@ -2853,7 +2850,7 @@ function buildDiag4(pos, evo, neg, det){
   return `<div class="diag4">    ${sec('d4-pos','✅','Ponto Positivo',pos)}    ${sec('d4-evo','📈','Evolução',evo)}    ${sec('d4-neg','⚠️','Ponto de Atenção',neg)}    ${sec('d4-det','🔍','Detalhamento',det)}  </div>`;
 }
 function spark(vals,fmt,hb){
-  const L=['Jan','Fev','Mar','Abr','Mai'];
+  const L=MONTHS.map(m=>MONTH_LABELS[m]||m);
   return `<div class="d4-spark">${vals.map((v,i)=>{    if(v==null) return `<span style="color:#CBD5E1">${
 L[i]}
 :—</span>`;    const nxt=vals.slice(i+1).find(x=>x!=null);    const c=nxt!=null?(hb?nxt>v?'#16A34A':'#DC2626':nxt<v?'#16A34A':'#DC2626'):'#94A3B8';    const arr=i<vals.length-1&&vals[i+1]!=null?`<span class="d4-sparkarrow">›</span>`:'';    return `<span style="color:${c};font-weight:700">${
@@ -2871,7 +2868,7 @@ function renderNpsDispersao(elId){
   
 // Considera média ponderada dos últimos 2 meses (Mar + Abr)  
 // Mínimo de 10 Pesquisas combinados para ser elegível  
-const M2 = ['2026-04','2026-05'];
+const M2 = MONTHS.slice(-2);
   const MIN_Pesquisas = 10;
   const ldaps = [...new Set(ALL.filter(r=>M2.includes(r.MES)&&r.TURNO!=='TMAD').map(r=>r.LDAP))];
   const agents = ldaps.map(ldap=>{
@@ -3004,7 +3001,7 @@ const v1main=mainDiff?medK(q1,mainDiff.k):null, v4main=mainDiff?medK(q4,mainDiff
   el.innerHTML=diagHtml+`<div class="disp-wrap">${meterHtml}${compHtml}${groupHtml}</div>`;
 }
 // ─── HELPER: linhas de dados para diagnóstico (respeita filtro LDAP/Leader) ───
-function getDiagRows(mes='2026-05'){
+function getDiagRows(mes=MONTHS[MONTHS.length-1]){
   const base = ALL.filter(r=>r.TURNO!=='TMAD'&&r.MES===mes);
   if(F.ldap)   return base.filter(r=>r.LDAP===F.ldap);
   if(F.leader) return base.filter(r=>r.LEADER===F.leader);
@@ -3059,7 +3056,7 @@ if(v!=null)det.push(`<div class="d4-row"><span>${mLbl}/26</span><span style="fon
  else {
     
 // Diagnóstico por combo (equipe / leader / canal)    
-const latest=getDiagRows('2026-05');
+const latest=getDiagRows();
     const chatTM=r=>r.CANAL==='CHAT'&&r.TURNO==='TM', chatTT=r=>r.CANAL==='CHAT'&&r.TURNO==='TT', c2c=r=>r.CANAL==='C2C';
     const vTM=wa(latest.filter(chatTM),key,wKey), vTT=wa(latest.filter(chatTT),key,wKey), vC2C=wa(latest.filter(c2c),key,wKey);
     const aT=getActiveCombos();
@@ -3083,7 +3080,7 @@ const vals=F.leader        ? MONTHS.map(m=>wa(getDiagRows(m).filter(c.fn),key,wK
       const d=vMaiNps!=null&&vals[1]!=null?vMaiNps-vals[1]:null;
       if(d!=null){
 const good=d>1,bad=d<-1;
-evo.push(`<div class="d4-item ${good?'g':bad?'r':'b'}"><strong>${c.lbl}${diagLbl}:</strong> ${spark(vals,v=>v.toFixed(1),true)} <span style="font-size:10px">(Δ Fev→Mai: ${d>0?'+':''}${d.toFixed(1)})</span></div>`);
+evo.push(`<div class="d4-item ${good?'g':bad?'r':'b'}"><strong>${c.lbl}${diagLbl}:</strong> ${spark(vals,v=>v.toFixed(1),true)} <span style="font-size:10px">(Δ Fev→${(MONTH_LABELS[MONTHS[MONTHS.length-1]]||MONTHS[MONTHS.length-1]).split('/')[0]}: ${d>0?'+':''}${d.toFixed(1)})</span></div>`);
 }
     });
     combos.forEach(c=>{
@@ -3149,7 +3146,7 @@ combos.forEach(c=>{
     const d=vMai!=null&&vFev!=null?vMai-vFev:null;
     if(d!=null){
       const good=d<-0.5,bad=d>0.5;
-      evo.push(`<div class="d4-item ${good?'g':bad?'r':'b'}"><strong>${c.lbl}:</strong> ${spark(c.vals,v=>v.toFixed(2)+'%',false)} <span style="font-size:10px">(Δ Fev→Mai: ${d>0?'+':''}${d.toFixed(2)}%)</span></div>`);
+      evo.push(`<div class="d4-item ${good?'g':bad?'r':'b'}"><strong>${c.lbl}:</strong> ${spark(c.vals,v=>v.toFixed(2)+'%',false)} <span style="font-size:10px">(Δ Fev→${(MONTH_LABELS[MONTHS[MONTHS.length-1]]||MONTHS[MONTHS.length-1]).split('/')[0]}: ${d>0?'+':''}${d.toFixed(2)}%)</span></div>`);
     }
   });
 
@@ -3236,7 +3233,7 @@ lbl:lEntry?lEntry.canal:F.leader,k,tot:geralA(k)}];
   }
   const tgt=T.PR;
   combos.forEach(c=>{
-    const v=c.tot[4]??c.tot[3];
+    const v=c.tot[5]??c.tot[4]??c.tot[3];
     if(v!=null&&v>=tgt) pos.push(`<div class="d4-item g"><strong>${c.lbl}:</strong> ${v.toFixed(2)} — acima da meta ${tgt}</div>`);
   });
   
@@ -3254,10 +3251,10 @@ evo.push(`<div class="d4-item ${good?'g':bad?'r':'b'}"><strong>${c.lbl}:</strong
   
 // Atenção
 combos.forEach(c=>{    
-const v=c.tot[4]??c.tot[3];
+const v=c.tot[5]??c.tot[4]??c.tot[3];
     if(v!=null&&v<tgt) neg.push(`<div class="d4-item r"><strong>${c.lbl}:</strong> ${v.toFixed(2)} — abaixo da meta ${tgt} (falta ${(tgt-v).toFixed(2)})</div>`);
   });
-  const _pOnNow=pOn.chatTM[4]??pOn.chatTM[3];
+  const _pOnNow=pOn.chatTM[5]??pOn.chatTM[4]??pOn.chatTM[3];
   if(!F.ldap&&_pOnNow<pOn.chatTM[1])neg.push(`<div class="d4-item o">Produ ON em queda: CHAT TM ${_pOnNow.toFixed(4)} (Fev: ${pOn.chatTM[1].toFixed(4)})</div>`);
   
 // Detalhamento ON vs OFF (usa combos ativos)
@@ -3307,7 +3304,7 @@ key:'c2cTM',lbl:'C2C',vals:STATIC.tmo.c2cTM}];
 ...c,note:false}));
   }
   combos.forEach(c=>{
-    const v=c.vals[4]??c.vals[3];
+    const v=c.vals[5]??c.vals[4]??c.vals[3];
     const sfx=c.note?'':diagLbl;
 
 // evita repetir o LDAP no label quando já está no lbl
@@ -3322,7 +3319,7 @@ combos.forEach(c=>{
     const sfx=c.note?'':diagLbl;
     if(d!=null){
 const good=d<-0.5,bad=d>0.5;
-evo.push(`<div class="d4-item ${good?'g':bad?'r':'b'}"><strong>${c.lbl}${sfx}:</strong> ${spark(c.vals,v=>v.toFixed(1)+' min',false)} <span style="font-size:10px">(Δ Fev→Mai: ${d>0?'+':''}${d.toFixed(1)} min)</span></div>`);
+evo.push(`<div class="d4-item ${good?'g':bad?'r':'b'}"><strong>${c.lbl}${sfx}:</strong> ${spark(c.vals,v=>v.toFixed(1)+' min',false)} <span style="font-size:10px">(Δ Fev→${(MONTH_LABELS[MONTHS[MONTHS.length-1]]||MONTHS[MONTHS.length-1]).split('/')[0]}: ${d>0?'+':''}${d.toFixed(1)} min)</span></div>`);
 }
   });
 
@@ -3395,7 +3392,7 @@ function renderTMOProcDiag(){
   if(!el) return;
   
 // Rank processos by Mai TMO desc
-const tv=p=>(p.tmo[4]??p.tmo[3]);
+const tv=p=>(p.tmo[5]??p.tmo[4]??p.tmo[3]);
 const sorted=[...TMO_PROC].sort((a,b)=>(tv(b)||0)-(tv(a)||0));
   const maiorTMO=sorted[0], menorTMO=sorted[sorted.length-1];
 
@@ -3405,27 +3402,27 @@ const emAlta=TMO_PROC.filter(p=>tv(p)!=null&&p.tmo[0]!=null&&(tv(p)-p.tmo[0])>2)
 
 // OFF excedido
 const offExc=[    {
-c:'C2C OFF',v:TMO_ON_OFF.c2cTM.off[4]??TMO_ON_OFF.c2cTM.off[3]},    {
-c:'CHAT TT OFF',v:TMO_ON_OFF.chatTT.off[4]??TMO_ON_OFF.chatTT.off[3]},    {
-c:'CHAT TM OFF',v:TMO_ON_OFF.chatTM.off[4]??TMO_ON_OFF.chatTM.off[3]}
+c:'C2C OFF',v:TMO_ON_OFF.c2cTM.off[5]??TMO_ON_OFF.c2cTM.off[4]??TMO_ON_OFF.c2cTM.off[3]},    {
+c:'CHAT TT OFF',v:TMO_ON_OFF.chatTT.off[5]??TMO_ON_OFF.chatTT.off[4]??TMO_ON_OFF.chatTT.off[3]},    {
+c:'CHAT TM OFF',v:TMO_ON_OFF.chatTM.off[5]??TMO_ON_OFF.chatTM.off[4]??TMO_ON_OFF.chatTM.off[3]}
   ].filter(x=>x.v>TMO_THRESHOLD);
   const pos=[], neg=[];
-  if(menorTMO) pos.push(`Processo com menor TMO em Mai: <strong>${menorTMO.proc}</strong> (${tv(menorTMO)?.toFixed(2)} min)`);
+  if(menorTMO) pos.push(`Processo com menor TMO em Jun: <strong>${menorTMO.proc}</strong> (${tv(menorTMO)?.toFixed(2)} min)`);
   if(emMelhora.length) pos.push(`${emMelhora.length} processo(s) com TMO em queda vs Jan: ${emMelhora.map(p=>`<strong>${
 p.proc}
 </strong>`).join(', ')}`);
   const canalOK=[{
-c:'CHAT TM',v:TMO_ON_OFF.chatTM.on[4]??TMO_ON_OFF.chatTM.on[3]},{
-c:'C2C TM',v:TMO_ON_OFF.c2cTM.on[4]??TMO_ON_OFF.c2cTM.on[3]}].filter(x=>x.v&&x.v<=TMO_THRESHOLD);
+c:'CHAT TM',v:TMO_ON_OFF.chatTM.on[5]??TMO_ON_OFF.chatTM.on[4]??TMO_ON_OFF.chatTM.on[3]},{
+c:'C2C TM',v:TMO_ON_OFF.c2cTM.on[5]??TMO_ON_OFF.c2cTM.on[4]??TMO_ON_OFF.c2cTM.on[3]}].filter(x=>x.v&&x.v<=TMO_THRESHOLD);
   if(canalOK.length) pos.push(`Canal ON dentro do threshold (≤${TMO_THRESHOLD}min): ${canalOK.map(x=>`<strong>${
 x.c}
 : ${
 x.v.toFixed(2)}
 min</strong>`).join(', ')}`);
-  if(maiorTMO) neg.push(`Processo com maior TMO em Mai: <strong>${maiorTMO.proc}</strong> (${tv(maiorTMO)?.toFixed(2)} min, +${(tv(maiorTMO)-maiorTMO.tmo[0]).toFixed(2)} vs Jan)`);
+  if(maiorTMO) neg.push(`Processo com maior TMO em Jun: <strong>${maiorTMO.proc}</strong> (${tv(maiorTMO)?.toFixed(2)} min, +${(tv(maiorTMO)-maiorTMO.tmo[0]).toFixed(2)} vs Jan)`);
   if(emAlta.length) emAlta.slice(0,3).forEach(p=>neg.push(`<strong>${p.proc}</strong>: TMO subiu +${(tv(p)-p.tmo[0]).toFixed(2)} min vs Jan (${p.tmo[0]?.toFixed(2)} → ${tv(p)?.toFixed(2)} min)`));
   if(offExc.length) offExc.forEach(x=>neg.push(`<strong>${x.c}</strong>: TMO OFF acima do threshold — ${x.v.toFixed(2)} min (>${TMO_THRESHOLD})`));
-  const chatTTon=TMO_ON_OFF.chatTT.on[4]??TMO_ON_OFF.chatTT.on[3];
+  const chatTTon=TMO_ON_OFF.chatTT.on[5]??TMO_ON_OFF.chatTT.on[4]??TMO_ON_OFF.chatTT.on[3];
   if(chatTTon>TMO_THRESHOLD) neg.push(`<strong>CHAT TT ON</strong> excedeu ${TMO_THRESHOLD}min: ${chatTTon.toFixed(2)} min`);
   el.innerHTML=`<div class="diag-grid">    <div class="diag-card">      <div class="diag-kpi-title">⏱️ TMO por Processo — Impactos</div>      <div class="diag-body">        <div class="diag-col"><div class="diag-col-title pos">Processos Controlados</div>${pos.map(t=>`<div class="diag-item pos" style="font-size:11px">✅ ${
 t}
@@ -4527,7 +4524,7 @@ const ptEl=document.getElementById('tmo_proc_table');
 const comboLbl = activeCombos.length===1?` (${activeCombos[0].lbl})`:'';
       ptEl.innerHTML=`<div class="agent-table-wrap" style="max-height:280px"><table><thead><tr><th>Processo${comboLbl}</th>${CHARTM.map(m=>`<th>${
 m}
-</th>`).join('')}<th>Δ Jan→Mai</th></tr></thead><tbody>${        tableData.map(p=>{          const vM=p.tmo[4]??p.tmo[3];const d=vM!=null&&p.tmo[0]!=null?vM-p.tmo[0]:null;          return `<tr><td><strong>${
+</th>`).join('')}<th>Δ Jan→Jun</th></tr></thead><tbody>${        tableData.map(p=>{          const vM=p.tmo[5]??p.tmo[4]??p.tmo[3];const d=vM!=null&&p.tmo[0]!=null?vM-p.tmo[0]:null;          return `<tr><td><strong>${
 p.proc}
 </strong></td>${
 p.tmo.map(v=>`<td>${ndTmo(v)}</td>`).join('')}
@@ -4889,7 +4886,7 @@ trs}
 </tbody>      </table>    </div>`;}
 // ─── DIAGNÓSTICO AUTOMÁTICO ───────────────────────────────────────────────────
 function wavgArr(arr, key, wKey){
-const v=arr.filter(r=>r[key]!=null&&(!wKey||r[wKey]>0));  if(!v.length) return null;  if(wKey){const tw=v.reduce((s,r)=>s+r[wKey],0);return tw>0?v.reduce((s,r)=>s+r[key]*r[wKey],0)/tw:null;}  return v.reduce((s,r)=>s+r[key],0)/v.length;}function pctQ(arr,key,hb,q){  const c=arr.filter(r=>r[key]!=null).map(r=>({...r}));  assignQuartiles(c,key,hb);  const tot=c.length, inQ=c.filter(r=>r['_q_'+key]===q).length;  return tot?Math.round(inQ/tot*100):0;}function renderDiagnosticTab(){  const el = document.getElementById('diag_content');  if(!el) return;  const latest  = getDiagRows('2026-05');  const jan     = getDiagRows('2026-01');  const chatTM  = r=>r.CANAL==='CHAT'&&r.TURNO==='TM';  const chatTT  = r=>r.CANAL==='CHAT'&&r.TURNO==='TT';  const c2c     = r=>r.CANAL==='C2C';  const allLatest = getDiagRows('2026-05');  function kpiCard(title, icon, items_pos, items_neg, dispKey, dispHb, dispUnit=''){    const pos = items_pos.map(t=>`<div class="diag-item pos">✅ ${
+const v=arr.filter(r=>r[key]!=null&&(!wKey||r[wKey]>0));  if(!v.length) return null;  if(wKey){const tw=v.reduce((s,r)=>s+r[wKey],0);return tw>0?v.reduce((s,r)=>s+r[key]*r[wKey],0)/tw:null;}  return v.reduce((s,r)=>s+r[key],0)/v.length;}function pctQ(arr,key,hb,q){  const c=arr.filter(r=>r[key]!=null).map(r=>({...r}));  assignQuartiles(c,key,hb);  const tot=c.length, inQ=c.filter(r=>r['_q_'+key]===q).length;  return tot?Math.round(inQ/tot*100):0;}function renderDiagnosticTab(){  const el = document.getElementById('diag_content');  if(!el) return;  const latest  = getDiagRows();  const jan     = getDiagRows('2026-01');  const chatTM  = r=>r.CANAL==='CHAT'&&r.TURNO==='TM';  const chatTT  = r=>r.CANAL==='CHAT'&&r.TURNO==='TT';  const c2c     = r=>r.CANAL==='C2C';  const allLatest = getDiagRows();  function kpiCard(title, icon, items_pos, items_neg, dispKey, dispHb, dispUnit=''){    const pos = items_pos.map(t=>`<div class="diag-item pos">✅ ${
 t}
 </div>`).join('');    const neg = items_neg.map(t=>`<div class="diag-item neg">⚠️ ${
 t}
@@ -5019,7 +5016,7 @@ trendHtml}
 evoHtml}
 </div>    </div>`;  }).join('');
 // Strengths & Opportunities
-const allKpis = Object.values(LDAP_KPI_KEYS).flat();  const strengths=[], opps=[];  allKpis.forEach(kpi=>{    const latestRow = agentRows.find(r=>r.MES==='2026-05')||agentRows.find(r=>r.MES==='2026-04')||agentRows[agentRows.length-1];    if(!latestRow) return;    const v=latestRow[kpi.k], q=latestRow[`_q_${
+const allKpis = Object.values(LDAP_KPI_KEYS).flat();  const strengths=[], opps=[];  allKpis.forEach(kpi=>{    const latestRow = agentRows.find(r=>r.MES===MONTHS[MONTHS.length-1])||agentRows.find(r=>r.MES===MONTHS[MONTHS.length-2])||agentRows[agentRows.length-1];    if(!latestRow) return;    const v=latestRow[kpi.k], q=latestRow[`_q_${
 kpi.k}
 `];    if(v==null) return;    const fmt2=n=>n.toFixed(2)+(kpi.k==='TDI'?'%':'');    if(q===1) strengths.push(`${
 kpi.lbl}
@@ -5133,4 +5130,4 @@ thead}
 tbody}
 </tbody></table>`;}
 // ─── INIT ─────────────────────────────────────────────────────────────────────
-populateFilters();setupFilterListeners();document.getElementById('fMes').value='2026-05';F.mes='2026-05';refreshAll();initSection('agentes');</script></body></html>
+populateFilters();setupFilterListeners();const _initMes=MONTHS[MONTHS.length-1];document.getElementById('fMes').value=_initMes;F.mes=_initMes;refreshAll();initSection('agentes');</script></body></html>
