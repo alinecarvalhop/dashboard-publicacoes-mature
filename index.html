@@ -1078,7 +1078,7 @@ padding:8px 12px}}
 TMO_THRESHOLD}
  min) — por canal/turno</div>    <div id="tmo_excedido_content"></div>  </div>  <!-- DIAGNÓSTICO POR PROCESSO -->  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico — Impacto no TMO por Processo</div>    <div id="tmo_diag"></div>  </div>  <div style="margin-top:16px"><div id="ldap_tmo_tab"></div></div></section><!-- ═══ TMO AGENTES ═══ --><section class="section" id="tmo_agente">  <div class="sec-title">👤 TMO Agentes — Tempo Médio por Agente</div>  <div id="tmoagt_kpi" class="gband" style="border-top-color:#8B5CF6"></div>  <div class="grid2" style="margin-top:14px">    <div class="card">      <div class="card-t">📊 TMO médio por Canal (mês selecionado)</div>      <div id="tmoagt_canal"></div>    </div>    <div class="card">      <div class="card-t">🏆 Ranking por Líder — TMO médio ponderado</div>      <div id="tmoagt_leader"></div>    </div>  </div>  <div class="card" style="margin-top:14px">    <div class="card-t" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">      <span>👤 TMO por Agente (LDAP) — <span id="tmoagt_count" style="color:#8B5CF6;font-weight:900">0</span> agentes</span>      <div style="display:flex;gap:8px;align-items:center">        <label style="font-size:10.5px;font-weight:700;color:var(--muted)">Ordenar por</label>        <select id="tmoagt_sort" onchange="renderTmoAgtLdap()" style="padding:3px 7px;border:1.5px solid var(--border);border-radius:7px;font-size:11.5px">          <option value="tmo_total">TMO Total ↓</option>          <option value="tmo_on">TMO ON ↓</option>          <option value="tmo_off">TMO OFF ↓</option>          <option value="casos_on">Casos ON ↓</option>          <option value="ldap">LDAP A-Z</option>        </select>      </div>    </div>    <div id="tmoagt_ldap" style="margin-top:10px;overflow-x:auto"></div>  </div>  <div class="alert b" style="margin-top:14px">    ℹ️ <span>TMO ON = casos via CHAT e C2C · TMO OFF = casos via e-mail · TMO Total = média ponderada por casos · Fonte: BT_CX_REP_METRICS_CS</span>  </div></section><!-- ═══ PRODUTIVIDADE ═══ --><section class="section" id="produ_tab">  <div class="sec-title">⚡ Produtividade</div>  <div id="gb_produ_tab"></div>  <div id="diag_ldap_produ_tab"></div>  <div id="cg_produ_tab" class="combo-grid"></div>  <div class="leg">    <div class="li"><div class="ld" style="background:#3483FA"></div>CHAT TM</div>    <div class="li"><div class="ld" style="background:#FF7B00"></div>CHAT TT</div>    <div class="li"><div class="ld" style="background:#00A650"></div>C2C</div>  </div>  <!-- ABERTURA POR PROCESSO -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 Abertura por Processo — Produtividade Total mensal</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução da Produtividade por Processo</p><div class="cw"><canvas id="produ_proc_chart"></canvas></div></div>      <div id="produ_proc_table" style="overflow-y:auto;max-height:280px"></div>    </div>  </div>  <!-- PRODU ON / OFF / GERAL -->  <div class="card" style="margin-top:14px">    <div class="card-t">⚡ Produtividade ON (chat/c2c) · OFF (mail) · Geral — evolução mensal</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Produ ON vs OFF — canal/turno</p><div class="cw"><canvas id="ef_proOn"></canvas></div></div>      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Produ Geral — canal/turno</p><div class="cw"><canvas id="ef_proOff"></canvas></div></div>    </div>    <div class="card" style="margin-top:12px;box-shadow:none;border:1px solid var(--border)">      <div class="card-t">Volume de Casos ON vs OFF e Produ ON% vs OFF%</div>      <div class="grid2">        <div><div class="cw sm"><canvas id="ef_casosOnOff"></canvas></div></div>        <div><div class="cw sm"><canvas id="ef_proOnOffPct"></canvas></div></div>      </div>    </div>  </div>  <!-- PRODU POR PROCESSO: ON vs OFF -->  <div class="card" style="margin-top:14px">    <div class="card-t">📊 Produtividade ON vs OFF por Processo — Maio/26*</div>    <div id="produ_proc_on_off_table"></div>  </div>  <!-- CASOS COM TMO EXCEDIDO (impacta produtividade) -->  <div class="card" style="margin-top:14px">    <div class="card-t">🔴 Casos com TMO Excedido — impacto na Produtividade (threshold: ${
 TMO_THRESHOLD}
- min)</div>    <div id="produ_excedido_content"></div>  </div>  <!-- DIAGNÓSTICO POR PROCESSO -->  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico — Impacto na Produtividade por Processo</div>    <div id="produ_diag"></div>  </div>  <div style="margin-top:16px"><div id="ldap_produ_tab"></div></div></section><!-- ═══ TDI ═══ --><section class="section" id="tdi">  <div class="sec-title">📋 TDI</div>  <div id="gb_tdi"></div>  <div id="diag_ldap_tdi"></div>  <div id="cg_tdi" class="combo-grid"></div>  <div class="grid2">    <div class="card"><div class="card-t">TDI% — Evolução</div><div class="cw"><canvas id="tdi_line"></canvas></div></div>    <div class="card"><div class="card-t">TDI% — Comparativo</div><div class="cw"><canvas id="tdi_bar"></canvas></div></div>  </div>  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico TDI</div>    <div id="tdi_diag"></div>  </div>  <div style="margin-top:16px"><div id="ldap_tdi"></div></div></section><!-- ═══ TO ═══ --><section class="section" id="to">  <div class="sec-title">💻 Tempo Online — Cola de Publicações</div>  <!-- Resultado Tempo Online por Canal -->  <div id="to_canal_top" style="margin-bottom:14px"></div>  <div id="gb_to"></div>  <div id="cg_to" class="combo-grid"></div>  <div class="grid2">    <div class="card"><div class="card-t">Tempo Online% — Evolução Mensal</div><div class="cw"><canvas id="to_line"></canvas></div></div>    <div class="card"><div class="card-t">Composição Tempo — CHAT TM (horas)</div><div class="cw"><canvas id="to_comp"></canvas></div></div>  </div>  <!-- Detalhamento por Líder -->  <div class="card" style="margin-top:14px">    <div class="card-t">👤 Detalhamento de Tempo por Líder — Maio/26*</div>    <div id="to_leader_content"></div>  </div>  <!-- Detalhamento por LDAP -->  <div class="card" style="margin-top:14px">    <div class="card-t">⏸️ Detalhamento de Tempo por LDAP — Maio/26* (ordenado por Break%)</div>    <div id="to_pausa_content"></div>  </div></section><!-- ═══ EVOLUÇÃO POR LDAP ═══ --><section class="section" id="evolucao">  <div class="sec-title">📈 Evolução Mensal por LDAP</div>  <!-- Seletor de visão -->  <div class="tabs" style="margin-bottom:12px">    <button class="tab active" onclick="setEvoView('summary',this)">📊 Evolução por Rep (todas as métricas)</button>    <button class="tab" onclick="setEvoView('single',this)">📈 Detalhe por Métrica</button>  </div>  <!-- Visão: todas as métricas por rep -->  <div id="evo_summary"></div>  <!-- Visão: detalhe de uma métrica -->  <div id="evo_single" style="display:none">    <div class="tabs" id="evoTabs" style="margin-bottom:14px">      <button class="tab active" onclick="setEvoMetric('NL',this)">NPS Lineal</button>      <button class="tab" onclick="setEvoMetric('NC',this)">NPS Colab</button>      <button class="tab" onclick="setEvoMetric('TDI',this)">TDI%</button>      <button class="tab" onclick="setEvoMetric('PR',this)">Produtividade</button>    </div>    <div id="evo_content"></div>  </div></section><!-- ═══ DIAGNÓSTICO ═══ --><section class="section" id="diagnostico">  <div class="sec-title">🔍 Diagnóstico — Pontos Positivos & Oportunidades</div>  <div id="diag_content"></div></section></div><!-- /page --><footer>  <span>📦 BT_CX_REP_CALIBRATION_METRICS_CS · meli-bi-data.WHOWNER · FLAG_PLANNING=true</span>  <span>🔢 Quartis com distribuição igual (N/4 agentes por quartil, ordenado por performance)</span>  <span>⚠️ *Maio em curso até 17/05/2026</span></footer><script>
+ min)</div>    <div id="produ_excedido_content"></div>  </div>  <!-- DIAGNÓSTICO POR PROCESSO -->  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico — Impacto na Produtividade por Processo</div>    <div id="produ_diag"></div>  </div>  <div style="margin-top:16px"><div id="ldap_produ_tab"></div></div></section><!-- ═══ TDI ═══ --><section class="section" id="tdi">  <div class="sec-title">📋 TDI</div>  <div id="gb_tdi"></div>  <div id="diag_ldap_tdi"></div>  <div id="cg_tdi" class="combo-grid"></div>  <div class="grid2">    <div class="card"><div class="card-t">TDI% — Evolução</div><div class="cw"><canvas id="tdi_line"></canvas></div></div>    <div class="card"><div class="card-t">TDI% — Comparativo</div><div class="cw"><canvas id="tdi_bar"></canvas></div></div>  </div>  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico TDI</div>    <div id="tdi_diag"></div>  </div>  <div style="margin-top:16px"><div id="ldap_tdi"></div></div></section><!-- ═══ TO ═══ --><section class="section" id="to">  <div class="sec-title">💻 Tempo Online — Cola de Publicações</div>  <!-- Resultado Tempo Online por Canal -->  <div id="to_canal_top" style="margin-bottom:14px"></div>  <div id="gb_to"></div>  <div id="cg_to" class="combo-grid"></div>  <div class="grid2">    <div class="card"><div class="card-t">Tempo Online% — Evolução Mensal</div><div class="cw"><canvas id="to_line"></canvas></div></div>    <div class="card"><div class="card-t">Composição Tempo — CHAT TM (horas)</div><div class="cw"><canvas id="to_comp"></canvas></div></div>  </div>  <!-- Detalhamento por Líder -->  <div class="card" style="margin-top:14px">    <div class="card-t">👤 Detalhamento de Tempo por Líder — Maio/26*</div>    <div id="to_leader_content"></div>  </div>  <!-- Detalhamento por LDAP -->  <div class="card" style="margin-top:14px">    <div class="card-t">⏸️ Detalhamento de Tempo por LDAP — Maio/26* (ordenado por Break%)</div>    <div id="to_pausa_content"></div>  </div></section><!-- ═══ EVOLUÇÃO POR LDAP ═══ --><section class="section" id="evolucao">  <div class="sec-title">📈 Evolução Mensal por LDAP</div>  <!-- Seletor de visão -->  <div class="tabs" style="margin-bottom:12px">    <button class="tab active" onclick="setEvoView('summary',this)">📊 Evolução por Rep (todas as métricas)</button>    <button class="tab" onclick="setEvoView('single',this)">📈 Detalhe por Métrica</button>  </div>  <!-- Visão: todas as métricas por rep -->  <div id="evo_summary"></div>  <!-- Visão: detalhe de uma métrica -->  <div id="evo_single" style="display:none">    <div class="tabs" id="evoTabs" style="margin-bottom:14px">      <button class="tab active" onclick="setEvoMetric('NL',this)">NPS Lineal</button>      <button class="tab" onclick="setEvoMetric('NC',this)">NPS Colab</button>      <button class="tab" onclick="setEvoMetric('TDI',this)">TDI%</button>      <button class="tab" onclick="setEvoMetric('PR',this)">Produtividade</button>    </div>    <div id="evo_content"></div>  </div></section><!-- ═══ DIAGNÓSTICO ═══ --><section class="section" id="diagnostico">  <div class="sec-title">🔍 Diagnóstico — Pontos Positivos & Oportunidades</div>  <div id="diag_content"></div></section></div><!-- /page --><footer>  <span>📦 BT_CX_REP_CALIBRATION_METRICS_CS · meli-bi-data.WHOWNER · FLAG_PLANNING=true</span>  <span>🔢 Quartis com distribuição igual por Canal+Turno (todos os líderes do mesmo combo competem juntos)</span>  <span>⚠️ *Maio em curso até 17/05/2026</span></footer><script>
 // ─── DADOS BRUTOS (CSV) ──────────────────────────────────────────────────────
 const CSV = `MES,LDAP,LEADER,CANAL,TURNO,NL,NC,TDI,PR,EM,QI,QE,QG,QF,SL,SC
 2026-01,allmdasilva,lrossetto,C2C,TM,,,0.0,5.34,,,,,,,
@@ -1516,8 +1516,9 @@ break;
 }
 // ─── TRUE QUARTILES POR GRUPO (CANAL+TURNO) ──────────────────────────────────────────
 // Q1-Q4 calculado DENTRO de cada combo: Chat TM | Chat TT | C2C TM | C2C TT
-// higherBetter: true = Q1 é maior valor (NPS/PR), false = Q1 é menor valor (TMO/TDI)
-// minSurveys: mínimo de pesquisas para incluir no cálculo (NPS apenas)
+// Todos os líderes do mesmo canal+turno competem juntos (universo = canal+turno)
+// higherBetter: true = Q4 é maior valor (NPS/PR), false = Q4 é menor valor (TMO/TDI)
+// Distribuição: floor(n/4) por quartil, excedente distribuído a partir do Q1
 const MIN_Q_SURVEYS_NPS = 1; // mínimo de pesquisas para atribuir quartil de NPS
 function assignQuartilesByGroup(rows, key, higherBetter, srvKey){
   rows.forEach(r => { r['_q_'+key] = null; });
@@ -1526,15 +1527,21 @@ function assignQuartilesByGroup(rows, key, higherBetter, srvKey){
     if(r[key] == null) return;
     // Exclui agentes com pesquisas insuficientes (evita artefatos de mês parcial)
     if(srvKey && (r[srvKey] == null || r[srvKey] < MIN_Q_SURVEYS_NPS)) return;
-    const g = (r.CANAL||'') + '|' + (r.TURNO||'') + '|' + (r.LEADER||'');
+    const g = (r.CANAL||'') + '|' + (r.TURNO||'');
     if(!groups[g]) groups[g] = [];
     groups[g].push(r);
   });
   Object.values(groups).forEach(grp => {
-    grp.sort((a,b) => higherBetter ? b[key]-a[key] : a[key]-b[key]);
+    grp.sort((a,b) => higherBetter ? b[key]-a[key] : a[key]-b[key]); // desc melhor→Q1
     const n = grp.length;
+    const base = Math.floor(n / 4);
+    const extra = n % 4;
+    // ntile(4): extra agentes vão para Q1 (melhor) — cada quartil tem floor(n/4) ou floor(n/4)+1
+    const b1 = base + (extra >= 1 ? 1 : 0);
+    const b2 = b1 + base + (extra >= 2 ? 1 : 0);
+    const b3 = b2 + base + (extra >= 3 ? 1 : 0);
     grp.forEach((r,i) => {
-      r['_q_'+key] = Math.min(4, Math.floor(i * 4 / n) + 1);
+      r['_q_'+key] = i < b1 ? 1 : i < b2 ? 2 : i < b3 ? 3 : 4;
     });
   });
 }
@@ -1545,7 +1552,7 @@ function computeAllQuartiles(rows){
   assignQuartilesByGroup(rows, 'PR',  true);        // Produtividade: maior = melhor
   assignQuartilesByGroup(rows, 'TMO', false);       // TMO:           menor = melhor
 }
-// ─── assignQuartiles (agrupa por CANAL+TURNO+LEADER — cada líder é seu próprio universo) ──
+// ─── assignQuartiles (agrupa por CANAL+TURNO — todos os líderes do mesmo combo competem juntos) ──
 function assignQuartiles(rows, key, higherBetter){
   const srvKey = key === 'NL' ? 'SL' : (key === 'NC' ? 'SC' : null);
   rows.forEach(r => { r['_q_'+key] = null; });
@@ -1553,14 +1560,19 @@ function assignQuartiles(rows, key, higherBetter){
   rows.forEach(r => {
     if(r[key] == null) return;
     if(srvKey && (r[srvKey] == null || r[srvKey] < MIN_Q_SURVEYS_NPS)) return;
-    const g = (r.CANAL||'') + '|' + (r.TURNO||'') + '|' + (r.LEADER||'');
+    const g = (r.CANAL||'') + '|' + (r.TURNO||'');
     if(!groups[g]) groups[g] = [];
     groups[g].push(r);
   });
   Object.values(groups).forEach(grp => {
     grp.sort((a,b) => higherBetter ? b[key]-a[key] : a[key]-b[key]);
     const n = grp.length;
-    grp.forEach((r,i) => { r['_q_'+key] = Math.min(4, Math.floor(i * 4 / n) + 1); });
+    const base = Math.floor(n / 4);
+    const extra = n % 4;
+    const b1 = base + (extra >= 1 ? 1 : 0);
+    const b2 = b1 + base + (extra >= 2 ? 1 : 0);
+    const b3 = b2 + base + (extra >= 3 ? 1 : 0);
+    grp.forEach((r,i) => { r['_q_'+key] = i < b1 ? 1 : i < b2 ? 2 : i < b3 ? 3 : 4; });
   });
 }
 // ─── FILTER // ─── FILTER UI ────────────────────────────────────────────────────────────────
@@ -1993,12 +2005,10 @@ const evo = MONTHS.map(mo => {
         return r ? r[m.key] : null;
       });
       
-// Quartil do agente dentro do time — filtra mesmo CANAL+TURNO+LEADER (cada líder = universo próprio)
-      // Usa canal+turno+leader do lastRow (mês do dado), não do ref (mês mais recente)
+// Quartil do agente dentro do combo CANAL+TURNO (todos os líderes competem juntos)
       const _qCanal  = lastRow ? (lastRow.CANAL  || canal)  : canal;
       const _qTurno  = lastRow ? (lastRow.TURNO  || turno)  : turno;
-      const _qLeader = lastRow ? (lastRow.LEADER || leader) : leader;
-      const teamCopy = teamRows.filter(r=>r[m.key]!=null&&r.MES===mes&&r.CANAL===_qCanal&&r.TURNO===_qTurno&&r.LEADER===_qLeader).map(r=>({...r}));
+      const teamCopy = teamRows.filter(r=>r[m.key]!=null&&r.MES===mes&&r.CANAL===_qCanal&&r.TURNO===_qTurno).map(r=>({...r}));
       assignQuartiles(teamCopy, m.key, m.hb);
       const agentQ = teamCopy.find(r=>r.LDAP === ldapFilter);
       const q = agentQ ? agentQ['_q_'+m.key] : null;
