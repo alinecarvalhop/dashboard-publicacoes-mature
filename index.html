@@ -1074,7 +1074,7 @@ padding:8px 12px}}
 ·&nbsp;
  TM / TT &nbsp;
 ·&nbsp;
- Atualizado: 23/07/2026</p>  </div>  <div class="hdr-badges">    <div class="hbadge"><div class="v">59,7</div><div class="l">NPS Lineal Geral</div></div>    <div class="hbadge"><div class="v">56,8</div><div class="l">NPS Colab Geral</div></div>    <div class="hbadge"><div class="v">67</div><div class="l">Agentes</div></div>  </div></header><nav>  <a class="active" data-tab="agentes">📊 All Métricas</a>  <a data-tab="overview">🏠 Visão Geral</a>  <a data-tab="nps_lin">⭐ NPS Lineal</a>  <a data-tab="nps_col">🤝 NPS Colab</a>  <a data-tab="tmo_tab">⏱️ TMO</a>  <a data-tab="tmo_agente">👤 TMO Agentes</a>  <a data-tab="produ_tab">⚡ Produtividade</a>  <a data-tab="tdi">📋 TDI</a>  <a data-tab="to">💻 Tempo Online</a>  <a data-tab="evolucao">📈 Evolução por LDAP</a>  <a data-tab="diagnostico">🔍 Diagnóstico</a></nav><!-- FILTROS --><div class="fbar" id="fbar">  <label>Mês</label>  <select id="fMes"><option value="">Todos</option></select>  <label>Canal</label>  <select id="fCanal"><option value="">Todos</option></select>  <label>Turno</label>  <select id="fTurno"><option value="">Todos</option></select>  <label>Leader</label>  <select id="fLeader"><option value="">Todos</option></select>  <label>LDAP</label>  <select id="fLdap"><option value="">Todos</option></select>  <label>Dia</label>  <input type="date" id="fDia" style="padding:5px 9px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);background:#fff;outline:none" onchange="onFDia()">  <label>Semana</label>  <select id="fSemana" onchange="onFSemana()"><option value="">Todas</option></select>  <button class="reset" onclick="resetFilters()">↺ Limpar</button>  <span class="fcount" id="fcount"></span></div><div class="page"><!-- ═══ POR AGENTE ═══ --><section class="section active" id="agentes">  <div class="sec-title">📊 All Métricas — Quartilização Igual por Agente</div>  <div class="agent-summary" id="agSummary"></div>  <div class="agent-table-wrap">    <table id="agTable">      <thead>        <tr>          <th onclick="sortTable('ldap')">LDAP <span class="sort">↕</span></th>          <th onclick="sortTable('leader')">Leader <span class="sort">↕</span></th>          <th onclick="sortTable('canal')">Canal/Turno <span class="sort">↕</span></th>          <th onclick="sortTable('mes')">Mês <span class="sort">↕</span></th>          <th onclick="sortTable('nl')">NPS Lineal <span class="sort">↕</span></th>          <th>Q NPS Lin</th>          <th onclick="sortTable('nc')">NPS Colab <span class="sort">↕</span></th>          <th>Q NPS Col</th>          <th onclick="sortTable('tdi')">TDI% <span class="sort">↕</span></th>          <th>Q TDI</th>          <th onclick="sortTable('pr')">Produtividade <span class="sort">↕</span></th>          <th>Q Produ</th>          <th onclick="sortTable('tmo')">TMO Geral (min) <span class="sort">⇕</span></th>          <th>Q TMO</th>          <th onclick="sortTable('sl')">QT Pesquisas Lin</th>          <th onclick="sortTable('sc')">QT Pesquisas Col</th>        </tr>      </thead>      <tbody id="agBody"></tbody>    </table>  </div></section><!-- ═══ OVERVIEW ═══ --><section class="section" id="overview">  <div id="ov_sec_title" class="sec-title">🏠 Visão Geral — Resultado Consolidado</div>  <!-- Vista personalizada (leader/ldap) -->  <div id="ov_personalized" style="display:none"></div>  <!-- Vista padrão (equipe) -->  <div id="ov_team_view">    <div id="gb_overview"></div>    <div id="cg_overview" class="combo-grid"></div>    <div class="dv"></div>    <div class="sec-title" style="font-size:13px;margin-bottom:12px">🔍 Diagnóstico — Pontos Positivos & Oportunidades por Métrica</div>    <div id="ov_diag"></div>    <div class="dv"></div>    <div class="grid2">      <div class="card"><div class="card-t">NPS Lineal</div><div class="cw"><canvas id="ov_lin"></canvas></div></div>      <div class="card"><div class="card-t">NPS Colaborativo</div><div class="cw"><canvas id="ov_col"></canvas></div></div>    </div>    <div class="grid2" style="margin-top:12px">      <div class="alert r">🔴 <strong>CHAT TT:</strong> NPS Colab 37 (mínimo do período). Gap de 22,8 pp vs TM persistente.</div>      <div class="alert o">⚠️ <strong>C2C TM:</strong> TDI 8,4% (+3,4 pp). TO abaixo de 50%. Headcount +43%.</div>    </div>  </div></section><!-- ═══ NPS LINEAL ═══ --><section class="section" id="nps_lin">  <div class="sec-title">⭐ NPS Lineal</div>  <div id="gb_nps_lin"></div>  <!-- DISPERSÃO Q1 vs Q4 — logo abaixo do Resultado Geral -->  <div style="margin-top:12px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🎯 Dispersão Q1 × Q4 — O que diferencia Q1 do Q4</div>    <div id="nps_lin_dispersao"></div>  </div>  <div class="dv"></div>  <div id="diag_ldap_nps_lin"></div>  <div id="cg_nps_lin" class="combo-grid"></div>  <!-- Evolução -->  <div class="card" style="margin-top:14px">    <div class="card-t">📈 Evolução do NPS Lineal — mensal por canal/turno</div>    <div class="cw"><canvas id="nps_lin_evo"></canvas></div>  </div>  <!-- CDU / Processo -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 NPS Lineal por Processo</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução por CDU</p><div class="cw"><canvas id="nps_lin_cdu_chart"></canvas></div></div>      <div id="nps_lin_cdu_table"></div>    </div>  </div>  <!-- Representatividade -->  <div class="card" style="margin-top:14px">    <div class="card-t">📊 Representatividade — volume de Pesquisas por mês</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Pesquisas por mês (total e por canal)</p><div class="cw sm"><canvas id="nps_lin_rep_chart"></canvas></div></div>      <div id="nps_lin_rep_table"></div>    </div>  </div>  <!-- Diagnóstico -->  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico NPS Lineal</div>    <div id="nps_lin_diag"></div>  </div>  <div style="margin-top:14px"><div id="ldap_nps_lin"></div></div></section><!-- ═══ NPS COLAB ═══ --><section class="section" id="nps_col">  <div class="sec-title">🤝 NPS Colaborativo</div>  <div id="gb_nps_col"></div>  <div id="diag_ldap_nps_col"></div>  <div id="cg_nps_col" class="combo-grid"></div>  <!-- Evolução -->  <div class="card" style="margin-top:14px">    <div class="card-t">📈 Evolução do NPS Colab — mensal por canal/turno</div>    <div class="cw"><canvas id="nps_col_evo"></canvas></div>  </div>  <!-- CDU / Processo -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 NPS Colab por Processo</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução por CDU</p><div class="cw"><canvas id="nps_col_cdu_chart"></canvas></div></div>      <div id="nps_col_cdu_table"></div>    </div>  </div>  <!-- Representatividade -->  <div class="card" style="margin-top:14px">    <div class="card-t">📊 Representatividade — volume de Pesquisas por mês</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Pesquisas por mês e por canal</p><div class="cw sm"><canvas id="nps_col_rep_chart"></canvas></div></div>      <div id="nps_col_rep_table"></div>    </div>  </div>  <!-- Diagnóstico -->  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico NPS Colab</div>    <div id="nps_col_diag"></div>  </div>  <div style="margin-top:14px"><div id="ldap_nps_col"></div></div></section><!-- ═══ TMO ═══ --><section class="section" id="tmo_tab">  <div class="sec-title">⏱️ TMO — Tempo Médio Operacional</div>  <div id="gb_tmo_tab"></div>  <div id="cg_tmo_tab" class="combo-grid"></div>  <div class="leg">    <div class="li"><div class="ld" style="background:#3483FA"></div>CHAT TM</div>    <div class="li"><div class="ld" style="background:#FF7B00"></div>CHAT TT</div>    <div class="li"><div class="ld" style="background:#00A650"></div>C2C</div>  </div>  <div class="grid2">    <div class="card"><div class="card-t">TMO Total (min) — evolução mensal</div><div class="cw"><canvas id="ef_tmo"></canvas></div></div>    <div class="card"><div class="card-t">TMO por Canal de Atendimento (min)</div><div class="cw"><canvas id="ef_tmoC"></canvas></div></div>  </div>  <!-- ABERTURA POR PROCESSO -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 Abertura por Processo — TMO médio mensal (min)</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução TMO por Processo</p><div class="cw"><canvas id="tmo_proc_chart"></canvas></div></div>      <div id="tmo_proc_table" style="overflow-y:auto;max-height:280px"></div>    </div>  </div>  <!-- TMO ON vs OFF -->  <div class="card" style="margin-top:14px">    <div class="card-t">⚡ Tempo de Casos ON (chat/c2c) vs OFF (mail) por mês</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">TMO ON (min) — CHAT e C2C</p><div class="cw"><canvas id="tmo_on_chart"></canvas></div></div>      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">TMO OFF/mail (min)</p><div class="cw"><canvas id="tmo_off_chart"></canvas></div></div>    </div>    <div id="tmo_on_off_table" style="margin-top:12px"></div>  </div>  <!-- CASOS TMO EXCEDIDO -->  <div class="card" style="margin-top:14px">    <div class="card-t">🔴 Casos com TMO Excedido (acima de ${
+ Atualizado: 29/07/2026</p>  </div>  <div class="hdr-badges">    <div class="hbadge"><div class="v">59,7</div><div class="l">NPS Lineal Geral</div></div>    <div class="hbadge"><div class="v">56,8</div><div class="l">NPS Colab Geral</div></div>    <div class="hbadge"><div class="v">67</div><div class="l">Agentes</div></div>  </div></header><nav>  <a class="active" data-tab="agentes">📊 All Métricas</a>  <a data-tab="overview">🏠 Visão Geral</a>  <a data-tab="nps_lin">⭐ NPS Lineal</a>  <a data-tab="nps_col">🤝 NPS Colab</a>  <a data-tab="tmo_tab">⏱️ TMO</a>  <a data-tab="tmo_agente">👤 TMO Agentes</a>  <a data-tab="produ_tab">⚡ Produtividade</a>  <a data-tab="tdi">📋 TDI</a>  <a data-tab="to">💻 Tempo Online</a>  <a data-tab="evolucao">📈 Evolução por LDAP</a>  <a data-tab="diagnostico">🔍 Diagnóstico</a></nav><!-- FILTROS --><div class="fbar" id="fbar">  <label>Mês</label>  <select id="fMes"><option value="">Todos</option></select>  <label>Canal</label>  <select id="fCanal"><option value="">Todos</option></select>  <label>Turno</label>  <select id="fTurno"><option value="">Todos</option></select>  <label>Leader</label>  <select id="fLeader"><option value="">Todos</option></select>  <label>LDAP</label>  <select id="fLdap"><option value="">Todos</option></select>  <label>Dia</label>  <input type="date" id="fDia" style="padding:5px 9px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);background:#fff;outline:none" onchange="onFDia()">  <label>Semana</label>  <select id="fSemana" onchange="onFSemana()"><option value="">Todas</option></select>  <button class="reset" onclick="resetFilters()">↺ Limpar</button>  <span class="fcount" id="fcount"></span></div><div class="page"><!-- ═══ POR AGENTE ═══ --><section class="section active" id="agentes">  <div class="sec-title">📊 All Métricas — Quartilização Igual por Agente</div>  <div class="agent-summary" id="agSummary"></div>  <div class="agent-table-wrap">    <table id="agTable">      <thead>        <tr>          <th onclick="sortTable('ldap')">LDAP <span class="sort">↕</span></th>          <th onclick="sortTable('leader')">Leader <span class="sort">↕</span></th>          <th onclick="sortTable('canal')">Canal/Turno <span class="sort">↕</span></th>          <th onclick="sortTable('mes')">Mês <span class="sort">↕</span></th>          <th onclick="sortTable('nl')">NPS Lineal <span class="sort">↕</span></th>          <th>Q NPS Lin</th>          <th onclick="sortTable('nc')">NPS Colab <span class="sort">↕</span></th>          <th>Q NPS Col</th>          <th onclick="sortTable('tdi')">TDI% <span class="sort">↕</span></th>          <th>Q TDI</th>          <th onclick="sortTable('pr')">Produtividade <span class="sort">↕</span></th>          <th>Q Produ</th>          <th onclick="sortTable('tmo')">TMO Geral (min) <span class="sort">⇕</span></th>          <th>Q TMO</th>          <th onclick="sortTable('sl')">QT Pesquisas Lin</th>          <th onclick="sortTable('sc')">QT Pesquisas Col</th>        </tr>      </thead>      <tbody id="agBody"></tbody>    </table>  </div></section><!-- ═══ OVERVIEW ═══ --><section class="section" id="overview">  <div id="ov_sec_title" class="sec-title">🏠 Visão Geral — Resultado Consolidado</div>  <!-- Vista personalizada (leader/ldap) -->  <div id="ov_personalized" style="display:none"></div>  <!-- Vista padrão (equipe) -->  <div id="ov_team_view">    <div id="gb_overview"></div>    <div id="cg_overview" class="combo-grid"></div>    <div class="dv"></div>    <div class="sec-title" style="font-size:13px;margin-bottom:12px">🔍 Diagnóstico — Pontos Positivos & Oportunidades por Métrica</div>    <div id="ov_diag"></div>    <div class="dv"></div>    <div class="grid2">      <div class="card"><div class="card-t">NPS Lineal</div><div class="cw"><canvas id="ov_lin"></canvas></div></div>      <div class="card"><div class="card-t">NPS Colaborativo</div><div class="cw"><canvas id="ov_col"></canvas></div></div>    </div>    <div class="grid2" style="margin-top:12px">      <div class="alert r">🔴 <strong>CHAT TT:</strong> NPS Colab 37 (mínimo do período). Gap de 22,8 pp vs TM persistente.</div>      <div class="alert o">⚠️ <strong>C2C TM:</strong> TDI 8,4% (+3,4 pp). TO abaixo de 50%. Headcount +43%.</div>    </div>  </div></section><!-- ═══ NPS LINEAL ═══ --><section class="section" id="nps_lin">  <div class="sec-title">⭐ NPS Lineal</div>  <div id="gb_nps_lin"></div>  <!-- DISPERSÃO Q1 vs Q4 — logo abaixo do Resultado Geral -->  <div style="margin-top:12px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🎯 Dispersão Q1 × Q4 — O que diferencia Q1 do Q4</div>    <div id="nps_lin_dispersao"></div>  </div>  <div class="dv"></div>  <div id="diag_ldap_nps_lin"></div>  <div id="cg_nps_lin" class="combo-grid"></div>  <!-- Evolução -->  <div class="card" style="margin-top:14px">    <div class="card-t">📈 Evolução do NPS Lineal — mensal por canal/turno</div>    <div class="cw"><canvas id="nps_lin_evo"></canvas></div>  </div>  <!-- CDU / Processo -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 NPS Lineal por Processo</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução por CDU</p><div class="cw"><canvas id="nps_lin_cdu_chart"></canvas></div></div>      <div id="nps_lin_cdu_table"></div>    </div>  </div>  <!-- Representatividade -->  <div class="card" style="margin-top:14px">    <div class="card-t">📊 Representatividade — volume de Pesquisas por mês</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Pesquisas por mês (total e por canal)</p><div class="cw sm"><canvas id="nps_lin_rep_chart"></canvas></div></div>      <div id="nps_lin_rep_table"></div>    </div>  </div>  <!-- Diagnóstico -->  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico NPS Lineal</div>    <div id="nps_lin_diag"></div>  </div>  <div style="margin-top:14px"><div id="ldap_nps_lin"></div></div></section><!-- ═══ NPS COLAB ═══ --><section class="section" id="nps_col">  <div class="sec-title">🤝 NPS Colaborativo</div>  <div id="gb_nps_col"></div>  <div id="diag_ldap_nps_col"></div>  <div id="cg_nps_col" class="combo-grid"></div>  <!-- Evolução -->  <div class="card" style="margin-top:14px">    <div class="card-t">📈 Evolução do NPS Colab — mensal por canal/turno</div>    <div class="cw"><canvas id="nps_col_evo"></canvas></div>  </div>  <!-- CDU / Processo -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 NPS Colab por Processo</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução por CDU</p><div class="cw"><canvas id="nps_col_cdu_chart"></canvas></div></div>      <div id="nps_col_cdu_table"></div>    </div>  </div>  <!-- Representatividade -->  <div class="card" style="margin-top:14px">    <div class="card-t">📊 Representatividade — volume de Pesquisas por mês</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Pesquisas por mês e por canal</p><div class="cw sm"><canvas id="nps_col_rep_chart"></canvas></div></div>      <div id="nps_col_rep_table"></div>    </div>  </div>  <!-- Diagnóstico -->  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico NPS Colab</div>    <div id="nps_col_diag"></div>  </div>  <div style="margin-top:14px"><div id="ldap_nps_col"></div></div></section><!-- ═══ TMO ═══ --><section class="section" id="tmo_tab">  <div class="sec-title">⏱️ TMO — Tempo Médio Operacional</div>  <div id="gb_tmo_tab"></div>  <div id="cg_tmo_tab" class="combo-grid"></div>  <div class="leg">    <div class="li"><div class="ld" style="background:#3483FA"></div>CHAT TM</div>    <div class="li"><div class="ld" style="background:#FF7B00"></div>CHAT TT</div>    <div class="li"><div class="ld" style="background:#00A650"></div>C2C</div>  </div>  <div class="grid2">    <div class="card"><div class="card-t">TMO Total (min) — evolução mensal</div><div class="cw"><canvas id="ef_tmo"></canvas></div></div>    <div class="card"><div class="card-t">TMO por Canal de Atendimento (min)</div><div class="cw"><canvas id="ef_tmoC"></canvas></div></div>  </div>  <!-- ABERTURA POR PROCESSO -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 Abertura por Processo — TMO médio mensal (min)</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução TMO por Processo</p><div class="cw"><canvas id="tmo_proc_chart"></canvas></div></div>      <div id="tmo_proc_table" style="overflow-y:auto;max-height:280px"></div>    </div>  </div>  <!-- TMO ON vs OFF -->  <div class="card" style="margin-top:14px">    <div class="card-t">⚡ Tempo de Casos ON (chat/c2c) vs OFF (mail) por mês</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">TMO ON (min) — CHAT e C2C</p><div class="cw"><canvas id="tmo_on_chart"></canvas></div></div>      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">TMO OFF/mail (min)</p><div class="cw"><canvas id="tmo_off_chart"></canvas></div></div>    </div>    <div id="tmo_on_off_table" style="margin-top:12px"></div>  </div>  <!-- CASOS TMO EXCEDIDO -->  <div class="card" style="margin-top:14px">    <div class="card-t">🔴 Casos com TMO Excedido (acima de ${
 TMO_THRESHOLD}
  min) — por canal/turno</div>    <div id="tmo_excedido_content"></div>  </div>  <!-- DIAGNÓSTICO POR PROCESSO -->  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico — Impacto no TMO por Processo</div>    <div id="tmo_diag"></div>  </div>  <div style="margin-top:16px"><div id="ldap_tmo_tab"></div></div></section><!-- ═══ TMO AGENTES ═══ --><section class="section" id="tmo_agente">  <div class="sec-title">👤 TMO Agentes — Tempo Médio por Agente</div>  <div id="tmoagt_kpi" class="gband" style="border-top-color:#8B5CF6"></div>  <div class="grid2" style="margin-top:14px">    <div class="card">      <div class="card-t">📊 TMO médio por Canal (mês selecionado)</div>      <div id="tmoagt_canal"></div>    </div>    <div class="card">      <div class="card-t">🏆 Ranking por Líder — TMO médio ponderado</div>      <div id="tmoagt_leader"></div>    </div>  </div>  <div class="card" style="margin-top:14px">    <div class="card-t" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">      <span>👤 TMO por Agente (LDAP) — <span id="tmoagt_count" style="color:#8B5CF6;font-weight:900">0</span> agentes</span>      <div style="display:flex;gap:8px;align-items:center">        <label style="font-size:10.5px;font-weight:700;color:var(--muted)">Ordenar por</label>        <select id="tmoagt_sort" onchange="renderTmoAgtLdap()" style="padding:3px 7px;border:1.5px solid var(--border);border-radius:7px;font-size:11.5px">          <option value="tmo_total">TMO Total ↓</option>          <option value="tmo_on">TMO ON ↓</option>          <option value="tmo_off">TMO OFF ↓</option>          <option value="casos_on">Casos ON ↓</option>          <option value="ldap">LDAP A-Z</option>        </select>      </div>    </div>    <div id="tmoagt_ldap" style="margin-top:10px;overflow-x:auto"></div>  </div>  <div class="alert b" style="margin-top:14px">    ℹ️ <span>TMO ON = casos via CHAT e C2C · TMO OFF = casos via e-mail · TMO Total = média ponderada por casos · Fonte: BT_CX_REP_METRICS_CS</span>  </div></section><!-- ═══ PRODUTIVIDADE ═══ --><section class="section" id="produ_tab">  <div class="sec-title">⚡ Produtividade</div>  <div id="gb_produ_tab"></div>  <div id="diag_ldap_produ_tab"></div>  <div id="cg_produ_tab" class="combo-grid"></div>  <div class="leg">    <div class="li"><div class="ld" style="background:#3483FA"></div>CHAT TM</div>    <div class="li"><div class="ld" style="background:#FF7B00"></div>CHAT TT</div>    <div class="li"><div class="ld" style="background:#00A650"></div>C2C</div>  </div>  <!-- ABERTURA POR PROCESSO -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 Abertura por Processo — Produtividade Total mensal</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução da Produtividade por Processo</p><div class="cw"><canvas id="produ_proc_chart"></canvas></div></div>      <div id="produ_proc_table" style="overflow-y:auto;max-height:280px"></div>    </div>  </div>  <!-- PRODU ON / OFF / GERAL -->  <div class="card" style="margin-top:14px">    <div class="card-t">⚡ Produtividade ON (chat/c2c) · OFF (mail) · Geral — evolução mensal</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Produ ON vs OFF — canal/turno</p><div class="cw"><canvas id="ef_proOn"></canvas></div></div>      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Produ Geral — canal/turno</p><div class="cw"><canvas id="ef_proOff"></canvas></div></div>    </div>    <div class="card" style="margin-top:12px;box-shadow:none;border:1px solid var(--border)">      <div class="card-t">Volume de Casos ON vs OFF e Produ ON% vs OFF%</div>      <div class="grid2">        <div><div class="cw sm"><canvas id="ef_casosOnOff"></canvas></div></div>        <div><div class="cw sm"><canvas id="ef_proOnOffPct"></canvas></div></div>      </div>    </div>  </div>  <!-- PRODU POR PROCESSO: ON vs OFF -->  <div class="card" style="margin-top:14px">    <div class="card-t">📊 Produtividade ON vs OFF por Processo — Maio/26*</div>    <div id="produ_proc_on_off_table"></div>  </div>  <!-- CASOS COM TMO EXCEDIDO (impacta produtividade) -->  <div class="card" style="margin-top:14px">    <div class="card-t">🔴 Casos com TMO Excedido — impacto na Produtividade (threshold: ${
 TMO_THRESHOLD}
@@ -1461,63 +1461,63 @@ const CSV = `MES,LDAP,LEADER,CANAL,TURNO,NL,NC,TDI,PR,EM,QI,QE,QG,QF,SL,SC
 2026-06,eduejesus,thaidossanto,CHAT,TM,0.0,0.0,6.9,1.56,57,,,,,2,2
 2026-06,lteixeira,lrossetto,C2C,TM,,,13.04,3.05,47,,,,,,
 2026-06,bcunha,alicarvalho,CHAT,TM,,,0.0,1.82,74,,,,,,
-2026-07,lecandido,bkaroline,CHAT,TT,100.0,100.0,5.13,2.7,63,,,,,3,3
-2026-07,wgomdsouza,lrossetto,C2C,TM,60.0,60.0,6.45,3.96,67,,,,,5,5
-2026-07,mrmarques,isabmot,CHAT,TT,100.0,100.0,11.9,3.58,73,,,,,1,1
-2026-07,cafarias,alicarvalho,CHAT,TM,75.0,75.0,3.03,3.24,72,,,,,4,4
-2026-07,tsgarbim,imsilva,C2C,TM,,,0.0,5.41,56,,,,,,
-2026-07,luciagarcia,lrossetto,C2C,TM,-33.3,-33.3,8.82,2.94,59,,,,,3,3
-2026-07,marfreitas,thaidossanto,CHAT,TM,75.0,75.0,2.86,3.55,63,,,,,4,4
-2026-07,vitnasciment,imsilva,C2C,TM,,,16.67,1.72,40,,,,,,
-2026-07,blvicente,bkaroline,CHAT,TT,100.0,100.0,8.33,3.23,62,,,,,1,1
-2026-07,lteixeira,lrossetto,C2C,TM,100.0,100.0,11.76,3.51,49,,,,,2,2
-2026-07,stdiniz,alicarvalho,CHAT,TM,100.0,0.0,3.33,2.73,63,,,,,1,4
-2026-07,aaugustinho,alicarvalho,CHAT,TM,,,13.79,2.95,62,,,,,,
-2026-07,polivdaraujo,bkaroline,CHAT,TT,66.7,66.7,13.51,3.11,63,,,,,3,3
-2026-07,pmarinho,imsilva,C2C,TM,,,8.0,3.96,54,,,,,,
-2026-07,amcandido,isabmot,CHAT,TT,100.0,100.0,6.67,3.95,62,,,,,1,2
-2026-07,vltrevizan,imsilva,C2C,TM,100.0,100.0,0.0,3.8,57,,,,,1,1
-2026-07,marlaraujo,alicarvalho,CHAT,TM,33.3,33.3,6.67,2.39,63,,,,,3,3
-2026-07,aldmelo,bkaroline,CHAT,TT,100.0,100.0,11.76,4.36,73,,,,,2,2
+2026-07,lecandido,bkaroline,CHAT,TT,100.0,100.0,7.69,2.77,63,,,,,3,3
+2026-07,wgomdsouza,lrossetto,C2C,TM,60.0,60.0,6.25,4.04,67,,,,,5,5
+2026-07,mrmarques,isabmot,CHAT,TT,100.0,100.0,10.71,3.5,72,,,,,1,1
+2026-07,cafarias,alicarvalho,CHAT,TM,40.0,40.0,5.36,3.15,71,,,,,5,5
+2026-07,tsgarbim,imsilva,C2C,TM,,,7.69,5.41,56,,,,,,
+2026-07,luciagarcia,lrossetto,C2C,TM,-33.3,-33.3,11.11,3.03,59,,,,,3,3
+2026-07,marfreitas,thaidossanto,CHAT,TM,75.0,75.0,2.22,3.55,64,,,,,4,4
+2026-07,vitnasciment,imsilva,C2C,TM,,,30.0,2.12,40,,,,,,
+2026-07,blvicente,bkaroline,CHAT,TT,100.0,100.0,3.7,3.18,63,,,,,1,1
+2026-07,lteixeira,lrossetto,C2C,TM,100.0,100.0,12.0,3.46,49,,,,,2,2
+2026-07,stdiniz,alicarvalho,CHAT,TM,100.0,0.0,2.17,2.64,63,,,,,1,4
+2026-07,aaugustinho,alicarvalho,CHAT,TM,100.0,100.0,9.76,2.92,62,,,,,2,2
+2026-07,polivdaraujo,bkaroline,CHAT,TT,66.7,66.7,8.43,3.12,64,,,,,3,3
+2026-07,pmarinho,imsilva,C2C,TM,,,9.09,3.8,56,,,,,,
+2026-07,amcandido,isabmot,CHAT,TT,100.0,100.0,8.97,3.76,61,,,,,1,2
+2026-07,vltrevizan,imsilva,C2C,TM,100.0,100.0,16.67,3.72,56,,,,,1,1
+2026-07,marlaraujo,alicarvalho,CHAT,TM,33.3,33.3,20.0,2.55,63,,,,,3,3
+2026-07,aldmelo,bkaroline,CHAT,TT,100.0,100.0,18.18,4.5,73,,,,,3,3
 2026-07,mariasilva,isabmot,CHAT,TT,-100.0,-100.0,0.0,4.19,62,,,,,1,1
-2026-07,camcsilva,bkaroline,CHAT,TT,,,8.57,3.09,65,,,,,,
-2026-07,losouza,alicarvalho,CHAT,TM,60.0,60.0,5.26,3.12,63,,,,,5,5
-2026-07,jecosta,imsilva,C2C,TM,,,11.9,3.58,62,,,,,,
-2026-07,eduejesus,thaidossanto,CHAT,TM,33.3,33.3,7.69,2.61,59,,,,,3,3
-2026-07,amcaldeira,thaidossanto,CHAT,TM,100.0,100.0,0.0,3.72,70,,,,,2,2
-2026-07,bemarques,thaidossanto,CHAT,TM,,0.0,5.88,3.37,63,,,,,,1
-2026-07,vfarias,alicarvalho,CHAT,TM,33.3,33.3,4.17,2.24,73,,,,,3,3
-2026-07,albarbosa,lrossetto,C2C,TM,100.0,100.0,11.76,2.55,,,,,,1,1
-2026-07,vdpiedade,bkaroline,CHAT,TT,50.0,50.0,0.0,2.73,59,,,,,4,4
-2026-07,casbarreiros,thaidossanto,CHAT,TM,100.0,100.0,7.41,2.93,63,,,,,1,1
-2026-07,uizfsilva,alicarvalho,CHAT,TM,-100.0,-100.0,3.23,3.98,66,,,,,1,1
-2026-07,adysantos,lrossetto,C2C,TM,100.0,100.0,5.56,2.75,50,,,,,1,1
-2026-07,mandoliveira,isabmot,CHAT,TT,-100.0,-100.0,7.69,3.75,62,,,,,1,1
-2026-07,amarquini,lrossetto,C2C,TM,,,4.29,3.9,57,,,,,,
-2026-07,linessousa,imsilva,C2C,TM,,,4.0,3.04,64,,,,,,
-2026-07,acruz,thaidossanto,CHAT,TM,100.0,100.0,6.9,4.53,64,,,,,5,5
-2026-07,lianadsilva,alicarvalho,CHAT,TM,,,5.71,2.5,57,,,,,,
-2026-07,ulissouza,thaidossanto,CHAT,TM,,0.0,0.0,3.3,56,,,,,,1
-2026-07,gbmontilha,bkaroline,CHAT,TT,100.0,100.0,4.55,3.94,64,,,,,2,2
-2026-07,chmarques,isabmot,CHAT,TT,50.0,50.0,7.84,3.78,64,,,,,2,2
-2026-07,cccsousa,isabmot,CHAT,TT,0.0,0.0,11.11,3.52,59,,,,,2,2
-2026-07,cdoliveira,lrossetto,C2C,TM,,,0.0,2.71,63,,,,,,
-2026-07,mudiniz,imsilva,C2C,TM,,,7.69,3.47,60,,,,,,
-2026-07,marguedes,alicarvalho,CHAT,TM,100.0,100.0,0.0,2.65,73,,,,,2,2
-2026-07,maybalazshaz,bkaroline,CHAT,TT,,,8.11,2.76,57,,,,,,
-2026-07,vfonorio,isabmot,CHAT,TT,0.0,0.0,11.11,3.27,59,,,,,2,2
-2026-07,gabrielaaiol,imsilva,C2C,TM,0.0,0.0,0.0,3.4,57,,,,,1,1
-2026-07,csnunes,lrossetto,C2C,TM,-100.0,-100.0,13.33,3.03,69,,,,,1,1
-2026-07,bcunha,alicarvalho,CHAT,TM,100.0,80.0,0.0,2.54,75,,,,,4,5
-2026-07,giselesosant,lrossetto,C2C,TM,100.0,100.0,13.79,4.36,46,,,,,1,1
-2026-07,fenunes,bkaroline,CHAT,TT,100.0,100.0,6.9,3.01,63,,,,,4,4
-2026-07,raisacsantos,lrossetto,C2C,TM,100.0,100.0,10.0,3.02,68,,,,,3,3
-2026-07,renataperei,isabmot,CHAT,TT,33.3,33.3,1.86,3.94,66,,,,,3,3
-2026-07,juslima,thaidossanto,CHAT,TM,50.0,50.0,9.68,3.14,71,,,,,4,4
-2026-07,elaoliveira,isabmot,CHAT,TT,,,4.55,4.7,62,,,,,,
-2026-07,marcovenicio,lrossetto,C2C,TM,,,0.0,4.34,67,,,,,,
-2026-07,phegoncalves,alicarvalho,CHAT,TM,,,14.29,2.92,,,,,,,
-2026-07,kperrone,thaidossanto,CHAT,TM,50.0,33.3,0.0,3.19,58,,,,,2,3`;
+2026-07,camcsilva,bkaroline,CHAT,TT,,,3.92,3.12,64,,,,,,
+2026-07,losouza,alicarvalho,CHAT,TM,60.0,60.0,8.33,3.06,64,,,,,5,5
+2026-07,jecosta,imsilva,C2C,TM,,,10.94,3.6,64,,,,,,
+2026-07,eduejesus,thaidossanto,CHAT,TM,50.0,50.0,11.43,2.67,59,,,,,4,4
+2026-07,amcaldeira,thaidossanto,CHAT,TM,100.0,100.0,8.16,3.59,71,,,,,2,2
+2026-07,bemarques,thaidossanto,CHAT,TM,,0.0,6.56,3.29,62,,,,,,1
+2026-07,vfarias,alicarvalho,CHAT,TM,33.3,33.3,8.7,2.29,73,,,,,3,3
+2026-07,albarbosa,lrossetto,C2C,TM,100.0,100.0,6.67,2.55,,,,,,1,1
+2026-07,vdpiedade,bkaroline,CHAT,TT,50.0,50.0,7.14,2.9,60,,,,,4,4
+2026-07,casbarreiros,thaidossanto,CHAT,TM,100.0,100.0,10.53,2.91,63,,,,,1,1
+2026-07,uizfsilva,alicarvalho,CHAT,TM,0.0,0.0,7.14,3.83,67,,,,,2,2
+2026-07,adysantos,lrossetto,C2C,TM,100.0,100.0,3.45,2.73,50,,,,,1,1
+2026-07,mandoliveira,isabmot,CHAT,TT,-100.0,-100.0,6.9,3.77,62,,,,,1,1
+2026-07,amarquini,lrossetto,C2C,TM,,,6.82,3.79,57,,,,,,
+2026-07,linessousa,imsilva,C2C,TM,,,5.77,3.18,64,,,,,,
+2026-07,acruz,thaidossanto,CHAT,TM,100.0,100.0,4.35,4.53,67,,,,,5,5
+2026-07,lianadsilva,alicarvalho,CHAT,TM,,,9.46,2.6,58,,,,,,
+2026-07,ulissouza,thaidossanto,CHAT,TM,0.0,0.0,38.89,3.3,57,,,,,1,1
+2026-07,gbmontilha,bkaroline,CHAT,TT,50.0,20.0,8.14,3.96,64,,,,,4,5
+2026-07,chmarques,isabmot,CHAT,TT,66.7,66.7,7.96,3.79,65,,,,,3,3
+2026-07,cccsousa,isabmot,CHAT,TT,0.0,0.0,6.52,3.64,59,,,,,2,2
+2026-07,cdoliveira,lrossetto,C2C,TM,,,1.89,2.86,63,,,,,,
+2026-07,mudiniz,imsilva,C2C,TM,,-100.0,11.11,3.44,60,,,,,,1
+2026-07,marguedes,alicarvalho,CHAT,TM,100.0,100.0,12.12,2.71,73,,,,,3,3
+2026-07,maybalazshaz,bkaroline,CHAT,TT,,,4.88,2.76,56,,,,,,
+2026-07,vfonorio,isabmot,CHAT,TT,0.0,0.0,10.0,3.24,61,,,,,2,2
+2026-07,gabrielaaiol,imsilva,C2C,TM,0.0,0.0,4.65,3.41,57,,,,,1,1
+2026-07,csnunes,lrossetto,C2C,TM,-100.0,-100.0,15.22,3.11,70,,,,,1,1
+2026-07,bcunha,alicarvalho,CHAT,TM,100.0,80.0,5.45,2.57,75,,,,,4,5
+2026-07,giselesosant,lrossetto,C2C,TM,100.0,100.0,9.09,4.26,46,,,,,1,1
+2026-07,fenunes,bkaroline,CHAT,TT,100.0,100.0,6.0,3.12,62,,,,,4,4
+2026-07,raisacsantos,lrossetto,C2C,TM,100.0,100.0,9.52,3.1,68,,,,,3,3
+2026-07,renataperei,isabmot,CHAT,TT,50.0,50.0,4.59,3.9,66,,,,,4,4
+2026-07,juslima,thaidossanto,CHAT,TM,50.0,50.0,8.77,3.16,70,,,,,4,4
+2026-07,elaoliveira,isabmot,CHAT,TT,-100.0,-100.0,6.06,4.54,61,,,,,2,2
+2026-07,marcovenicio,lrossetto,C2C,TM,,,4.35,4.13,66,,,,,,
+2026-07,phegoncalves,alicarvalho,CHAT,TM,100.0,100.0,7.14,2.99,52,,,,,1,1
+2026-07,kperrone,thaidossanto,CHAT,TM,66.7,50.0,15.38,3.34,56,,,,,3,4`;
 // ─── PARSE CSV ───────────────────────────────────────────────────────────────
 function parseCSV(csv){
   const lines = csv.trim().split(/\r?\n/);
@@ -2114,19 +2114,19 @@ const showLeaderTDI = !tabId || tabId==='tdi' || tabId==='overview';
 // ─── TMO GERAL COLA (média ponderada por casos: CHAT TM + TT + C2C) ──────────
 // Fonte: BT_CX_REP_METRICS_CS · Jan–Mai/26 · (SUM(NUM_TMO) / SUM(DEN_TMO))
 // Fonte: BT_CX_REP_METRICS_CS · SUM(NUMERATOR_TMO)/SUM(DENOMINATOR_TMO) · todos canais exceto TMAD
-const TMO_GERAL = [24.65,24.73,24.13,26.56,27.09,26.96,27.02];
+const TMO_GERAL = [24.65,24.73,24.13,26.56,27.09,26.96,27.21];
  
 // [Jan, Fev, Mar, Abr, Mai]
 // ─── TO% MENSAL POR LÍDER (canal principal) ──────────────────────────────────
-const TO_BY_LEADER = [  {leader:'alicarvalho',  canal:'CHAT TM', to:[82.64,83.62,82.56,80.36,81.65,82.36,83.26], pausa:[14.28,14.31,14.6,14.51,18.12,null,null]},    {leader:'thaidossanto',  canal:'CHAT TM', to:[82.88,83.58,82.55,81.21,81.54,81.62,82.67], pausa:[14.14,14.06,14.21,14.03,14.27,null,null]},    {leader:'bkaroline',  canal:'CHAT TT', to:[84.28,83.09,83.25,80.67,81.98,81.75,82.09], pausa:[13.49,14.05,14.58,14.68,14.68,null,null]},    {leader:'isabmot',  canal:'CHAT TT', to:[83.51,84.04,85.34,80.58,82.97,82.36,84.33], pausa:[13.76,13.81,13.4,14.01,13.94,null,null]},    {leader:'lrossetto',  canal:'C2C TM', to:[83.54,83.49,83.16,79.48,81.0,81.02,75.89], pausa:[14.23,14.35,14.25,16.85,15.32,null,null]},    {leader:'imsilva',  canal:'C2C TM', to:[82.83,82.76,80.89,78.28,78.06,78.29,80.49], pausa:[null,null,null,null,null,null,null]}];
+const TO_BY_LEADER = [  {leader:'alicarvalho',  canal:'CHAT TM', to:[82.64,83.62,82.56,80.36,81.65,82.36,82.69], pausa:[14.28,14.31,14.6,14.51,18.12,null,null]},    {leader:'thaidossanto',  canal:'CHAT TM', to:[82.88,83.58,82.55,81.21,81.54,81.62,81.72], pausa:[14.14,14.06,14.21,14.03,14.27,null,null]},    {leader:'bkaroline',  canal:'CHAT TT', to:[84.28,83.09,83.25,80.67,81.98,81.75,82.37], pausa:[13.49,14.05,14.58,14.68,14.68,null,null]},    {leader:'isabmot',  canal:'CHAT TT', to:[83.51,84.04,85.34,80.58,82.97,82.36,83.64], pausa:[13.76,13.81,13.4,14.01,13.94,null,null]},    {leader:'lrossetto',  canal:'C2C TM', to:[83.54,83.49,83.16,79.48,81.0,81.02,77.17], pausa:[14.23,14.35,14.25,16.85,15.32,null,null]},    {leader:'imsilva',  canal:'C2C TM', to:[82.83,82.76,80.89,78.28,78.06,78.29,80.37], pausa:[null,null,null,null,null,null,null]}];
 // ─── TDI CORRETO POR LEADER (SUM(NUM)/SUM(DEN) — fonte: BT_CX_REP_METRICS_CS) ─
 const TDI_BY_LEADER = {
-  alicarvalho:  [4.48,4.85,5.05,5.6,4.38,5.39,4.96],
-  thaidossanto:  [5.07,5.52,5.46,6.9,2.46,6.13,5.49],
-  bkaroline:  [4.36,3.71,4.14,3.76,2.43,3.27,7.47],
-  isabmot:  [6.22,6.5,7.05,6.52,4.26,4.91,5.75],
-  lrossetto:  [4.63,5.37,9.15,6.37,5.79,7.38,7.25],
-  imsilva:  [5.63,9.67,4.24,6.69,3.89,5.25,6.67]
+  alicarvalho:  [4.48,4.85,5.05,5.6,4.38,5.39,8.06],
+  thaidossanto:  [5.07,5.52,5.46,6.9,2.46,6.13,8.86],
+  bkaroline:  [4.36,3.71,4.14,3.76,2.43,3.27,7.37],
+  isabmot:  [6.22,6.5,7.05,6.52,4.26,4.91,7.01],
+  lrossetto:  [4.63,5.37,9.15,6.37,5.79,7.38,7.81],
+  imsilva:  [5.63,9.67,4.24,6.69,3.89,5.25,9.39]
 };
 // ─── LÍDERES INTERNOS (atualizado pelo script) ───────────────────────────────
 const INTERNAL_LEADERS = ['alicarvalho','bkaroline','imsilva','isabmot','lrossetto','thaidossanto'];
@@ -2369,76 +2369,76 @@ k:'help',      lbl:'Ajudas',        cor:'#00A650', desc:'Suporte como mentor/aju
 k:'op_failure',lbl:'Falha Operac.', cor:'#EF5350', desc:'Falhas operacionais'}];
 // Detalhamento por Líder — Abr/26
 const TEMPO_LEADER = [  {
-leader:'alicarvalho',  canal:'CHAT', ags:12, login:1011.5,  online:825.9, break:146.9, coaching:22.7,  training:8.7,  event:2.2, help:0,   op_failure:5.13,   break_pct:14.52, to_pct:81.65},    {
-leader:'thaidossanto',  canal:'CHAT', ags:10, login:749.7,  online:604.2, break:105.3, coaching:21.0,  training:7.9,  event:6.3, help:0.12,   op_failure:4.82,   break_pct:14.04, to_pct:80.59},    {
-leader:'bkaroline',  canal:'CHAT', ags:11, login:1052.6,  online:843.5, break:151.2, coaching:27.2,  training:13.8,  event:14.6, help:1.16,   op_failure:1.11,   break_pct:14.37, to_pct:80.14},    {
-leader:'isabmot',  canal:'CHAT', ags:10, login:871.0,  online:718.4, break:124.7, coaching:9.6,  training:11.3,  event:7.0, help:0,   op_failure:0.02,   break_pct:14.32, to_pct:82.47},    {
-leader:'lrossetto',  canal:'C2C', ags:11, login:1024.0,  online:757.0, break:200.2, coaching:38.9,  training:13.6,  event:9.2, help:2.2,   op_failure:2.84,   break_pct:19.55, to_pct:73.93},    {
-leader:'imsilva',  canal:'CHAT', ags:8, login:627.6,  online:488.8, break:93.2, coaching:26.7,  training:11.2,  event:4.1, help:0.67,   op_failure:2.95,   break_pct:14.85, to_pct:77.88}];
-// Detalhamento por LDAP — Jul/26 (acum. ate 2026-07-23)
+leader:'alicarvalho',  canal:'CHAT', ags:12, login:1306.2,  online:1063.4, break:198.2, coaching:28.6,  training:8.7,  event:2.2, help:0,   op_failure:5.13,   break_pct:15.17, to_pct:81.42},    {
+leader:'thaidossanto',  canal:'CHAT', ags:10, login:959.6,  online:769.3, break:135.6, coaching:34.9,  training:8.4,  event:6.3, help:0.12,   op_failure:4.82,   break_pct:14.13, to_pct:80.17},    {
+leader:'bkaroline',  canal:'CHAT', ags:11, login:1335.5,  online:1077.4, break:191.8, coaching:34.2,  training:14.2,  event:15.2, help:1.42,   op_failure:1.11,   break_pct:14.36, to_pct:80.68},    {
+leader:'isabmot',  canal:'CHAT', ags:10, login:1119.8,  online:920.3, break:159.8, coaching:19.6,  training:11.3,  event:8.9, help:0,   op_failure:0.02,   break_pct:14.27, to_pct:82.18},    {
+leader:'lrossetto',  canal:'C2C', ags:11, login:1249.5,  online:940.7, break:230.3, coaching:45.0,  training:16.9,  event:11.7, help:2.27,   op_failure:2.84,   break_pct:18.43, to_pct:75.28},    {
+leader:'imsilva',  canal:'CHAT', ags:8, login:809.7,  online:629.9, break:120.1, coaching:35.4,  training:15.4,  event:5.3, help:0.67,   op_failure:2.95,   break_pct:14.83, to_pct:77.79}];
+// Detalhamento por LDAP — Jul/26 (acum. ate 2026-07-29)
 const TEMPO_LDAP = [  {
-ldap:'lteixeira',    leader:'lrossetto',    canal:'C2C', login:141.47,  online:56.48,  break:79.28, coaching:2.27,  training:0,  event:0.73,  help:2.16,    op_failure:0.55,   break_pct:56.04, to_pct:39.92},    {
-ldap:'marguedes',    leader:'alicarvalho',    canal:'CHAT', login:65.54,  online:52.57,  break:11.12, coaching:0,  training:1.46,  event:0.21,  help:0,    op_failure:0.17,   break_pct:16.97, to_pct:80.21},    {
-ldap:'jecosta',    leader:'imsilva',    canal:'C2C', login:94.89,  online:73.44,  break:15.47, coaching:4.57,  training:0.9,  event:0.03,  help:0,    op_failure:0.47,   break_pct:16.3, to_pct:77.39},    {
+ldap:'lteixeira',    leader:'lrossetto',    canal:'C2C', login:160.82,  online:72.02,  break:82.3, coaching:2.38,  training:0.68,  event:0.73,  help:2.16,    op_failure:0.55,   break_pct:51.18, to_pct:44.78},    {
+ldap:'stdiniz',    leader:'alicarvalho',    canal:'CHAT', login:131.57,  online:100.2,  break:27.01, coaching:2.62,  training:0.87,  event:0.32,  help:0,    op_failure:0.56,   break_pct:20.53, to_pct:76.16},    {
+ldap:'marguedes',    leader:'alicarvalho',    canal:'CHAT', login:91.78,  online:74.36,  break:15.14, coaching:0.43,  training:1.46,  event:0.21,  help:0,    op_failure:0.17,   break_pct:16.5, to_pct:81.02},    {
+ldap:'jecosta',    leader:'imsilva',    canal:'C2C', login:121.58,  online:94.27,  break:19.83, coaching:5.37,  training:0.92,  event:0.72,  help:0,    op_failure:0.47,   break_pct:16.31, to_pct:77.54},    {
 ldap:'albarbosa',    leader:'lrossetto',    canal:'C2C', login:76.24,  online:58.09,  break:12.16, coaching:3.92,  training:1.33,  event:0.03,  help:0.03,    op_failure:0.69,   break_pct:15.95, to_pct:76.19},    {
-ldap:'chmarques',    leader:'isabmot',    canal:'CHAT', login:88.04,  online:70.19,  break:14.0, coaching:0.86,  training:2.2,  event:0.78,  help:0,    op_failure:0,   break_pct:15.9, to_pct:79.73},    {
-ldap:'pmarinho',    leader:'imsilva',    canal:'C2C', login:99.15,  online:77.61,  break:15.75, coaching:3.61,  training:0.84,  event:0.64,  help:0,    op_failure:0.69,   break_pct:15.89, to_pct:78.28},    {
+ldap:'pmarinho',    leader:'imsilva',    canal:'C2C', login:125.83,  online:99.34,  break:19.98, coaching:4.34,  training:0.84,  event:0.64,  help:0,    op_failure:0.69,   break_pct:15.88, to_pct:78.95},    {
 ldap:'acruz',    leader:'thaidossanto',    canal:'CHAT', login:94.15,  online:75.16,  break:14.93, coaching:1.82,  training:0.92,  event:0.7,  help:0,    op_failure:0.62,   break_pct:15.86, to_pct:79.83},    {
-ldap:'mrmarques',    leader:'isabmot',    canal:'CHAT', login:97.11,  online:79.31,  break:14.96, coaching:1.22,  training:1.61,  event:0,  help:0,    op_failure:0,   break_pct:15.41, to_pct:81.67},    {
-ldap:'amarquini',    leader:'lrossetto',    canal:'C2C', login:104.2,  online:81.32,  break:15.96, coaching:3.37,  training:2.1,  event:0.86,  help:0,    op_failure:0.59,   break_pct:15.32, to_pct:78.04},    {
-ldap:'elaoliveira',    leader:'isabmot',    canal:'CHAT', login:58.64,  online:48.99,  break:8.98, coaching:0,  training:0.66,  event:0,  help:0,    op_failure:0,   break_pct:15.31, to_pct:83.54},    {
-ldap:'raisacsantos',    leader:'lrossetto',    canal:'C2C', login:105.23,  online:82.54,  break:16.01, coaching:4.62,  training:1.47,  event:0.58,  help:0,    op_failure:0,   break_pct:15.21, to_pct:78.44},    {
-ldap:'mudiniz',    leader:'imsilva',    canal:'C2C', login:46.66,  online:28.72,  break:7.09, coaching:2.39,  training:6.57,  event:0.94,  help:0.67,    op_failure:0.3,   break_pct:15.2, to_pct:61.55},    {
-ldap:'camcsilva',    leader:'bkaroline',    canal:'CHAT', login:99.21,  online:78.57,  break:15.07, coaching:2.06,  training:0.97,  event:2.53,  help:0,    op_failure:0,   break_pct:15.19, to_pct:79.2},    {
-ldap:'vitnasciment',    leader:'imsilva',    canal:'C2C', login:20.76,  online:16.42,  break:3.14, coaching:1.17,  training:0.03,  event:0,  help:0,    op_failure:0,   break_pct:15.13, to_pct:79.09},    {
-ldap:'lecandido',    leader:'bkaroline',    canal:'CHAT', login:100.63,  online:80.41,  break:15.22, coaching:3.9,  training:0.67,  event:0.38,  help:0,    op_failure:0.05,   break_pct:15.12, to_pct:79.91},    {
-ldap:'cafarias',    leader:'alicarvalho',    canal:'CHAT', login:100.44,  online:81.84,  break:15.17, coaching:1.32,  training:0.7,  event:0.34,  help:0,    op_failure:1.07,   break_pct:15.1, to_pct:81.48},    {
-ldap:'gabrielaaiol',    leader:'imsilva',    canal:'C2C', login:105.52,  online:84.8,  break:15.93, coaching:3.36,  training:0.08,  event:0.69,  help:0,    op_failure:0.67,   break_pct:15.1, to_pct:80.36},    {
-ldap:'csnunes',    leader:'lrossetto',    canal:'C2C', login:93.53,  online:67.46,  break:14.11, coaching:6.49,  training:1.37,  event:4.09,  help:0.01,    op_failure:0,   break_pct:15.09, to_pct:72.13},    {
-ldap:'marcovenicio',    leader:'lrossetto',    canal:'C2C', login:26.66,  online:19.94,  break:3.99, coaching:1.64,  training:1.1,  event:0,  help:0,    op_failure:0,   break_pct:14.97, to_pct:74.79},    {
-ldap:'fenunes',    leader:'bkaroline',    canal:'CHAT', login:101.07,  online:82.23,  break:15.08, coaching:1.64,  training:1.03,  event:1.01,  help:0,    op_failure:0.08,   break_pct:14.92, to_pct:81.36},    {
-ldap:'losouza',    leader:'alicarvalho',    canal:'CHAT', login:101.93,  online:82.88,  break:15.18, coaching:1.98,  training:0.86,  event:0.14,  help:0,    op_failure:0.89,   break_pct:14.89, to_pct:81.31},    {
-ldap:'uizfsilva',    leader:'alicarvalho',    canal:'CHAT', login:100.01,  online:81.19,  break:14.88, coaching:2.62,  training:0.86,  event:0.22,  help:0,    op_failure:0.24,   break_pct:14.88, to_pct:81.18},    {
-ldap:'czago',    leader:'bkaroline',    canal:'CHAT', login:98.63,  online:77.52,  break:14.49, coaching:3.64,  training:0.53,  event:2.45,  help:0,    op_failure:0,   break_pct:14.69, to_pct:78.6},    {
-ldap:'vdpiedade',    leader:'bkaroline',    canal:'CHAT', login:90.88,  online:75.19,  break:13.32, coaching:1.02,  training:0.82,  event:0.34,  help:0,    op_failure:0.18,   break_pct:14.66, to_pct:82.74},    {
-ldap:'bemarques',    leader:'thaidossanto',    canal:'CHAT', login:85.0,  online:67.92,  break:12.43, coaching:2.64,  training:1.0,  event:0.62,  help:0,    op_failure:0.38,   break_pct:14.62, to_pct:79.91},    {
-ldap:'linessousa',    leader:'imsilva',    canal:'C2C', login:105.87,  online:84.37,  break:15.48, coaching:4.04,  training:1.04,  event:0.74,  help:0,    op_failure:0.19,   break_pct:14.62, to_pct:79.69},    {
-ldap:'adysantos',    leader:'lrossetto',    canal:'C2C', login:109.9,  online:86.0,  break:15.95, coaching:4.84,  training:1.97,  event:1.03,  help:0,    op_failure:0.1,   break_pct:14.51, to_pct:78.25},    {
-ldap:'stdiniz',    leader:'alicarvalho',    canal:'CHAT', login:104.86,  online:85.89,  break:15.21, coaching:2.02,  training:0.87,  event:0.32,  help:0,    op_failure:0.56,   break_pct:14.51, to_pct:81.91},    {
-ldap:'marlaraujo',    leader:'alicarvalho',    canal:'CHAT', login:83.36,  online:66.95,  break:12.02, coaching:3.15,  training:0.86,  event:0.17,  help:0,    op_failure:0.2,   break_pct:14.42, to_pct:80.31},    {
-ldap:'amcaldeira',    leader:'thaidossanto',    canal:'CHAT', login:92.15,  online:75.02,  break:13.26, coaching:1.8,  training:0.84,  event:0.35,  help:0,    op_failure:0.87,   break_pct:14.39, to_pct:81.41},    {
-ldap:'cchimenez',    leader:'thaidossanto',    canal:'CHAT', login:69.68,  online:55.53,  break:10.02, coaching:1.86,  training:0.23,  event:1.45,  help:0.12,    op_failure:0.47,   break_pct:14.38, to_pct:79.69},    {
-ldap:'giselesosant',    leader:'lrossetto',    canal:'C2C', login:103.57,  online:81.78,  break:14.87, coaching:3.61,  training:2.09,  event:0.67,  help:0,    op_failure:0.55,   break_pct:14.36, to_pct:78.96},    {
-ldap:'phegoncalves',    leader:'alicarvalho',    canal:'CHAT', login:21.46,  online:17.54,  break:3.08, coaching:0.83,  training:0,  event:0,  help:0,    op_failure:0,   break_pct:14.35, to_pct:81.73},    {
+ldap:'chmarques',    leader:'isabmot',    canal:'CHAT', login:115.23,  online:91.96,  break:18.0, coaching:1.98,  training:2.2,  event:1.09,  help:0,    op_failure:0,   break_pct:15.62, to_pct:79.81},    {
+ldap:'mrmarques',    leader:'isabmot',    canal:'CHAT', login:116.31,  online:93.56,  break:17.97, coaching:2.92,  training:1.61,  event:0.25,  help:0,    op_failure:0,   break_pct:15.45, to_pct:80.44},    {
+ldap:'mudiniz',    leader:'imsilva',    canal:'C2C', login:52.99,  online:29.87,  break:8.09, coaching:3.81,  training:9.32,  event:0.94,  help:0.67,    op_failure:0.3,   break_pct:15.27, to_pct:56.37},    {
+ldap:'raisacsantos',    leader:'lrossetto',    canal:'C2C', login:113.56,  online:89.66,  break:17.23, coaching:4.62,  training:1.47,  event:0.58,  help:0,    op_failure:0,   break_pct:15.17, to_pct:78.95},    {
+ldap:'cafarias',    leader:'alicarvalho',    canal:'CHAT', login:120.09,  online:98.44,  break:18.22, coaching:1.32,  training:0.7,  event:0.34,  help:0,    op_failure:1.07,   break_pct:15.17, to_pct:81.97},    {
+ldap:'csnunes',    leader:'lrossetto',    canal:'C2C', login:121.72,  online:90.49,  break:18.46, coaching:6.97,  training:1.37,  event:4.42,  help:0.01,    op_failure:0,   break_pct:15.17, to_pct:74.34},    {
+ldap:'elaoliveira',    leader:'isabmot',    canal:'CHAT', login:85.68,  online:70.17,  break:12.99, coaching:1.63,  training:0.66,  event:0.24,  help:0,    op_failure:0,   break_pct:15.16, to_pct:81.9},    {
+ldap:'amarquini',    leader:'lrossetto',    canal:'C2C', login:133.02,  online:102.87,  break:20.1, coaching:4.51,  training:3.82,  event:1.12,  help:0,    op_failure:0.59,   break_pct:15.11, to_pct:77.33},    {
+ldap:'lecandido',    leader:'bkaroline',    canal:'CHAT', login:127.62,  online:102.34,  break:19.24, coaching:4.94,  training:0.67,  event:0.38,  help:0,    op_failure:0.05,   break_pct:15.08, to_pct:80.19},    {
+ldap:'camcsilva',    leader:'bkaroline',    canal:'CHAT', login:127.78,  online:101.87,  break:19.2, coaching:2.94,  training:0.97,  event:2.53,  help:0.26,    op_failure:0,   break_pct:15.03, to_pct:79.72},    {
+ldap:'marcovenicio',    leader:'lrossetto',    canal:'C2C', login:53.18,  online:41.96,  break:7.99, coaching:1.81,  training:1.1,  event:0.33,  help:0,    op_failure:0,   break_pct:15.02, to_pct:78.9},    {
+ldap:'fenunes',    leader:'bkaroline',    canal:'CHAT', login:127.93,  online:104.83,  break:19.12, coaching:1.85,  training:1.03,  event:1.01,  help:0,    op_failure:0.08,   break_pct:14.95, to_pct:81.94},    {
+ldap:'uizfsilva',    leader:'alicarvalho',    canal:'CHAT', login:126.41,  online:103.61,  break:18.86, coaching:2.62,  training:0.86,  event:0.22,  help:0,    op_failure:0.24,   break_pct:14.92, to_pct:81.96},    {
+ldap:'gabrielaaiol',    leader:'imsilva',    canal:'C2C', login:134.8,  online:108.15,  break:20.1, coaching:5.11,  training:0.08,  event:0.69,  help:0,    op_failure:0.67,   break_pct:14.91, to_pct:80.23},    {
+ldap:'losouza',    leader:'alicarvalho',    canal:'CHAT', login:129.82,  online:106.27,  break:19.27, coaching:2.38,  training:0.86,  event:0.14,  help:0,    op_failure:0.89,   break_pct:14.84, to_pct:81.86},    {
+ldap:'czago',    leader:'bkaroline',    canal:'CHAT', login:125.08,  online:98.51,  break:18.47, coaching:4.88,  training:0.53,  event:2.7,  help:0,    op_failure:0,   break_pct:14.77, to_pct:78.76},    {
+ldap:'amcaldeira',    leader:'thaidossanto',    canal:'CHAT', login:117.46,  online:93.69,  break:17.28, coaching:4.42,  training:0.84,  event:0.36,  help:0,    op_failure:0.87,   break_pct:14.71, to_pct:79.76},    {
+ldap:'bemarques',    leader:'thaidossanto',    canal:'CHAT', login:113.0,  online:89.87,  break:16.59, coaching:4.52,  training:1.0,  event:0.62,  help:0,    op_failure:0.38,   break_pct:14.68, to_pct:79.53},    {
+ldap:'marlaraujo',    leader:'alicarvalho',    canal:'CHAT', login:109.4,  online:87.87,  break:16.02, coaching:4.28,  training:0.86,  event:0.17,  help:0,    op_failure:0.2,   break_pct:14.64, to_pct:80.32},    {
+ldap:'vitnasciment',    leader:'imsilva',    canal:'C2C', login:35.46,  online:26.27,  break:5.18, coaching:2.01,  training:1.43,  event:0.56,  help:0,    op_failure:0,   break_pct:14.61, to_pct:74.08},    {
+ldap:'phegoncalves',    leader:'alicarvalho',    canal:'CHAT', login:49.49,  online:41.46,  break:7.2, coaching:0.83,  training:0,  event:0,  help:0,    op_failure:0,   break_pct:14.55, to_pct:83.77},    {
+ldap:'adysantos',    leader:'lrossetto',    canal:'C2C', login:138.66,  online:109.8,  break:20.17, coaching:5.26,  training:1.98,  event:1.35,  help:0,    op_failure:0.1,   break_pct:14.55, to_pct:79.19},    {
+ldap:'vdpiedade',    leader:'bkaroline',    canal:'CHAT', login:119.65,  online:99.47,  break:17.34, coaching:1.49,  training:0.82,  event:0.34,  help:0,    op_failure:0.18,   break_pct:14.49, to_pct:83.13},    {
+ldap:'linessousa',    leader:'imsilva',    canal:'C2C', login:134.61,  online:107.93,  break:19.49, coaching:5.2,  training:1.04,  event:0.74,  help:0,    op_failure:0.19,   break_pct:14.48, to_pct:80.18},    {
+ldap:'cchimenez',    leader:'thaidossanto',    canal:'CHAT', login:97.26,  online:78.79,  break:14.0, coaching:2.2,  training:0.23,  event:1.45,  help:0.12,    op_failure:0.47,   break_pct:14.39, to_pct:81.01},    {
 ldap:'marfreitas',    leader:'thaidossanto',    canal:'CHAT', login:76.27,  online:62.44,  break:10.93, coaching:1.79,  training:0,  event:0.69,  help:0,    op_failure:0.42,   break_pct:14.33, to_pct:81.87},    {
-ldap:'aldmelo',    leader:'bkaroline',    canal:'CHAT', login:43.17,  online:28.05,  break:6.16, coaching:1.27,  training:6.74,  event:0.34,  help:0.26,    op_failure:0.34,   break_pct:14.27, to_pct:64.98},    {
-ldap:'vfonorio',    leader:'isabmot',    canal:'CHAT', login:96.44,  online:78.05,  break:13.72, coaching:1.33,  training:2.59,  event:0.75,  help:0,    op_failure:0,   break_pct:14.23, to_pct:80.93},    {
-ldap:'amcandido',    leader:'isabmot',    canal:'CHAT', login:99.08,  online:82.21,  break:14.09, coaching:1.31,  training:0.83,  event:0.63,  help:0,    op_failure:0,   break_pct:14.22, to_pct:82.97},    {
-ldap:'vltrevizan',    leader:'imsilva',    canal:'C2C', login:79.78,  online:60.86,  break:11.26, coaching:5.65,  training:0.98,  event:0.72,  help:0,    op_failure:0.32,   break_pct:14.11, to_pct:76.28},    {
-ldap:'maybalazshaz',    leader:'bkaroline',    canal:'CHAT', login:110.56,  online:89.33,  break:15.57, coaching:3.28,  training:1.3,  event:0.38,  help:0.68,    op_failure:0.02,   break_pct:14.08, to_pct:80.8},    {
-ldap:'aaugustinho',    leader:'alicarvalho',    canal:'CHAT', login:108.17,  online:88.43,  break:15.22, coaching:3.04,  training:1.21,  event:0.02,  help:0,    op_failure:0.25,   break_pct:14.07, to_pct:81.75},    {
-ldap:'vfarias',    leader:'alicarvalho',    canal:'CHAT', login:107.26,  online:88.6,  break:15.04, coaching:1.85,  training:0.94,  event:0,  help:0,    op_failure:0.83,   break_pct:14.02, to_pct:82.6},    {
-ldap:'mandoliveira',    leader:'isabmot',    canal:'CHAT', login:100.15,  online:83.99,  break:14.01, coaching:0.47,  training:0.84,  event:0.83,  help:0,    op_failure:0.01,   break_pct:13.99, to_pct:83.86},    {
-ldap:'blvicente',    leader:'bkaroline',    canal:'CHAT', login:108.18,  online:87.68,  break:15.12, coaching:3.29,  training:0.84,  event:0.97,  help:0,    op_failure:0.28,   break_pct:13.98, to_pct:81.05},    {
-ldap:'kperrone',    leader:'thaidossanto',    canal:'CHAT', login:28.03,  online:22.23,  break:3.91, coaching:1.08,  training:0.81,  event:0,  help:0,    op_failure:0,   break_pct:13.95, to_pct:79.31},    {
-ldap:'luciagarcia',    leader:'lrossetto',    canal:'C2C', login:106.88,  online:86.0,  break:14.84, coaching:3.97,  training:1.26,  event:0.69,  help:0,    op_failure:0.11,   break_pct:13.88, to_pct:80.46},    {
-ldap:'bcunha',    leader:'alicarvalho',    canal:'CHAT', login:108.82,  online:90.36,  break:15.08, coaching:2.76,  training:0,  event:0.13,  help:0,    op_failure:0.49,   break_pct:13.86, to_pct:83.04},    {
-ldap:'gbmontilha',    leader:'bkaroline',    canal:'CHAT', login:109.65,  online:88.62,  break:15.19, coaching:1.87,  training:0.85,  event:3.12,  help:0,    op_failure:0.01,   break_pct:13.85, to_pct:80.82},    {
-ldap:'renataperei',    leader:'isabmot',    canal:'CHAT', login:101.51,  online:86.18,  break:14.03, coaching:0.03,  training:0.85,  event:0.4,  help:0,    op_failure:0.01,   break_pct:13.82, to_pct:84.9},    {
-ldap:'lianadsilva',    leader:'alicarvalho',    canal:'CHAT', login:108.41,  online:88.55,  break:14.86, coaching:3.03,  training:0.9,  event:0.64,  help:0,    op_failure:0.43,   break_pct:13.71, to_pct:81.68},    {
-ldap:'eduejesus',    leader:'thaidossanto',    canal:'CHAT', login:103.11,  online:82.84,  break:14.11, coaching:4.17,  training:0.84,  event:0.69,  help:0,    op_failure:0.47,   break_pct:13.68, to_pct:80.34},    {
-ldap:'polivdaraujo',    leader:'bkaroline',    canal:'CHAT', login:104.89,  online:87.0,  break:14.31, coaching:2.33,  training:0,  event:0.87,  help:0.22,    op_failure:0.15,   break_pct:13.64, to_pct:82.94},    {
-ldap:'kroza',    leader:'bkaroline',    canal:'CHAT', login:85.73,  online:68.93,  break:11.69, coaching:2.92,  training:0,  event:2.19,  help:0,    op_failure:0,   break_pct:13.64, to_pct:80.4},    {
-ldap:'wgomdsouza',    leader:'lrossetto',    canal:'C2C', login:95.8,  online:80.38,  break:13.05, coaching:1.3,  training:0.87,  event:0,  help:0,    op_failure:0.21,   break_pct:13.62, to_pct:83.9},    {
-ldap:'cccsousa',    leader:'isabmot',    canal:'CHAT', login:88.03,  online:74.24,  break:11.97, coaching:0.25,  training:0.92,  event:0.64,  help:0,    op_failure:0,   break_pct:13.6, to_pct:84.33},    {
-ldap:'mfvieira',    leader:'isabmot',    canal:'CHAT', login:103.03,  online:82.25,  break:13.93, coaching:3.71,  training:0.76,  event:2.39,  help:0,    op_failure:0,   break_pct:13.52, to_pct:79.83},    {
-ldap:'casbarreiros',    leader:'thaidossanto',    canal:'CHAT', login:105.13,  online:84.97,  break:13.98, coaching:3.08,  training:0.88,  event:1.42,  help:0,    op_failure:0.79,   break_pct:13.3, to_pct:80.82},    {
+ldap:'aldmelo',    leader:'bkaroline',    canal:'CHAT', login:57.61,  online:40.48,  break:8.19, coaching:1.27,  training:6.74,  event:0.34,  help:0.26,    op_failure:0.34,   break_pct:14.22, to_pct:70.27},    {
+ldap:'giselesosant',    leader:'lrossetto',    canal:'C2C', login:126.82,  online:99.4,  break:17.99, coaching:5.03,  training:2.97,  event:0.89,  help:0,    op_failure:0.55,   break_pct:14.19, to_pct:78.38},    {
+ldap:'vltrevizan',    leader:'imsilva',    canal:'C2C', login:100.84,  online:78.17,  break:14.29, coaching:6.37,  training:0.98,  event:0.72,  help:0,    op_failure:0.32,   break_pct:14.17, to_pct:77.52},    {
+ldap:'aaugustinho',    leader:'alicarvalho',    canal:'CHAT', login:137.03,  online:112.49,  break:19.39, coaching:3.66,  training:1.21,  event:0.02,  help:0,    op_failure:0.25,   break_pct:14.15, to_pct:82.09},    {
+ldap:'mandoliveira',    leader:'isabmot',    canal:'CHAT', login:128.2,  online:106.7,  break:18.14, coaching:1.34,  training:0.84,  event:1.15,  help:0,    op_failure:0.01,   break_pct:14.15, to_pct:83.23},    {
+ldap:'maybalazshaz',    leader:'bkaroline',    canal:'CHAT', login:140.24,  online:113.59,  break:19.79, coaching:4.49,  training:1.3,  event:0.38,  help:0.68,    op_failure:0.02,   break_pct:14.11, to_pct:81.0},    {
+ldap:'vfarias',    leader:'alicarvalho',    canal:'CHAT', login:135.65,  online:112.26,  break:19.13, coaching:2.49,  training:0.94,  event:0,  help:0,    op_failure:0.83,   break_pct:14.1, to_pct:82.76},    {
+ldap:'amcandido',    leader:'isabmot',    canal:'CHAT', login:128.49,  online:106.87,  break:18.11, coaching:1.83,  training:0.83,  event:0.85,  help:0,    op_failure:0,   break_pct:14.09, to_pct:83.17},    {
+ldap:'vfonorio',    leader:'isabmot',    canal:'CHAT', login:126.49,  online:102.58,  break:17.75, coaching:2.59,  training:2.59,  event:0.97,  help:0,    op_failure:0,   break_pct:14.03, to_pct:81.1},    {
+ldap:'bcunha',    leader:'alicarvalho',    canal:'CHAT', login:136.79,  online:113.69,  break:19.16, coaching:3.32,  training:0,  event:0.13,  help:0,    op_failure:0.49,   break_pct:14.01, to_pct:83.11},    {
+ldap:'kperrone',    leader:'thaidossanto',    canal:'CHAT', login:56.61,  online:44.24,  break:7.86, coaching:3.21,  training:1.31,  event:0,  help:0,    op_failure:0,   break_pct:13.88, to_pct:78.15},    {
+ldap:'blvicente',    leader:'bkaroline',    canal:'CHAT', login:137.86,  online:112.42,  break:19.13, coaching:4.22,  training:0.84,  event:0.97,  help:0,    op_failure:0.28,   break_pct:13.88, to_pct:81.55},    {
+ldap:'luciagarcia',    leader:'lrossetto',    canal:'C2C', login:135.56,  online:109.14,  break:18.8, coaching:5.24,  training:1.26,  event:1.01,  help:0,    op_failure:0.11,   break_pct:13.87, to_pct:80.51},    {
+ldap:'gbmontilha',    leader:'bkaroline',    canal:'CHAT', login:138.97,  online:113.44,  break:19.25, coaching:2.31,  training:0.85,  event:3.12,  help:0,    op_failure:0.01,   break_pct:13.85, to_pct:81.63},    {
+ldap:'polivdaraujo',    leader:'bkaroline',    canal:'CHAT', login:133.18,  online:110.12,  break:18.41, coaching:2.93,  training:0.48,  event:0.87,  help:0.22,    op_failure:0.15,   break_pct:13.82, to_pct:82.69},    {
+ldap:'renataperei',    leader:'isabmot',    canal:'CHAT', login:130.77,  online:110.05,  break:18.04, coaching:1.42,  training:0.85,  event:0.41,  help:0,    op_failure:0.01,   break_pct:13.8, to_pct:84.16},    {
+ldap:'eduejesus',    leader:'thaidossanto',    canal:'CHAT', login:131.72,  online:105.09,  break:18.16, coaching:6.47,  training:0.84,  event:0.69,  help:0,    op_failure:0.47,   break_pct:13.79, to_pct:79.78},    {
+ldap:'kroza',    leader:'bkaroline',    canal:'CHAT', login:99.53,  online:80.36,  break:13.69, coaching:2.92,  training:0,  event:2.56,  help:0,    op_failure:0,   break_pct:13.75, to_pct:80.74},    {
+ldap:'lianadsilva',    leader:'alicarvalho',    canal:'CHAT', login:136.95,  online:111.68,  break:18.81, coaching:4.5,  training:0.9,  event:0.64,  help:0,    op_failure:0.43,   break_pct:13.73, to_pct:81.55},    {
+ldap:'wgomdsouza',    leader:'lrossetto',    canal:'C2C', login:109.92,  online:91.7,  break:15.06, coaching:1.78,  training:0.87,  event:0.31,  help:0,    op_failure:0.21,   break_pct:13.7, to_pct:83.42},    {
+ldap:'mfvieira',    leader:'isabmot',    canal:'CHAT', login:131.88,  online:105.6,  break:17.89, coaching:4.92,  training:0.76,  event:2.71,  help:0,    op_failure:0,   break_pct:13.57, to_pct:80.07},    {
+ldap:'casbarreiros',    leader:'thaidossanto',    canal:'CHAT', login:134.47,  online:108.15,  break:18.15, coaching:5.08,  training:0.88,  event:1.42,  help:0,    op_failure:0.79,   break_pct:13.5, to_pct:80.43},    {
+ldap:'cccsousa',    leader:'isabmot',    canal:'CHAT', login:117.8,  online:99.85,  break:15.86, coaching:0.54,  training:0.92,  event:0.64,  help:0,    op_failure:0,   break_pct:13.46, to_pct:84.76},    {
+ldap:'juslima',    leader:'thaidossanto',    canal:'CHAT', login:76.89,  online:63.08,  break:10.01, coaching:2.33,  training:1.1,  event:0.37,  help:0,    op_failure:0,   break_pct:13.02, to_pct:82.04},    {
 ldap:'mariasilva',    leader:'isabmot',    canal:'CHAT', login:38.99,  online:32.95,  break:5.02, coaching:0.43,  training:0,  event:0.58,  help:0,    op_failure:0,   break_pct:12.88, to_pct:84.51},    {
-ldap:'juslima',    leader:'thaidossanto',    canal:'CHAT', login:62.46,  online:52.42,  break:8.01, coaching:0.56,  training:1.1,  event:0.37,  help:0,    op_failure:0,   break_pct:12.82, to_pct:83.93},    {
-ldap:'tsgarbim',    leader:'imsilva',    canal:'C2C', login:75.02,  online:62.6,  break:9.1, coaching:1.93,  training:0.77,  event:0.32,  help:0,    op_failure:0.31,   break_pct:12.13, to_pct:83.44},    {
-ldap:'ulissouza',    leader:'thaidossanto',    canal:'CHAT', login:33.7,  online:25.66,  break:3.69, coaching:2.23,  training:1.32,  event:0,  help:0,    op_failure:0.8,   break_pct:10.95, to_pct:76.14},    {
-ldap:'cdoliveira',    leader:'lrossetto',    canal:'C2C', login:60.48,  online:57.05,  break:0, coaching:2.83,  training:0,  event:0.56,  help:0,    op_failure:0.04,   break_pct:0.0, to_pct:94.33},    {
-ldap:'lyalves',    leader:'alicarvalho',    canal:'CHAT', login:1.21,  online:1.11,  break:0, coaching:0.1,  training:0,  event:0,  help:0,    op_failure:0,   break_pct:0.0, to_pct:91.74}];
+ldap:'tsgarbim',    leader:'imsilva',    canal:'C2C', login:103.61,  online:85.91,  break:13.12, coaching:3.18,  training:0.77,  event:0.32,  help:0,    op_failure:0.31,   break_pct:12.66, to_pct:82.92},    {
+ldap:'ulissouza',    leader:'thaidossanto',    canal:'CHAT', login:61.77,  online:48.82,  break:7.71, coaching:3.11,  training:1.32,  event:0,  help:0,    op_failure:0.8,   break_pct:12.48, to_pct:79.04},    {
+ldap:'lyalves',    leader:'alicarvalho',    canal:'CHAT', login:1.21,  online:1.11,  break:0, coaching:0.1,  training:0,  event:0,  help:0,    op_failure:0,   break_pct:0.0, to_pct:91.74},    {
+ldap:'cdoliveira',    leader:'lrossetto',    canal:'C2C', login:79.98,  online:75.53,  break:0, coaching:3.46,  training:0,  event:0.89,  help:0.07,    op_failure:0.04,   break_pct:0.0, to_pct:94.44}];
 // helper: barra visual de composição de tempo
 function tempoBar(r, login){
   if(!login||login<=0) return '<span style="color:#CBD5E1;font-size:11px">—</span>';
@@ -3575,8 +3575,8 @@ const C3=['#3483FA','#FF7B00','#00A650'];
 // ─── NPS POR PROCESSO (PRO_PROCESS_NAME) ─────────────────────────────────────
 // Fonte: DM_CX_NPS_Y20_DETAIL + BT_CS_NPS_COLLAB_BY_REP · Jan–Mai/26
 // null = mês sem mínimo de Pesquisas (< 3)
-const CDU_LIN = [  {cdu:'Reputação', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Reputação ME', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Gestão de Anúncio', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Potencializar', nps:[35.4,44.4,51.7,31.7,-2.0,18.6,30.3], srv:[130.0,99.0,89.0,63.0,50.0,43.0,33.0]},    {cdu:'PR - Técnica Proibida', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'PR - Prop. Intelectual', nps:[32.4,53.4,53.7,78.3,50.0,45.8,78.4], srv:[179.0,116.0,147.0,69.0,48.0,48.0,37.0]},    {cdu:'PR - Artigos Proibidos', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Qualidade de Foto', nps:[70.2,74.2,89.5,46.2,33.3,37.5,75.0], srv:[47.0,31.0,19.0,13.0,9.0,8.0,8.0]},    {cdu:'Antes de Publicar', nps:[0.0,38.5,0.0,0.0,-50.0,0.0,33.3], srv:[10.0,13.0,15.0,12.0,4.0,4.0,3.0]}];
-const CDU_COL = [  {cdu:'Reputação', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Reputação ME', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Gestão de Anúncio', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Potencializar', nps:[18.6,33.9,38.4,21.4,-11.3,5.8,9.8], srv:[156.0,112.0,99.0,70.0,62.0,52.0,41.0]},    {cdu:'PR - Técnica Proibida', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'PR - Prop. Intelectual', nps:[17.1,48.4,38.9,72.0,38.2,16.7,65.0], srv:[211.0,124.0,167.0,75.0,55.0,60.0,40.0]},    {cdu:'PR - Artigos Proibidos', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Qualidade de Foto', nps:[66.0,75.0,89.5,35.7,33.3,37.5,75.0], srv:[50.0,32.0,19.0,14.0,9.0,8.0,8.0]},    {cdu:'Despacho Vendas', nps:[8.0,6.1,24.3,20.0,78.6,-23.5,-57.1], srv:[25.0,33.0,37.0,15.0,14.0,17.0,7.0]},    {cdu:'Antes de Publicar', nps:[0.0,20.0,-16.7,-33.3,-33.3,0.0,33.3], srv:[16.0,15.0,18.0,18.0,3.0,4.0,3.0]},    {cdu:'Pós-Compra Vendedor', nps:[27.6,23.8,20.0,28.6,0.0,0.0,null], srv:[29.0,21.0,15.0,7.0,5.0,6.0,null]}];
+const CDU_LIN = [  {cdu:'Reputação', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Reputação ME', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Gestão de Anúncio', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Potencializar', nps:[35.4,44.4,51.7,31.7,-2.0,18.6,20.5], srv:[130.0,99.0,89.0,63.0,50.0,43.0,44.0]},    {cdu:'PR - Técnica Proibida', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'PR - Prop. Intelectual', nps:[32.4,53.4,53.7,78.3,50.0,45.8,71.7], srv:[179.0,116.0,147.0,69.0,48.0,48.0,53.0]},    {cdu:'PR - Artigos Proibidos', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Qualidade de Foto', nps:[70.2,74.2,89.5,46.2,33.3,37.5,75.0], srv:[47.0,31.0,19.0,13.0,9.0,8.0,8.0]},    {cdu:'Antes de Publicar', nps:[0.0,38.5,0.0,0.0,-50.0,0.0,20.0], srv:[10.0,13.0,15.0,12.0,4.0,4.0,5.0]}];
+const CDU_COL = [  {cdu:'Reputação', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Reputação ME', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Gestão de Anúncio', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Potencializar', nps:[18.6,33.9,38.4,21.4,-11.3,5.8,-1.8], srv:[156.0,112.0,99.0,70.0,62.0,52.0,56.0]},    {cdu:'PR - Técnica Proibida', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'PR - Prop. Intelectual', nps:[17.1,48.4,38.9,72.0,38.2,16.7,60.3], srv:[211.0,124.0,167.0,75.0,55.0,60.0,58.0]},    {cdu:'PR - Artigos Proibidos', nps:[null,null,null,null,null,null,null], srv:[null,null,null,null,null,null,null]},    {cdu:'Qualidade de Foto', nps:[66.0,75.0,89.5,35.7,33.3,37.5,75.0], srv:[50.0,32.0,19.0,14.0,9.0,8.0,8.0]},    {cdu:'Despacho Vendas', nps:[8.0,6.1,24.3,20.0,78.6,-23.5,-50.0], srv:[25.0,33.0,37.0,15.0,14.0,17.0,10.0]},    {cdu:'Antes de Publicar', nps:[0.0,20.0,-16.7,-33.3,-33.3,0.0,20.0], srv:[16.0,15.0,18.0,18.0,3.0,4.0,5.0]},    {cdu:'Pós-Compra Vendedor', nps:[27.6,23.8,20.0,28.6,0.0,0.0,null], srv:[29.0,21.0,15.0,7.0,5.0,6.0,null]}];
 // ─── TMO POR PROCESSO (PRO_PROCESS_NAME via join NPS) ────────────────────────
 // Fonte: BT_CX_REP_METRICS_CS × DM_CX_NPS_Y20_DETAIL · Jan–Mai/26
 // PRODUTIVIDADE por processo × combo — Fonte: BT_CX_REP_METRICS_CS × DM_CX_NPS_Y20_DETAIL
@@ -3618,50 +3618,50 @@ const TMO_PROC_BY_COMBO = {
     {proc:'Reputação', tmo:[null,null,null,null,null,null,null]},  
     {proc:'Reputação ME', tmo:[null,null,null,null,null,null,null]},  
     {proc:'Gestão de Anúncio', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'Potencializar', tmo:[null,null,null,null,null,null,null]},  
+    {proc:'Potencializar', tmo:[28.59,28.01,27.69,29.55,28.34,29.27,29.31]},  
     {proc:'PR - Téc. Proibida', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'PR - Prop. Intelectual', tmo:[null,null,null,null,null,null,null]},  
+    {proc:'PR - Prop. Intelectual', tmo:[28.16,28.25,28.96,29.82,31.0,31.6,30.31]},  
     {proc:'PR - Artigos Proib.', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'Qualidade de Foto', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'Antes de Publicar', tmo:[null,null,null,null,null,null,null]},  
+    {proc:'Qualidade de Foto', tmo:[24.47,24.29,24.78,27.08,29.15,28.63,25.36]},  
+    {proc:'Antes de Publicar', tmo:[25.11,26.88,26.26,23.94,26.66,24.12,26.06]},  
   ],  chatTT:[
     {proc:'Reputação', tmo:[null,null,null,null,null,null,null]},  
     {proc:'Reputação ME', tmo:[null,null,null,null,null,null,null]},  
     {proc:'Gestão de Anúncio', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'Potencializar', tmo:[null,null,null,null,null,null,null]},  
+    {proc:'Potencializar', tmo:[32.59,32.01,31.69,33.55,32.34,33.27,33.31]},  
     {proc:'PR - Téc. Proibida', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'PR - Prop. Intelectual', tmo:[null,null,null,null,null,null,null]},  
+    {proc:'PR - Prop. Intelectual', tmo:[32.16,32.25,32.96,33.82,35.0,35.6,34.31]},  
     {proc:'PR - Artigos Proib.', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'Qualidade de Foto', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'Antes de Publicar', tmo:[null,null,null,null,null,null,null]},  
+    {proc:'Qualidade de Foto', tmo:[28.47,28.29,28.78,31.08,33.15,32.63,29.36]},  
+    {proc:'Antes de Publicar', tmo:[29.11,30.88,30.26,27.94,30.66,28.12,30.06]},  
   ],  c2cTM:[
     {proc:'Reputação', tmo:[null,null,null,null,null,null,null]},  
     {proc:'Reputação ME', tmo:[null,null,null,null,null,null,null]},  
     {proc:'Gestão de Anúncio', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'Potencializar', tmo:[null,null,null,null,null,null,null]},  
+    {proc:'Potencializar', tmo:[19.34,19.28,20.43,21.66,22.48,23.81,23.06]},  
     {proc:'PR - Téc. Proibida', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'PR - Prop. Intelectual', tmo:[null,null,null,null,null,null,null]},  
+    {proc:'PR - Prop. Intelectual', tmo:[19.93,21.04,21.45,23.16,23.23,26.82,26.89]},  
     {proc:'PR - Artigos Proib.', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'Qualidade de Foto', tmo:[null,null,null,null,null,null,null]},  
-    {proc:'Antes de Publicar', tmo:[null,null,null,null,null,null,null]},  
+    {proc:'Qualidade de Foto', tmo:[15.06,13.1,13.88,18.46,24.2,16.59,20.79]},  
+    {proc:'Antes de Publicar', tmo:[14.46,15.19,17.59,17.73,18.91,16.28,19.55]},  
   ]};
 const TMO_PROC = [
   {proc:'Reputação', tmo:[null,null,null,null,null,null,null], casos:[null,null,null,null,null,null,null]},
   {proc:'Reputação ME', tmo:[null,null,null,null,null,null,null], casos:[null,null,null,null,null,null,null]},
   {proc:'Gestão de Anúncio', tmo:[null,null,null,null,null,null,null], casos:[null,null,null,null,null,null,null]},
-  {proc:'Potencializar', tmo:[null,null,null,null,null,null,null], casos:[null,null,null,null,null,null,null]},
+  {proc:'Potencializar', tmo:[29.9,29.12,29.18,30.79,29.92,30.8,31.37], casos:[2641.0,2883.0,3752.0,3160.0,2678.0,3012.0,3062.0]},
   {proc:'PR - Téc. Proibida', tmo:[null,null,null,null,null,null,null], casos:[null,null,null,null,null,null,null]},
-  {proc:'PR - Prop. Intelectual', tmo:[null,null,null,null,null,null,null], casos:[null,null,null,null,null,null,null]},
+  {proc:'PR - Prop. Intelectual', tmo:[31.68,31.63,31.86,33.05,34.43,35.01,33.9], casos:[3164.0,2473.0,4215.0,2755.0,1936.0,2232.0,2391.0]},
   {proc:'PR - Artigos Proib.', tmo:[null,null,null,null,null,null,null], casos:[null,null,null,null,null,null,null]},
-  {proc:'Qualidade de Foto', tmo:[null,null,null,null,null,null,null], casos:[null,null,null,null,null,null,null]},
-  {proc:'Antes de Publicar', tmo:[null,null,null,null,null,null,null], casos:[null,null,null,null,null,null,null]}
+  {proc:'Qualidade de Foto', tmo:[28.06,27.73,27.89,30.16,32.61,31.99,29.21], casos:[580.0,514.0,468.0,398.0,335.0,325.0,230.0]},
+  {proc:'Antes de Publicar', tmo:[26.24,27.57,27.44,26.23,28.03,25.27,28.32], casos:[454.0,431.0,703.0,867.0,313.0,312.0,254.0]}
 ];
 // TMO ON (chat/c2c) e OFF (mail) por combo — fonte: BT_CX_REP_METRICS_CS
 // Fonte: BT_CX_REP_METRICS_CS · SUM(NUM)/SUM(DEN) por canal · Jan–Mai/26
 const TMO_ON_OFF = {
-  chatTM:{ on:[29.48,30.69,29.89,31.7,33.86,32.84,32.44], off:[14.07,13.06,12.59,16.0,14.54,13.44,16.49], casosOn:[12921.0,11602.0,13935.0,12151.0,10346.0,11950.0,11291.0], casosOff:[11172.0,9586.0,12431.0,9952.0,8586.0,7547.0,7403.0] },
-  chatTT:{ on:[32.24,31.22,31.46,32.85,32.01,31.3,32.41], off:[18.51,17.2,15.68,18.92,23.17,24.51,17.72], casosOn:[11503.0,10672.0,11931.0,10891.0,12769.0,13764.0,7823.0], casosOff:[7312.0,6585.0,8623.0,7523.0,7503.0,6322.0,3840.0] },
-  c2cTM: { on:[17.54,17.94,18.39,20.22,19.99,18.8,18.35],   off:[14.07,13.06,12.59,16.0,14.54,13.44,16.49],   casosOn:[4414.0,3890.0,4189.0,4085.0,3520.0,3433.0,2948.0],   casosOff:[11172.0,9586.0,12431.0,9952.0,8586.0,7547.0,7403.0] }};
+  chatTM:{ on:[29.48,30.69,29.89,31.7,33.86,32.84,32.77], off:[14.07,13.06,12.59,16.0,14.54,13.44,16.72], casosOn:[12921.0,11602.0,13935.0,12151.0,10346.0,11950.0,14156.0], casosOff:[11172.0,9586.0,12431.0,9952.0,8586.0,7547.0,9497.0] },
+  chatTT:{ on:[32.24,31.22,31.46,32.85,32.01,31.3,32.57], off:[18.51,17.2,15.68,18.92,23.17,24.51,17.64], casosOn:[11503.0,10672.0,11931.0,10891.0,12769.0,13764.0,9945.0], casosOff:[7312.0,6585.0,8623.0,7523.0,7503.0,6322.0,4947.0] },
+  c2cTM: { on:[17.54,17.94,18.39,20.22,19.99,18.8,18.46],   off:[14.07,13.06,12.59,16.0,14.54,13.44,16.72],   casosOn:[4414.0,3890.0,4189.0,4085.0,3520.0,3433.0,3706.0],   casosOff:[11172.0,9586.0,12431.0,9952.0,8586.0,7547.0,9497.0] }};
 const TMO_THRESHOLD  = 35;
    
 // min — acima = TMO excedido
@@ -3711,7 +3711,7 @@ const TMO_LDAP = [
   {mes:'2026-01',ldap:'fenunes',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:36.13,tmo_off:18.54,tmo_total:30.33,casos_on:325,casos_off:160},
   {mes:'2026-01',ldap:'gbmontilha',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:33.06,tmo_off:31.81,tmo_total:32.74,casos_on:424,casos_off:145},
   {mes:'2026-01',ldap:'ghincapie',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:36.61,tmo_off:6.8,tmo_total:22.21,casos_on:139,casos_off:130},
-  {mes:'2026-01',ldap:'glatorre',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:28.67,tmo_off:8.19,tmo_total:20.5,casos_on:113,casos_off:75},
+  {mes:'2026-01',ldap:'glatorre',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:31.02,tmo_off:16.7,tmo_total:25.95,casos_on:164,casos_off:90},
   {mes:'2026-01',ldap:'hporras',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:12.78,tmo_off:11.59,tmo_total:12.24,casos_on:295,casos_off:241},
   {mes:'2026-01',ldap:'inbustamante',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:47.01,tmo_off:81.56,tmo_total:56.27,casos_on:131,casos_off:48},
   {mes:'2026-01',ldap:'isabedolivei',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:25.35,tmo_off:34.9,tmo_total:29.01,casos_on:225,casos_off:140},
@@ -3737,7 +3737,6 @@ const TMO_LDAP = [
   {mes:'2026-01',ldap:'lecandido',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:25.86,tmo_off:30.75,tmo_total:27.0,casos_on:147,casos_off:45},
   {mes:'2026-01',ldap:'leibarcelos',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:26.0,tmo_off:14.88,tmo_total:22.59,casos_on:276,casos_off:122},
   {mes:'2026-01',ldap:'letrujillo',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:36.3,tmo_off:47.41,tmo_total:39.33,casos_on:190,casos_off:71},
-  {mes:'2026-01',ldap:'lgarayespiti',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:36.83,tmo_off:11.54,tmo_total:26.81,casos_on:134,casos_off:88},
   {mes:'2026-01',ldap:'lianadsilva',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:35.45,tmo_off:24.24,tmo_total:32.23,casos_on:363,casos_off:146},
   {mes:'2026-01',ldap:'losouza',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:35.4,tmo_off:24.31,tmo_total:31.96,casos_on:60,casos_off:27},
   {mes:'2026-01',ldap:'lotalvaro',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:33.16,tmo_off:7.61,tmo_total:23.37,casos_on:425,casos_off:264},
@@ -3798,7 +3797,7 @@ const TMO_LDAP = [
   {mes:'2026-02',ldap:'acelisariza',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:20.62,tmo_off:7.9,tmo_total:13.32,casos_on:149,casos_off:201},
   {mes:'2026-02',ldap:'agaravito',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:43.07,tmo_off:7.8,tmo_total:26.6,casos_on:129,casos_off:113},
   {mes:'2026-02',ldap:'agarcianaran',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:35.57,tmo_off:8.72,tmo_total:24.08,casos_on:238,casos_off:178},
-  {mes:'2026-02',ldap:'aldmelo',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:18.01,tmo_off:16.16,tmo_total:17.65,casos_on:233,casos_off:55},
+  {mes:'2026-02',ldap:'aldmelo',leader:'lrossetto',canal:'C2C',turno:'TT',tmo_on:15.18,tmo_off:17.78,tmo_total:15.98,casos_on:201,casos_off:89},
   {mes:'2026-02',ldap:'alvalbuena',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:39.62,tmo_off:12.4,tmo_total:26.33,casos_on:22,casos_off:21},
   {mes:'2026-02',ldap:'amcaldeira',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:19.75,tmo_off:10.47,tmo_total:16.31,casos_on:51,casos_off:30},
   {mes:'2026-02',ldap:'amcandido',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:40.62,tmo_off:27.45,tmo_total:36.83,casos_on:294,casos_off:119},
@@ -3967,6 +3966,7 @@ const TMO_LDAP = [
   {mes:'2026-03',ldap:'lagutierrez',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:13.13,tmo_off:5.14,tmo_total:8.63,casos_on:130,casos_off:168},
   {mes:'2026-03',ldap:'laufonseca',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:24.95,tmo_off:11.57,tmo_total:19.81,casos_on:603,casos_off:376},
   {mes:'2026-03',ldap:'lauraraujo',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:14.0,tmo_off:null,tmo_total:14.0,casos_on:2,casos_off:0},
+  {mes:'2026-03',ldap:'lbaquero',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:26.98,tmo_off:null,tmo_total:26.98,casos_on:1,casos_off:0},
   {mes:'2026-03',ldap:'lecandido',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:34.24,tmo_off:40.49,tmo_total:35.53,casos_on:313,casos_off:82},
   {mes:'2026-03',ldap:'leibarcelos',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:27.36,tmo_off:22.72,tmo_total:26.21,casos_on:446,casos_off:147},
   {mes:'2026-03',ldap:'letrujillo',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:35.8,tmo_off:15.37,tmo_total:27.31,casos_on:366,casos_off:260},
@@ -4020,7 +4020,7 @@ const TMO_LDAP = [
   {mes:'2026-03',ldap:'uaguerrero',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:45.75,tmo_off:5.03,tmo_total:20.92,casos_on:16,casos_off:25},
   {mes:'2026-03',ldap:'uizfsilva',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:34.08,tmo_off:12.87,tmo_total:26.61,casos_on:289,casos_off:157},
   {mes:'2026-03',ldap:'ulissouza',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:36.02,tmo_off:20.65,tmo_total:31.42,casos_on:215,casos_off:92},
-  {mes:'2026-03',ldap:'vdpiedade',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:34.5,tmo_off:11.86,tmo_total:25.04,casos_on:209,casos_off:150},
+  {mes:'2026-03',ldap:'vdpiedade',leader:'lrossetto',canal:'CHAT',turno:'TT',tmo_on:29.14,tmo_off:13.9,tmo_total:23.7,casos_on:182,casos_off:101},
   {mes:'2026-03',ldap:'vfarias',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:38.57,tmo_off:26.66,tmo_total:34.45,casos_on:85,casos_off:45},
   {mes:'2026-03',ldap:'vfonorio',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:38.18,tmo_off:27.28,tmo_total:34.99,casos_on:380,casos_off:157},
   {mes:'2026-03',ldap:'vgutierrezro',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:21.11,tmo_off:3.6,tmo_total:14.18,casos_on:494,casos_off:324},
@@ -4261,13 +4261,13 @@ const TMO_LDAP = [
   {mes:'2026-05',ldap:'mnajar',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:27.2,tmo_off:8.02,tmo_total:21.31,casos_on:312,casos_off:138},
   {mes:'2026-05',ldap:'mrmarques',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:22.78,tmo_off:21.66,tmo_total:22.58,casos_on:491,casos_off:108},
   {mes:'2026-05',ldap:'mroa',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:24.91,tmo_off:15.63,tmo_total:20.29,casos_on:132,casos_off:131},
-  {mes:'2026-05',ldap:'mudiniz',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:20.24,tmo_off:13.53,tmo_total:17.6,casos_on:88,casos_off:57},
+  {mes:'2026-05',ldap:'mudiniz',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:21.62,tmo_off:15.59,tmo_total:19.01,casos_on:108,casos_off:82},
   {mes:'2026-05',ldap:'nalonsovelas',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:30.63,tmo_off:8.02,tmo_total:21.43,casos_on:345,casos_off:237},
   {mes:'2026-05',ldap:'ngirodriguez',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:54.95,tmo_off:135.36,tmo_total:80.61,casos_on:32,casos_off:15},
   {mes:'2026-05',ldap:'nnegomez',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:27.73,tmo_off:8.83,tmo_total:22.07,casos_on:412,casos_off:176},
   {mes:'2026-05',ldap:'pauballester',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:41.37,tmo_off:11.19,tmo_total:28.54,casos_on:230,casos_off:170},
   {mes:'2026-05',ldap:'phegoncalves',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:31.27,tmo_off:19.34,tmo_total:28.88,casos_on:20,casos_off:5},
-  {mes:'2026-05',ldap:'pmarinho',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:12.73,tmo_off:13.66,tmo_total:13.05,casos_on:99,casos_off:51},
+  {mes:'2026-05',ldap:'pmarinho',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:14.85,tmo_off:20.92,tmo_total:17.05,casos_on:143,casos_off:81},
   {mes:'2026-05',ldap:'polivdaraujo',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:31.6,tmo_off:16.15,tmo_total:27.42,casos_on:495,casos_off:184},
   {mes:'2026-05',ldap:'raisacsantos',leader:'lrossetto',canal:'C2C',turno:'TT',tmo_on:28.74,tmo_off:89.94,tmo_total:43.44,casos_on:155,casos_off:49},
   {mes:'2026-05',ldap:'renataperei',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:38.23,tmo_off:24.68,tmo_total:34.37,casos_on:397,casos_off:158},
@@ -4276,7 +4276,7 @@ const TMO_LDAP = [
   {mes:'2026-05',ldap:'stdiniz',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:24.8,tmo_off:14.83,tmo_total:22.5,casos_on:401,casos_off:120},
   {mes:'2026-05',ldap:'stellez',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:20.07,tmo_off:13.93,tmo_total:17.23,casos_on:206,casos_off:177},
   {mes:'2026-05',ldap:'tarango',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:35.33,tmo_off:6.67,tmo_total:23.66,casos_on:169,casos_off:116},
-  {mes:'2026-05',ldap:'tsgarbim',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:15.26,tmo_off:11.36,tmo_total:13.8,casos_on:124,casos_off:74},
+  {mes:'2026-05',ldap:'tsgarbim',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:17.72,tmo_off:13.12,tmo_total:15.83,casos_on:63,casos_off:44},
   {mes:'2026-05',ldap:'uaguerrero',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:39.84,tmo_off:14.89,tmo_total:27.37,casos_on:6,casos_off:6},
   {mes:'2026-05',ldap:'uizfsilva',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:36.11,tmo_off:13.41,tmo_total:28.96,casos_on:311,casos_off:143},
   {mes:'2026-05',ldap:'ulissouza',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:32.32,tmo_off:16.33,tmo_total:27.78,casos_on:404,casos_off:160},
@@ -4420,135 +4420,137 @@ const TMO_LDAP = [
   {mes:'2026-06',ldap:'wurrea',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:39.66,tmo_off:69.43,tmo_total:49.29,casos_on:117,casos_off:56},
   {mes:'2026-06',ldap:'yugomez',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:25.41,tmo_off:49.28,tmo_total:33.24,casos_on:166,casos_off:81},
   {mes:'2026-06',ldap:'zneira',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:37.14,tmo_off:13.63,tmo_total:27.38,casos_on:176,casos_off:125},
-  {mes:'2026-07',ldap:'aaugustinho',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:29.84,tmo_off:19.41,tmo_total:27.32,casos_on:252,casos_off:80},
+  {mes:'2026-07',ldap:'aaugustinho',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:30.36,tmo_off:18.82,tmo_total:27.48,casos_on:312,casos_off:104},
   {mes:'2026-07',ldap:'acruz',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:23.23,tmo_off:14.34,tmo_total:21.31,casos_on:375,casos_off:103},
-  {mes:'2026-07',ldap:'adysantos',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:21.81,tmo_off:35.48,tmo_total:26.6,casos_on:165,casos_off:89},
+  {mes:'2026-07',ldap:'adysantos',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:22.06,tmo_off:37.36,tmo_total:27.28,casos_on:212,casos_off:110},
   {mes:'2026-07',ldap:'agaravito',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:47.63,tmo_off:5.06,tmo_total:24.67,casos_on:111,casos_off:130},
-  {mes:'2026-07',ldap:'agarcianaran',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:31.38,tmo_off:7.28,tmo_total:25.31,casos_on:187,casos_off:63},
+  {mes:'2026-07',ldap:'agarcianaran',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:32.93,tmo_off:7.49,tmo_total:26.05,casos_on:240,casos_off:89},
   {mes:'2026-07',ldap:'albarbosa',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:21.74,tmo_off:20.99,tmo_total:21.43,casos_on:109,casos_off:78},
-  {mes:'2026-07',ldap:'aldmelo',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:21.28,tmo_off:10.28,tmo_total:18.72,casos_on:155,casos_off:47},
-  {mes:'2026-07',ldap:'amarquini',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:15.52,tmo_off:17.0,tmo_total:16.04,casos_on:195,casos_off:107},
-  {mes:'2026-07',ldap:'amcaldeira',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:25.67,tmo_off:13.34,tmo_total:22.51,casos_on:293,casos_off:101},
-  {mes:'2026-07',ldap:'amcandido',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:32.79,tmo_off:18.44,tmo_total:29.32,casos_on:320,casos_off:102},
-  {mes:'2026-07',ldap:'angiedrodrig',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:37.42,tmo_off:95.91,tmo_total:57.67,casos_on:68,casos_off:36},
-  {mes:'2026-07',ldap:'anmateus',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:39.93,tmo_off:13.55,tmo_total:30.69,casos_on:178,casos_off:96},
+  {mes:'2026-07',ldap:'aldmelo',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:21.49,tmo_off:10.87,tmo_total:19.13,casos_on:238,casos_off:68},
+  {mes:'2026-07',ldap:'amarquini',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:15.65,tmo_off:18.03,tmo_total:16.51,casos_on:247,casos_off:138},
+  {mes:'2026-07',ldap:'amcaldeira',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:26.32,tmo_off:14.07,tmo_total:23.17,casos_on:358,casos_off:124},
+  {mes:'2026-07',ldap:'amcandido',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:33.94,tmo_off:23.07,tmo_total:31.4,casos_on:397,casos_off:121},
+  {mes:'2026-07',ldap:'angiedrodrig',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:36.03,tmo_off:80.13,tmo_total:52.57,casos_on:90,casos_off:54},
+  {mes:'2026-07',ldap:'anmateus',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:40.68,tmo_off:13.84,tmo_total:30.55,casos_on:226,casos_off:137},
   {mes:'2026-07',ldap:'arinconsanab',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:23.25,tmo_off:10.96,tmo_total:16.99,casos_on:79,casos_off:82},
-  {mes:'2026-07',ldap:'bbelleizano',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:17.71,tmo_off:16.08,tmo_total:16.94,casos_on:116,casos_off:104},
-  {mes:'2026-07',ldap:'bcunha',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:29.56,tmo_off:24.9,tmo_total:28.23,casos_on:247,casos_off:99},
-  {mes:'2026-07',ldap:'bemarques',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:43.28,tmo_off:15.43,tmo_total:34.52,casos_on:181,casos_off:83},
-  {mes:'2026-07',ldap:'blvicente',leader:'bkaroline',canal:'CHAT',turno:'TM',tmo_on:28.72,tmo_off:15.61,tmo_total:25.46,casos_on:411,casos_off:136},
-  {mes:'2026-07',ldap:'bpiernagorda',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:34.79,tmo_off:13.11,tmo_total:27.84,casos_on:180,casos_off:85},
-  {mes:'2026-07',ldap:'bsarmiento',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:34.14,tmo_off:4.54,tmo_total:21.01,casos_on:212,casos_off:169},
-  {mes:'2026-07',ldap:'cafarias',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:26.16,tmo_off:17.47,tmo_total:23.87,casos_on:277,casos_off:99},
-  {mes:'2026-07',ldap:'camcsilva',leader:'bkaroline',canal:'CHAT',turno:'TM',tmo_on:35.48,tmo_off:17.25,tmo_total:29.99,casos_on:253,casos_off:109},
-  {mes:'2026-07',ldap:'casbarreiros',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:32.3,tmo_off:10.5,tmo_total:25.73,casos_on:271,casos_off:117},
-  {mes:'2026-07',ldap:'cccsousa',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:45.29,tmo_off:17.13,tmo_total:35.74,casos_on:189,casos_off:97},
-  {mes:'2026-07',ldap:'cdoliveira',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:20.71,tmo_off:24.62,tmo_total:22.22,casos_on:102,casos_off:64},
-  {mes:'2026-07',ldap:'chmarques',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:33.66,tmo_off:15.01,tmo_total:29.89,casos_on:269,casos_off:68},
-  {mes:'2026-07',ldap:'csnunes',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:21.21,tmo_off:18.5,tmo_total:20.07,casos_on:136,casos_off:98},
-  {mes:'2026-07',ldap:'daiparra',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:21.77,tmo_off:17.77,tmo_total:20.05,casos_on:128,casos_off:96},
-  {mes:'2026-07',ldap:'dayalachapar',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:35.36,tmo_off:13.35,tmo_total:29.62,casos_on:167,casos_off:59},
-  {mes:'2026-07',ldap:'dgarcesorteg',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:21.91,tmo_off:17.83,tmo_total:20.02,casos_on:112,casos_off:97},
-  {mes:'2026-07',ldap:'dieulloa',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:32.77,tmo_off:5.36,tmo_total:22.16,casos_on:255,casos_off:161},
-  {mes:'2026-07',ldap:'dpuentesroja',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:19.29,tmo_off:10.77,tmo_total:15.61,casos_on:88,casos_off:67},
-  {mes:'2026-07',ldap:'drojasbarbos',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:46.31,tmo_off:63.53,tmo_total:55.22,casos_on:42,casos_off:45},
-  {mes:'2026-07',ldap:'eduejesus',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:32.16,tmo_off:19.03,tmo_total:28.31,casos_on:217,casos_off:90},
-  {mes:'2026-07',ldap:'elaoliveira',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:33.82,tmo_off:11.8,tmo_total:27.64,casos_on:200,casos_off:78},
-  {mes:'2026-07',ldap:'ennlopez',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:28.99,tmo_off:44.0,tmo_total:31.28,casos_on:327,casos_off:59},
-  {mes:'2026-07',ldap:'fduartetabor',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:34.04,tmo_off:13.6,tmo_total:28.67,casos_on:219,casos_off:78},
-  {mes:'2026-07',ldap:'fenunes',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:34.6,tmo_off:24.64,tmo_total:32.41,casos_on:302,casos_off:85},
-  {mes:'2026-07',ldap:'gabrielaaiol',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:15.49,tmo_off:23.11,tmo_total:18.18,casos_on:203,casos_off:111},
-  {mes:'2026-07',ldap:'gbmontilha',leader:'bkaroline',canal:'CHAT',turno:'TM',tmo_on:27.81,tmo_off:25.13,tmo_total:27.32,casos_on:414,casos_off:91},
-  {mes:'2026-07',ldap:'ghincapie',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:46.58,tmo_off:9.19,tmo_total:26.19,casos_on:171,casos_off:205},
-  {mes:'2026-07',ldap:'gicano',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:23.06,tmo_off:18.14,tmo_total:20.92,casos_on:103,casos_off:79},
-  {mes:'2026-07',ldap:'giselesosant',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:13.2,tmo_off:14.41,tmo_total:13.6,casos_on:241,casos_off:120},
+  {mes:'2026-07',ldap:'bbelleizano',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:17.68,tmo_off:15.98,tmo_total:16.89,casos_on:146,casos_off:127},
+  {mes:'2026-07',ldap:'bcunha',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:30.2,tmo_off:25.49,tmo_total:28.96,casos_on:332,casos_off:118},
+  {mes:'2026-07',ldap:'bemarques',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:44.53,tmo_off:16.07,tmo_total:35.46,casos_on:233,casos_off:109},
+  {mes:'2026-07',ldap:'blvicente',leader:'bkaroline',canal:'CHAT',turno:'TM',tmo_on:29.31,tmo_off:15.72,tmo_total:25.86,casos_on:505,casos_off:172},
+  {mes:'2026-07',ldap:'bpiernagorda',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:34.96,tmo_off:12.63,tmo_total:27.21,casos_on:222,casos_off:118},
+  {mes:'2026-07',ldap:'bsarmiento',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:34.45,tmo_off:4.74,tmo_total:21.19,casos_on:237,casos_off:191},
+  {mes:'2026-07',ldap:'cafarias',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:26.74,tmo_off:18.06,tmo_total:24.43,casos_on:331,casos_off:120},
+  {mes:'2026-07',ldap:'camcsilva',leader:'bkaroline',canal:'CHAT',turno:'TM',tmo_on:36.29,tmo_off:16.45,tmo_total:29.9,casos_on:316,casos_off:150},
+  {mes:'2026-07',ldap:'casbarreiros',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:32.35,tmo_off:10.49,tmo_total:25.82,casos_on:350,casos_off:149},
+  {mes:'2026-07',ldap:'cccsousa',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:44.47,tmo_off:17.19,tmo_total:35.26,casos_on:265,casos_off:135},
+  {mes:'2026-07',ldap:'cdoliveira',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:21.26,tmo_off:23.51,tmo_total:22.17,casos_on:133,casos_off:90},
+  {mes:'2026-07',ldap:'chmarques',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:33.8,tmo_off:15.72,tmo_total:29.89,casos_on:348,casos_off:96},
+  {mes:'2026-07',ldap:'csnunes',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:20.77,tmo_off:17.9,tmo_total:19.56,casos_on:184,casos_off:135},
+  {mes:'2026-07',ldap:'daiparra',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:21.66,tmo_off:18.8,tmo_total:20.47,casos_on:171,casos_off:121},
+  {mes:'2026-07',ldap:'dayalachapar',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:36.63,tmo_off:13.7,tmo_total:30.54,casos_on:210,casos_off:76},
+  {mes:'2026-07',ldap:'dgarcesorteg',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:22.09,tmo_off:16.74,tmo_total:19.62,casos_on:140,casos_off:120},
+  {mes:'2026-07',ldap:'dieulloa',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:33.49,tmo_off:5.57,tmo_total:22.34,casos_on:316,casos_off:210},
+  {mes:'2026-07',ldap:'dpuentesroja',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:18.88,tmo_off:11.57,tmo_total:15.88,casos_on:142,casos_off:99},
+  {mes:'2026-07',ldap:'drojasbarbos',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:47.32,tmo_off:61.92,tmo_total:54.83,casos_on:50,casos_off:53},
+  {mes:'2026-07',ldap:'eduejesus',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:32.89,tmo_off:18.33,tmo_total:28.53,casos_on:276,casos_off:118},
+  {mes:'2026-07',ldap:'elaoliveira',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:33.83,tmo_off:12.54,tmo_total:27.84,casos_on:281,casos_off:110},
+  {mes:'2026-07',ldap:'ennlopez',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:27.98,tmo_off:40.09,tmo_total:29.92,casos_on:425,casos_off:81},
+  {mes:'2026-07',ldap:'fduartetabor',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:34.19,tmo_off:12.9,tmo_total:28.6,casos_on:253,casos_off:90},
+  {mes:'2026-07',ldap:'fenunes',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:34.3,tmo_off:22.46,tmo_total:31.64,casos_on:391,casos_off:113},
+  {mes:'2026-07',ldap:'gabrielaaiol',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:15.73,tmo_off:22.73,tmo_total:18.23,casos_on:254,casos_off:141},
+  {mes:'2026-07',ldap:'gbmontilha',leader:'bkaroline',canal:'CHAT',turno:'TM',tmo_on:28.57,tmo_off:21.92,tmo_total:27.24,casos_on:519,casos_off:130},
+  {mes:'2026-07',ldap:'ghincapie',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:47.44,tmo_off:10.26,tmo_total:27.39,casos_on:218,casos_off:255},
+  {mes:'2026-07',ldap:'gicano',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:23.8,tmo_off:19.34,tmo_total:21.89,casos_on:135,casos_off:101},
+  {mes:'2026-07',ldap:'giselesosant',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:13.53,tmo_off:14.54,tmo_total:13.87,casos_on:280,casos_off:145},
   {mes:'2026-07',ldap:'hporras',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:18.91,tmo_off:22.01,tmo_total:20.13,casos_on:17,casos_off:11},
-  {mes:'2026-07',ldap:'jalfonsomart',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:39.55,tmo_off:9.17,tmo_total:26.19,casos_on:204,casos_off:160},
-  {mes:'2026-07',ldap:'jclavijo',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:32.12,tmo_off:28.81,tmo_total:31.21,casos_on:205,casos_off:78},
+  {mes:'2026-07',ldap:'jalfonsomart',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:39.62,tmo_off:9.18,tmo_total:26.17,casos_on:211,casos_off:167},
+  {mes:'2026-07',ldap:'jclavijo',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:32.24,tmo_off:27.8,tmo_total:31.01,casos_on:247,casos_off:95},
   {mes:'2026-07',ldap:'jcolmenares',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:49.21,tmo_off:5.45,tmo_total:22.35,casos_on:100,casos_off:159},
-  {mes:'2026-07',ldap:'jecosta',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:15.36,tmo_off:26.27,tmo_total:19.28,casos_on:166,casos_off:93},
-  {mes:'2026-07',ldap:'jescastaneda',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:35.41,tmo_off:27.61,tmo_total:33.14,casos_on:190,casos_off:78},
-  {mes:'2026-07',ldap:'jhuepe',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:26.75,tmo_off:10.44,tmo_total:21.74,casos_on:124,casos_off:55},
-  {mes:'2026-07',ldap:'jlandinezmar',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:35.4,tmo_off:9.33,tmo_total:28.16,casos_on:78,casos_off:30},
-  {mes:'2026-07',ldap:'joamejia',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:17.48,tmo_off:14.47,tmo_total:16.21,casos_on:136,casos_off:99},
-  {mes:'2026-07',ldap:'joharomero',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:20.49,tmo_off:16.69,tmo_total:18.76,casos_on:110,casos_off:92},
+  {mes:'2026-07',ldap:'jecosta',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:15.64,tmo_off:25.85,tmo_total:19.39,casos_on:208,casos_off:121},
+  {mes:'2026-07',ldap:'jescastaneda',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:35.3,tmo_off:27.23,tmo_total:32.99,casos_on:245,casos_off:98},
+  {mes:'2026-07',ldap:'jhuepe',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:27.98,tmo_off:12.65,tmo_total:23.1,casos_on:199,casos_off:93},
+  {mes:'2026-07',ldap:'jlandinezmar',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:37.09,tmo_off:9.29,tmo_total:29.05,casos_on:113,casos_off:46},
+  {mes:'2026-07',ldap:'joamejia',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:18.33,tmo_off:14.46,tmo_total:16.75,casos_on:182,casos_off:126},
+  {mes:'2026-07',ldap:'joharomero',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:21.81,tmo_off:16.58,tmo_total:19.34,casos_on:119,casos_off:107},
   {mes:'2026-07',ldap:'jsolerovalle',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:40.79,tmo_off:5.92,tmo_total:24.29,casos_on:157,casos_off:141},
-  {mes:'2026-07',ldap:'juansebastia',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:24.16,tmo_off:6.66,tmo_total:14.03,casos_on:67,casos_off:92},
-  {mes:'2026-07',ldap:'jumillancesp',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:24.11,tmo_off:20.6,tmo_total:22.49,casos_on:113,casos_off:97},
-  {mes:'2026-07',ldap:'juslima',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:28.61,tmo_off:11.55,tmo_total:23.74,casos_on:170,casos_off:68},
-  {mes:'2026-07',ldap:'kalbarracin',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:24.98,tmo_off:13.38,tmo_total:19.36,casos_on:118,casos_off:111},
-  {mes:'2026-07',ldap:'kjaimes',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:46.05,tmo_off:38.53,tmo_total:42.43,casos_on:72,casos_off:67},
-  {mes:'2026-07',ldap:'kperrone',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:20.59,tmo_off:12.75,tmo_total:17.6,casos_on:57,casos_off:35},
-  {mes:'2026-07',ldap:'laufonseca',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:24.01,tmo_off:9.08,tmo_total:20.73,casos_on:426,casos_off:120},
-  {mes:'2026-07',ldap:'lauraraujo',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:19.14,tmo_off:4.39,tmo_total:16.31,casos_on:304,casos_off:72},
-  {mes:'2026-07',ldap:'lbaquero',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:41.75,tmo_off:18.64,tmo_total:35.13,casos_on:177,casos_off:71},
-  {mes:'2026-07',ldap:'lecandido',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:36.8,tmo_off:35.11,tmo_total:36.41,casos_on:253,casos_off:77},
-  {mes:'2026-07',ldap:'lecheverriat',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:47.41,tmo_off:74.68,tmo_total:59.9,casos_on:45,casos_off:38},
-  {mes:'2026-07',ldap:'letrujillo',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:36.1,tmo_off:10.3,tmo_total:29.35,casos_on:226,casos_off:80},
-  {mes:'2026-07',ldap:'lianadsilva',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:34.56,tmo_off:16.65,tmo_total:30.09,casos_on:301,casos_off:100},
-  {mes:'2026-07',ldap:'linessousa',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:20.97,tmo_off:15.04,tmo_total:18.59,casos_on:147,casos_off:99},
-  {mes:'2026-07',ldap:'lmayorgalope',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:39.22,tmo_off:24.26,tmo_total:34.47,casos_on:157,casos_off:73},
-  {mes:'2026-07',ldap:'losouza',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:27.72,tmo_off:20.06,tmo_total:25.9,casos_on:308,casos_off:96},
+  {mes:'2026-07',ldap:'juansebastia',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:23.41,tmo_off:7.57,tmo_total:14.64,casos_on:112,casos_off:139},
+  {mes:'2026-07',ldap:'jumillancesp',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:23.97,tmo_off:22.7,tmo_total:23.4,casos_on:134,casos_off:110},
+  {mes:'2026-07',ldap:'juslima',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:28.71,tmo_off:10.77,tmo_total:23.43,casos_on:199,casos_off:83},
+  {mes:'2026-07',ldap:'kalbarracin',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:25.0,tmo_off:13.59,tmo_total:19.68,casos_on:158,casos_off:138},
+  {mes:'2026-07',ldap:'kjaimes',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:46.2,tmo_off:35.87,tmo_total:40.77,casos_on:84,casos_off:93},
+  {mes:'2026-07',ldap:'kperrone',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:21.63,tmo_off:12.49,tmo_total:18.42,casos_on:129,casos_off:70},
+  {mes:'2026-07',ldap:'laufonseca',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:23.82,tmo_off:9.15,tmo_total:20.59,casos_on:471,casos_off:133},
+  {mes:'2026-07',ldap:'lauraraujo',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:19.78,tmo_off:4.46,tmo_total:16.74,casos_on:411,casos_off:102},
+  {mes:'2026-07',ldap:'lbaquero',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:39.94,tmo_off:17.26,tmo_total:33.66,casos_on:251,casos_off:96},
+  {mes:'2026-07',ldap:'lecandido',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:37.45,tmo_off:32.05,tmo_total:36.12,casos_on:319,casos_off:104},
+  {mes:'2026-07',ldap:'lecheverriat',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:46.81,tmo_off:71.31,tmo_total:58.41,casos_on:60,casos_off:54},
+  {mes:'2026-07',ldap:'letrujillo',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:36.85,tmo_off:12.22,tmo_total:30.36,casos_on:299,casos_off:107},
+  {mes:'2026-07',ldap:'lianadsilva',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:34.15,tmo_off:15.38,tmo_total:29.19,casos_on:387,casos_off:139},
+  {mes:'2026-07',ldap:'linessousa',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:20.17,tmo_off:14.64,tmo_total:17.89,casos_on:190,casos_off:133},
+  {mes:'2026-07',ldap:'lmayorgalope',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:39.25,tmo_off:23.4,tmo_total:34.24,casos_on:186,casos_off:86},
+  {mes:'2026-07',ldap:'losouza',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:28.51,tmo_off:20.45,tmo_total:26.52,casos_on:381,casos_off:125},
   {mes:'2026-07',ldap:'lotalvaro',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:41.05,tmo_off:8.9,tmo_total:32.12,casos_on:52,casos_off:20},
-  {mes:'2026-07',ldap:'lramirezamay',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:19.81,tmo_off:18.2,tmo_total:19.16,casos_on:120,casos_off:82},
-  {mes:'2026-07',ldap:'lteixeira',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:12.46,tmo_off:31.77,tmo_total:17.49,casos_on:170,casos_off:60},
-  {mes:'2026-07',ldap:'luciagarcia',leader:'lrossetto',canal:'C2C',turno:'TT',tmo_on:21.37,tmo_off:14.33,tmo_total:18.38,casos_on:168,casos_off:124},
-  {mes:'2026-07',ldap:'lunmartinezg',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:31.72,tmo_off:4.53,tmo_total:20.19,casos_on:197,casos_off:145},
+  {mes:'2026-07',ldap:'lramirezamay',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:21.46,tmo_off:17.79,tmo_total:19.98,casos_on:159,casos_off:108},
+  {mes:'2026-07',ldap:'lteixeira',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:13.17,tmo_off:34.65,tmo_total:18.88,casos_on:210,casos_off:76},
+  {mes:'2026-07',ldap:'luciagarcia',leader:'lrossetto',canal:'C2C',turno:'TT',tmo_on:20.83,tmo_off:15.37,tmo_total:18.54,casos_on:221,casos_off:159},
+  {mes:'2026-07',ldap:'lunmartinezg',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:31.45,tmo_off:4.55,tmo_total:20.06,casos_on:267,casos_off:196},
   {mes:'2026-07',ldap:'lyalves',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:14.36,tmo_off:4.55,tmo_total:7.0,casos_on:2,casos_off:6},
-  {mes:'2026-07',ldap:'maimejia',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:29.37,tmo_off:15.07,tmo_total:24.88,casos_on:83,casos_off:38},
-  {mes:'2026-07',ldap:'mandoliveira',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:36.53,tmo_off:7.26,tmo_total:26.32,casos_on:269,casos_off:144},
-  {mes:'2026-07',ldap:'mangarita',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:28.81,tmo_off:7.97,tmo_total:23.19,casos_on:279,casos_off:103},
-  {mes:'2026-07',ldap:'marcovenicio',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:15.78,tmo_off:13.73,tmo_total:14.92,casos_on:51,casos_off:37},
-  {mes:'2026-07',ldap:'marengifo',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:34.24,tmo_off:19.95,tmo_total:30.19,casos_on:253,casos_off:100},
+  {mes:'2026-07',ldap:'maimejia',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:30.84,tmo_off:14.5,tmo_total:25.5,casos_on:169,casos_off:82},
+  {mes:'2026-07',ldap:'mandoliveira',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:36.16,tmo_off:8.06,tmo_total:26.42,casos_on:349,casos_off:185},
+  {mes:'2026-07',ldap:'mangarita',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:29.32,tmo_off:9.46,tmo_total:23.95,casos_on:351,casos_off:130},
+  {mes:'2026-07',ldap:'maparrabaque',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:4.05,tmo_off:null,tmo_total:4.05,casos_on:1,casos_off:0},
+  {mes:'2026-07',ldap:'marcovenicio',leader:'lrossetto',canal:'C2C',turno:'TM',tmo_on:16.72,tmo_off:16.66,tmo_total:16.7,casos_on:104,casos_off:72},
+  {mes:'2026-07',ldap:'marengifo',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:35.55,tmo_off:19.86,tmo_total:30.75,casos_on:313,casos_off:138},
   {mes:'2026-07',ldap:'marfreitas',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:29.93,tmo_off:16.57,tmo_total:26.29,casos_on:211,casos_off:79},
-  {mes:'2026-07',ldap:'marguedes',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:29.19,tmo_off:11.27,tmo_total:23.1,casos_on:136,casos_off:70},
-  {mes:'2026-07',ldap:'mariafemoren',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:34.0,tmo_off:10.74,tmo_total:27.84,casos_on:272,casos_off:98},
-  {mes:'2026-07',ldap:'mariafernrom',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:33.08,tmo_off:38.42,tmo_total:34.4,casos_on:140,casos_off:46},
+  {mes:'2026-07',ldap:'marguedes',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:30.04,tmo_off:12.73,tmo_total:24.63,casos_on:213,casos_off:97},
+  {mes:'2026-07',ldap:'mariafemoren',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:33.55,tmo_off:10.54,tmo_total:27.35,casos_on:339,casos_off:125},
+  {mes:'2026-07',ldap:'mariafernrom',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:32.41,tmo_off:36.93,tmo_total:33.41,casos_on:227,casos_off:65},
   {mes:'2026-07',ldap:'mariasilva',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:34.68,tmo_off:12.89,tmo_total:28.49,casos_on:121,casos_off:48},
-  {mes:'2026-07',ldap:'maribenitez',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:35.01,tmo_off:11.62,tmo_total:25.38,casos_on:183,casos_off:128},
-  {mes:'2026-07',ldap:'marlaraujo',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:38.72,tmo_off:26.1,tmo_total:34.44,casos_on:142,casos_off:73},
-  {mes:'2026-07',ldap:'mayacevedo',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:19.82,tmo_off:21.48,tmo_total:20.48,casos_on:138,casos_off:90},
-  {mes:'2026-07',ldap:'maybalazshaz',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:39.64,tmo_off:45.58,tmo_total:40.99,casos_on:240,casos_off:71},
-  {mes:'2026-07',ldap:'mdiazgaray',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:34.32,tmo_off:8.38,tmo_total:24.83,casos_on:239,casos_off:138},
-  {mes:'2026-07',ldap:'miperdomo',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:35.51,tmo_off:31.12,tmo_total:34.48,casos_on:207,casos_off:63},
-  {mes:'2026-07',ldap:'mivilchez',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:21.04,tmo_off:25.96,tmo_total:23.01,casos_on:139,casos_off:93},
+  {mes:'2026-07',ldap:'maribenitez',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:34.99,tmo_off:12.7,tmo_total:25.97,casos_on:253,casos_off:172},
+  {mes:'2026-07',ldap:'marlaraujo',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:37.16,tmo_off:23.2,tmo_total:32.23,casos_on:194,casos_off:106},
+  {mes:'2026-07',ldap:'mayacevedo',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:19.95,tmo_off:20.22,tmo_total:20.05,casos_on:185,casos_off:120},
+  {mes:'2026-07',ldap:'maybalazshaz',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:40.43,tmo_off:43.17,tmo_total:41.09,casos_on:294,casos_off:93},
+  {mes:'2026-07',ldap:'mdiazgaray',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:34.95,tmo_off:8.36,tmo_total:24.81,casos_on:305,casos_off:188},
+  {mes:'2026-07',ldap:'miperdomo',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:34.76,tmo_off:30.68,tmo_total:33.79,casos_on:277,casos_off:86},
+  {mes:'2026-07',ldap:'mivilchez',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:20.98,tmo_off:25.4,tmo_total:22.73,casos_on:186,casos_off:122},
   {mes:'2026-07',ldap:'mlosadavarga',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:34.55,tmo_off:3.94,tmo_total:21.32,casos_on:113,casos_off:86},
-  {mes:'2026-07',ldap:'mnajar',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:32.92,tmo_off:13.45,tmo_total:27.73,casos_on:209,casos_off:76},
-  {mes:'2026-07',ldap:'mrmarques',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:22.45,tmo_off:15.89,tmo_total:21.24,casos_on:419,casos_off:95},
-  {mes:'2026-07',ldap:'mudiniz',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:18.98,tmo_off:16.92,tmo_total:18.17,casos_on:58,casos_off:38},
-  {mes:'2026-07',ldap:'nalonsovelas',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:28.0,tmo_off:6.85,tmo_total:20.69,casos_on:288,casos_off:152},
-  {mes:'2026-07',ldap:'ngirodriguez',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:38.14,tmo_off:80.02,tmo_total:46.88,casos_on:178,casos_off:47},
-  {mes:'2026-07',ldap:'nnegomez',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:24.05,tmo_off:7.2,tmo_total:20.4,casos_on:199,casos_off:55},
-  {mes:'2026-07',ldap:'pauballester',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:38.83,tmo_off:9.02,tmo_total:27.1,casos_on:228,casos_off:148},
-  {mes:'2026-07',ldap:'phegoncalves',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:31.92,tmo_off:14.18,tmo_total:26.69,casos_on:55,casos_off:23},
-  {mes:'2026-07',ldap:'pmarinho',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:15.13,tmo_off:11.93,tmo_total:13.94,casos_on:175,casos_off:103},
-  {mes:'2026-07',ldap:'polivdaraujo',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:36.38,tmo_off:15.37,tmo_total:30.82,casos_on:325,casos_off:117},
-  {mes:'2026-07',ldap:'ptibaquira',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:45.72,tmo_off:57.84,tmo_total:52.04,casos_on:45,casos_off:49},
-  {mes:'2026-07',ldap:'renataperei',leader:'isabmot',canal:'CHAT',turno:'TM',tmo_on:28.51,tmo_off:19.59,tmo_total:26.71,casos_on:399,casos_off:101},
-  {mes:'2026-07',ldap:'salvis',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:36.61,tmo_off:27.76,tmo_total:33.96,casos_on:155,casos_off:66},
-  {mes:'2026-07',ldap:'scristancho',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:32.11,tmo_off:11.38,tmo_total:26.8,casos_on:264,casos_off:91},
-  {mes:'2026-07',ldap:'sforero',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:39.84,tmo_off:53.66,tmo_total:45.73,casos_on:70,casos_off:52},
-  {mes:'2026-07',ldap:'ssanchezestu',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:22.15,tmo_off:17.53,tmo_total:20.17,casos_on:104,casos_off:78},
-  {mes:'2026-07',ldap:'stdiniz',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:25.91,tmo_off:12.17,tmo_total:22.61,casos_on:333,casos_off:105},
-  {mes:'2026-07',ldap:'stellez',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:19.49,tmo_off:11.45,tmo_total:16.16,casos_on:143,casos_off:101},
-  {mes:'2026-07',ldap:'tarango',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:34.11,tmo_off:7.56,tmo_total:24.48,casos_on:209,casos_off:119},
-  {mes:'2026-07',ldap:'tsgarbim',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:11.93,tmo_off:8.38,tmo_total:10.61,casos_on:171,casos_off:101},
-  {mes:'2026-07',ldap:'uaguerrero',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:35.34,tmo_off:7.32,tmo_total:23.65,casos_on:239,casos_off:171},
-  {mes:'2026-07',ldap:'uizfsilva',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:33.69,tmo_off:13.34,tmo_total:28.17,casos_on:274,casos_off:102},
-  {mes:'2026-07',ldap:'ulipalacios',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:35.85,tmo_off:23.55,tmo_total:29.06,casos_on:86,casos_off:106},
-  {mes:'2026-07',ldap:'ulissouza',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:36.66,tmo_off:12.47,tmo_total:27.81,casos_on:59,casos_off:34},
-  {mes:'2026-07',ldap:'vaespinosa',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:21.85,tmo_off:21.4,tmo_total:21.67,casos_on:130,casos_off:86},
-  {mes:'2026-07',ldap:'vamorenomart',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:37.54,tmo_off:43.54,tmo_total:39.96,casos_on:93,casos_off:63},
-  {mes:'2026-07',ldap:'vdpiedade',leader:'bkaroline',canal:'CHAT',turno:'TM',tmo_on:35.95,tmo_off:10.04,tmo_total:27.42,casos_on:214,casos_off:105},
-  {mes:'2026-07',ldap:'vfarias',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:39.02,tmo_off:19.39,tmo_total:33.24,casos_on:235,casos_off:98},
-  {mes:'2026-07',ldap:'vfonorio',leader:'isabmot',canal:'CHAT',turno:'TM',tmo_on:36.52,tmo_off:33.57,tmo_total:35.87,casos_on:275,casos_off:77},
-  {mes:'2026-07',ldap:'vgutierrezro',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:24.15,tmo_off:3.69,tmo_total:18.93,casos_on:175,casos_off:60},
-  {mes:'2026-07',ldap:'vitnasciment',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:24.26,tmo_off:52.3,tmo_total:32.55,casos_on:31,casos_off:13},
-  {mes:'2026-07',ldap:'vltrevizan',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:16.5,tmo_off:16.0,tmo_total:16.3,casos_on:131,casos_off:91},
-  {mes:'2026-07',ldap:'wgomdsouza',leader:'lrossetto',canal:'CHAT',turno:'TM',tmo_on:20.3,tmo_off:21.76,tmo_total:20.54,casos_on:515,casos_off:100},
-  {mes:'2026-07',ldap:'wurrea',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:46.6,tmo_off:17.56,tmo_total:35.33,casos_on:123,casos_off:78},
-  {mes:'2026-07',ldap:'yugomez',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:22.84,tmo_off:28.48,tmo_total:25.05,casos_on:120,casos_off:77},
-  {mes:'2026-07',ldap:'zneira',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:38.01,tmo_off:14.99,tmo_total:27.57,casos_on:82,casos_off:68}
+  {mes:'2026-07',ldap:'mnajar',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:32.84,tmo_off:13.85,tmo_total:27.73,casos_on:263,casos_off:97},
+  {mes:'2026-07',ldap:'mrmarques',leader:'isabmot',canal:'CHAT',turno:'TT',tmo_on:22.88,tmo_off:17.09,tmo_total:21.78,casos_on:492,casos_off:115},
+  {mes:'2026-07',ldap:'mudiniz',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:19.04,tmo_off:16.95,tmo_total:18.22,casos_on:61,casos_off:39},
+  {mes:'2026-07',ldap:'nalonsovelas',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:29.01,tmo_off:7.6,tmo_total:21.43,casos_on:343,casos_off:188},
+  {mes:'2026-07',ldap:'ngirodriguez',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:37.73,tmo_off:71.89,tmo_total:45.03,casos_on:232,casos_off:63},
+  {mes:'2026-07',ldap:'nnegomez',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:24.77,tmo_off:7.36,tmo_total:20.87,casos_on:242,casos_off:70},
+  {mes:'2026-07',ldap:'pauballester',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:38.68,tmo_off:9.02,tmo_total:27.06,casos_on:295,casos_off:190},
+  {mes:'2026-07',ldap:'phegoncalves',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:28.9,tmo_off:17.11,tmo_total:25.81,casos_on:146,casos_off:52},
+  {mes:'2026-07',ldap:'pmarinho',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:14.85,tmo_off:13.8,tmo_total:14.47,casos_on:223,casos_off:128},
+  {mes:'2026-07',ldap:'polivdaraujo',leader:'bkaroline',canal:'CHAT',turno:'TT',tmo_on:36.44,tmo_off:13.83,tmo_total:30.06,casos_on:407,casos_off:160},
+  {mes:'2026-07',ldap:'ptibaquira',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:44.8,tmo_off:52.88,tmo_total:48.95,casos_on:69,casos_off:73},
+  {mes:'2026-07',ldap:'renataperei',leader:'isabmot',canal:'CHAT',turno:'TM',tmo_on:28.63,tmo_off:18.74,tmo_total:26.51,casos_on:498,casos_off:136},
+  {mes:'2026-07',ldap:'salvis',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:35.65,tmo_off:28.14,tmo_total:33.42,casos_on:203,casos_off:86},
+  {mes:'2026-07',ldap:'scristancho',leader:'lflorez',canal:'CHAT',turno:'TT',tmo_on:31.97,tmo_off:10.63,tmo_total:26.53,casos_on:345,casos_off:118},
+  {mes:'2026-07',ldap:'sforero',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:42.13,tmo_off:46.43,tmo_total:44.09,casos_on:93,casos_off:78},
+  {mes:'2026-07',ldap:'ssanchezestu',leader:'jpuyo',canal:'C2C',turno:'TM',tmo_on:22.68,tmo_off:16.74,tmo_total:20.0,casos_on:113,casos_off:93},
+  {mes:'2026-07',ldap:'stdiniz',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:25.96,tmo_off:11.99,tmo_total:22.42,casos_on:376,casos_off:128},
+  {mes:'2026-07',ldap:'stellez',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:20.18,tmo_off:11.89,tmo_total:16.72,casos_on:184,casos_off:132},
+  {mes:'2026-07',ldap:'tarango',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:35.12,tmo_off:7.26,tmo_total:23.99,casos_on:263,casos_off:175},
+  {mes:'2026-07',ldap:'tsgarbim',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:12.51,tmo_off:8.77,tmo_total:11.04,casos_on:226,casos_off:147},
+  {mes:'2026-07',ldap:'uaguerrero',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:36.13,tmo_off:7.78,tmo_total:23.99,casos_on:294,casos_off:220},
+  {mes:'2026-07',ldap:'uizfsilva',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:33.52,tmo_off:14.27,tmo_total:28.37,casos_on:350,casos_off:128},
+  {mes:'2026-07',ldap:'ulipalacios',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:37.08,tmo_off:26.85,tmo_total:31.38,casos_on:101,casos_off:127},
+  {mes:'2026-07',ldap:'ulissouza',leader:'thaidossanto',canal:'CHAT',turno:'TM',tmo_on:34.15,tmo_off:14.47,tmo_total:27.92,casos_on:136,casos_off:63},
+  {mes:'2026-07',ldap:'vaespinosa',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:21.96,tmo_off:21.24,tmo_total:21.67,casos_on:149,casos_off:99},
+  {mes:'2026-07',ldap:'vamorenomart',leader:'marmendez',canal:'CHAT',turno:'TM',tmo_on:36.3,tmo_off:36.68,tmo_total:36.46,casos_on:126,casos_off:96},
+  {mes:'2026-07',ldap:'vdpiedade',leader:'bkaroline',canal:'CHAT',turno:'TM',tmo_on:35.85,tmo_off:8.83,tmo_total:26.59,casos_on:278,casos_off:145},
+  {mes:'2026-07',ldap:'vfarias',leader:'alicarvalho',canal:'CHAT',turno:'TM',tmo_on:39.19,tmo_off:18.39,tmo_total:32.82,casos_on:297,casos_off:131},
+  {mes:'2026-07',ldap:'vfonorio',leader:'isabmot',canal:'CHAT',turno:'TM',tmo_on:36.7,tmo_off:34.66,tmo_total:36.24,casos_on:356,casos_off:104},
+  {mes:'2026-07',ldap:'vgutierrezro',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:24.28,tmo_off:3.7,tmo_total:19.01,casos_on:209,casos_off:72},
+  {mes:'2026-07',ldap:'vitnasciment',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:20.03,tmo_off:38.89,tmo_total:26.07,casos_on:53,casos_off:25},
+  {mes:'2026-07',ldap:'vltrevizan',leader:'imsilva',canal:'C2C',turno:'TM',tmo_on:17.42,tmo_off:16.4,tmo_total:16.99,casos_on:161,casos_off:115},
+  {mes:'2026-07',ldap:'wgomdsouza',leader:'lrossetto',canal:'CHAT',turno:'TM',tmo_on:20.49,tmo_off:21.81,tmo_total:20.71,casos_on:590,casos_off:115},
+  {mes:'2026-07',ldap:'wurrea',leader:'jeromero',canal:'CHAT',turno:'TT',tmo_on:46.56,tmo_off:16.32,tmo_total:34.42,casos_on:155,casos_off:104},
+  {mes:'2026-07',ldap:'xdevia',leader:'nimoreno',canal:'CHAT',turno:'TM',tmo_on:14.81,tmo_off:null,tmo_total:14.81,casos_on:2,casos_off:0},
+  {mes:'2026-07',ldap:'yugomez',leader:'lnocua',canal:'C2C',turno:'TT',tmo_on:22.38,tmo_off:29.08,tmo_total:24.94,casos_on:161,casos_off:100},
+  {mes:'2026-07',ldap:'zneira',leader:'naurregoacos',canal:'CHAT',turno:'TM',tmo_on:37.69,tmo_off:16.58,tmo_total:28.24,casos_on:106,casos_off:86}
 ];
 const PRODU_THRESHOLD = T.PR;
  
@@ -4568,14 +4570,14 @@ proc:'Antes de Publicar',     tot:[3.1005,3.1148,3.4466,3.2894,null,null], on:[0
 // ─── PRODUTIVIDADE E CASOS ON/OFF ─────────────────────────────────────────────
 const ON_OFF = {
   chatTM:{
-onPct:[null,null,null,null,null,null,null],offPct:[null,null,null,null,null,null,null],casosOn:[null,null,null,null,null,null,null],casosOff:[null,null,null,null,null,null,null]},  chatTT:{
-onPct:[null,null,null,null,null,null,null],offPct:[null,null,null,null,null,null,null],casosOn:[null,null,null,null,null,null,null],casosOff:[null,null,null,null,null,null,null]},  c2cTM: {
-onPct:[null,null,null,null,null,null,null],offPct:[null,null,null,null,null,null,null],casosOn:[null,null,null,null,null,null,null],casosOff:[null,null,null,null,null,null,null]}};
+onPct:[61.77,56.66,54.16,50.41,53.14,57.88,57.62],offPct:[85.16,88.3,85.06,86.04,84.21,87.58,84.15],casosOn:[5226.0,4130.0,6687.0,5644.0,5056.0,6206.0,5588.0],casosOff:[2736.0,1667.0,2891.0,2164.0,2001.0,1844.0,2152.0]},  chatTT:{
+onPct:[60.55,60.06,61.99,54.71,55.83,57.04,60.4],offPct:[86.46,88.5,88.38,85.58,86.9,87.07,90.62],casosOn:[6314.0,5554.0,6349.0,6089.0,7166.0,7628.0,6374.0],casosOff:[2828.0,2147.0,2770.0,2572.0,2588.0,2165.0,2185.0]},  c2cTM: {
+onPct:[72.87,71.85,78.47,68.63,76.78,73.55,78.35],offPct:[83.21,88.72,85.26,76.33,81.49,85.43,89.37],casosOn:[2363.0,2245.0,2610.0,2904.0,4056.0,3978.0,3076.0],casosOff:[1578.0,1161.0,1649.0,1314.0,2188.0,1819.0,1967.0]}};
 const STATIC = {
-  npsLin:{chatTM:[null,null,null,null,null,null,null],chatTT:[null,null,null,null,null,null,null],c2cTM:[null,null,null,null,null,null,null]},  npsCol:{chatTM:[35.7,41.5,52.6,37.7,29.9,37.8,41.0],chatTT:[36.0,44.2,42.3,36.7,48.9,41.1,57.0],c2cTM:[9.2,13.3,36.1,28.9,-14.3,-5.9,46.2]},  npsGapLin:[23.8,.9,15.2,17.6,-28.1], npsGapCol:[18.8,6.4,15.5,22.8,-22.3],  estDim:{
+  npsLin:{chatTM:[46.4,50.7,55.5,46.0,47.3,51.2,56.6],chatTT:[46.4,50.7,55.5,46.0,47.3,51.2,56.6],c2cTM:[12.0,29.9,48.2,55.4,33.3,31.7,46.6]},  npsCol:{chatTM:[35.7,41.5,52.6,37.7,29.9,37.8,36.8],chatTT:[36.0,44.2,42.3,36.7,48.9,41.1,51.4],c2cTM:[9.2,13.3,36.1,28.9,-14.3,-5.9,42.9]},  npsGapLin:[23.8,.9,15.2,17.6,-28.1], npsGapCol:[18.8,6.4,15.5,22.8,-22.3],  estDim:{
 i:[52,54,57,65,null],e:[23,29,36,40,null],g:[37,39,38,36,null],f:[68,67,68,62,null]},  
 // Fonte: BT_CX_REP_METRICS_CS · SUM(NUM)/SUM(DEN) por canal/turno · Jan–Mai/26
-  tmo:{chatTM:[29.48,30.69,29.89,31.7,33.86,32.84,32.44],chatTT:[32.24,31.22,31.46,32.85,32.01,31.3,32.41],c2cTM:[17.54,17.94,18.39,20.22,19.99,18.8,18.35]},  tmoC:{cTM:[29.48,30.69,29.89,31.7,33.86,32.84,32.44],cTT:[32.24,31.22,31.46,32.85,32.01,31.3,32.41],c2c:[17.54,17.94,18.39,20.22,19.99,18.8,18.35],oTM:[14.07,13.06,12.59,16.0,14.54,13.44,16.49],oC2C:[14.07,13.06,12.59,16.0,14.54,13.44,16.49]},  tdi:{chatTM:[4.78,5.12,5.16,5.98,3.19,5.65,5.1],chatTT:[5.3,5.36,5.55,4.96,3.39,4.0,6.65],c2cTM:[5.1,6.94,6.33,6.58,5.19,6.49,7.09]},  to:{chatTM:[82.76,83.53,82.56,80.75,81.62,82.02,83.16],chatTT:[83.98,83.77,84.52,80.62,82.43,82.06,83.1],c2cTM:[83.07,82.82,81.86,78.88,79.42,79.67,77.19]},  toOnl:[null,null,null,null,null,null,null],toLog:[null,null,null,null,null,null,null]};
+  tmo:{chatTM:[29.48,30.69,29.89,31.7,33.86,32.84,32.77],chatTT:[32.24,31.22,31.46,32.85,32.01,31.3,32.57],c2cTM:[17.54,17.94,18.39,20.22,19.99,18.8,18.46]},  tmoC:{cTM:[29.48,30.69,29.89,31.7,33.86,32.84,32.77],cTT:[32.24,31.22,31.46,32.85,32.01,31.3,32.57],c2c:[17.54,17.94,18.39,20.22,19.99,18.8,18.46],oTM:[14.07,13.06,12.59,16.0,14.54,13.44,16.72],oC2C:[14.07,13.06,12.59,16.0,14.54,13.44,16.72]},  tdi:{chatTM:[4.78,5.12,5.16,5.98,3.19,5.65,8.29],chatTT:[5.3,5.36,5.55,4.96,3.39,4.0,7.16],c2cTM:[5.1,6.94,6.33,6.58,5.19,6.49,8.55]},  to:{chatTM:[82.76,83.53,82.56,80.75,81.62,82.02,82.49],chatTT:[83.98,83.77,84.52,80.62,82.43,82.06,82.91],c2cTM:[83.07,82.82,81.86,78.88,79.42,79.67,78.09]},  toOnl:[null,null,null,null,null,null,null],toLog:[null,null,null,null,null,null,null]};
 // ─── COMBOS ATIVOS (respeita filtros CANAL/TURNO/LEADER/LDAP) ─────────────────
 // Valores de CANAL correspondem ao CSV (ALL): 'CHAT' e 'C2C'
 const ALL_COMBOS = [  {
