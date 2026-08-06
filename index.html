@@ -1074,7 +1074,7 @@ padding:8px 12px}}
 ·&nbsp;
  TM / TT &nbsp;
 ·&nbsp;
- Atualizado: 06/08/2026</p>  </div>  <div class="hdr-badges">    <div class="hbadge"><div class="v">59,7</div><div class="l">NPS Lineal Geral</div></div>    <div class="hbadge"><div class="v">56,8</div><div class="l">NPS Colab Geral</div></div>    <div class="hbadge"><div class="v">67</div><div class="l">Agentes</div></div>  </div></header><nav>  <a class="active" data-tab="agentes">📊 All Métricas</a>  <a data-tab="csat">⭐ CSAT</a>  <a data-tab="tmo_tab">⏱️ TMO</a>  <a data-tab="tmo_agente">👤 TMO Agentes</a>  <a data-tab="produ_tab">⚡ Produtividade</a>  <a data-tab="tdi">📋 TDI</a>  <a data-tab="evolucao">📈 Evolução por LDAP</a>  <a data-tab="diagnostico">🔍 Diagnóstico</a></nav><!-- FILTROS --><div class="fbar" id="fbar">  <label>Mês</label>  <select id="fMes"><option value="">Todos</option></select>  <label>Canal</label>  <select id="fCanal"><option value="">Todos</option></select>  <label>Turno</label>  <select id="fTurno"><option value="">Todos</option></select>  <label>Leader</label>  <select id="fLeader"><option value="">Todos</option></select>  <label>LDAP</label>  <select id="fLdap"><option value="">Todos</option></select>  <label>Dia</label>  <input type="date" id="fDia" style="padding:5px 9px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);background:#fff;outline:none" onchange="onFDia()">  <label>Semana</label>  <select id="fSemana" onchange="onFSemana()"><option value="">Todas</option></select>  <button class="reset" onclick="resetFilters()">↺ Limpar</button>  <span class="fcount" id="fcount"></span></div><div class="page"><!-- ═══ POR AGENTE ═══ --><section class="section active" id="agentes">  <div class="sec-title">📊 All Métricas — Quartilização Igual por Agente</div>  <div class="agent-summary" id="agSummary"></div>  <div class="agent-table-wrap">    <table id="agTable">      <thead>        <tr>          <th onclick="sortTable('ldap')">LDAP <span class="sort">↕</span></th>          <th onclick="sortTable('leader')">Leader <span class="sort">↕</span></th>          <th onclick="sortTable('canal')">Canal/Turno <span class="sort">↕</span></th>          <th onclick="sortTable('mes')">Mês <span class="sort">↕</span></th>          <th onclick="sortTable('cs')">CSAT% <span class="sort">↕</span></th>          <th>Q CSAT</th>          <th onclick="sortTable('tdi')">TDI% <span class="sort">↕</span></th>          <th>Q TDI</th>          <th onclick="sortTable('pr')">Produtividade <span class="sort">↕</span></th>          <th>Q Produ</th>          <th onclick="sortTable('tmo')">TMO Geral (min) <span class="sort">⇕</span></th>          <th>Q TMO</th>          <th onclick="sortTable('em')">Estilo Meli <span class="sort">↕</span></th>          <th onclick="sortTable('ss')">Pesquisas CSAT</th>        </tr>      </thead>      <tbody id="agBody"></tbody>    </table>  </div></section><!-- ═══ CSAT ═══ --><section class="section" id="csat">  <div class="page">    <div class="sec-title">⭐ CSAT — Satisfação do Cliente por Agente</div>    <div id="csat_summary" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"></div>    <div class="card">      <div class="card-t" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">        <span>Resultado por LDAP — <span id="csat_count" style="color:var(--blue);font-weight:900">0</span> registros</span>        <div style="display:flex;gap:8px;align-items:center">          <label style="font-size:10.5px;font-weight:700;color:var(--muted)">Ordenar por</label>          <select id="csat_sort" onchange="renderCsatTable()" style="padding:3px 7px;border:1.5px solid var(--border);border-radius:7px;font-size:11.5px">            <option value="csat_pct">CSAT% ↓</option>            <option value="surveys">Pesquisas ↓</option>            <option value="ldap">LDAP A-Z</option>          </select>        </div>      </div>      <div id="csat_table_wrap" style="margin-top:10px;overflow-x:auto"></div>    </div>  </div></section><!-- ═══ TMO ═══ --><section class="section" id="tmo_tab">  <div class="sec-title">⏱️ TMO — Tempo Médio Operacional</div>  <div id="gb_tmo_tab"></div>  <div id="cg_tmo_tab" class="combo-grid"></div>  <div class="leg">    <div class="li"><div class="ld" style="background:#3483FA"></div>CHAT TM</div>    <div class="li"><div class="ld" style="background:#FF7B00"></div>CHAT TT</div>    <div class="li"><div class="ld" style="background:#00A650"></div>C2C</div>  </div>  <div class="grid2">    <div class="card"><div class="card-t">TMO Total (min) — evolução mensal</div><div class="cw"><canvas id="ef_tmo"></canvas></div></div>    <div class="card"><div class="card-t">TMO por Canal de Atendimento (min)</div><div class="cw"><canvas id="ef_tmoC"></canvas></div></div>  </div>  <!-- ABERTURA POR PROCESSO -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 Abertura por Processo — TMO médio mensal (min)</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução TMO por Processo</p><div class="cw"><canvas id="tmo_proc_chart"></canvas></div></div>      <div id="tmo_proc_table" style="overflow-y:auto;max-height:280px"></div>    </div>  </div>  <!-- TMO ON vs OFF -->  <div class="card" style="margin-top:14px">    <div class="card-t">⚡ Tempo de Casos ON (chat/c2c) vs OFF (mail) por mês</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">TMO ON (min) — CHAT e C2C</p><div class="cw"><canvas id="tmo_on_chart"></canvas></div></div>      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">TMO OFF/mail (min)</p><div class="cw"><canvas id="tmo_off_chart"></canvas></div></div>    </div>    <div id="tmo_on_off_table" style="margin-top:12px"></div>  </div>  <!-- CASOS TMO EXCEDIDO -->  <div class="card" style="margin-top:14px">    <div class="card-t">🔴 Casos com TMO Excedido (acima de ${
+ Atualizado: 06/08/2026</p>  </div>  <div class="hdr-badges">    <div class="hbadge"><div class="v">59,7</div><div class="l">NPS Lineal Geral</div></div>    <div class="hbadge"><div class="v">56,8</div><div class="l">NPS Colab Geral</div></div>    <div class="hbadge"><div class="v">67</div><div class="l">Agentes</div></div>  </div></header><nav>  <a class="active" data-tab="agentes">📊 Métricas Gerais</a>  <a data-tab="csat">⭐ CSAT</a>  <a data-tab="tmo_tab">⏱️ TMO</a>  <a data-tab="tmo_agente">👤 TMO Agentes</a>  <a data-tab="produ_tab">⚡ Produtividade</a>  <a data-tab="tdi">📋 TDI</a>  <a data-tab="evolucao">📈 Evolução por LDAP</a>  <a data-tab="diagnostico">🔍 Diagnóstico</a></nav><!-- FILTROS --><div class="fbar" id="fbar">  <label>Mês</label>  <select id="fMes"><option value="">Todos</option></select>  <label>Canal</label>  <select id="fCanal"><option value="">Todos</option></select>  <label>Turno</label>  <select id="fTurno"><option value="">Todos</option></select>  <label>Leader</label>  <select id="fLeader"><option value="">Todos</option></select>  <label>LDAP</label>  <select id="fLdap"><option value="">Todos</option></select>  <label>Dia</label>  <input type="date" id="fDia" style="padding:5px 9px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;color:var(--text);background:#fff;outline:none" onchange="onFDia()">  <label>Semana</label>  <select id="fSemana" onchange="onFSemana()"><option value="">Todas</option></select>  <button class="reset" onclick="resetFilters()">↺ Limpar</button>  <span class="fcount" id="fcount"></span></div><div class="page"><!-- ═══ POR AGENTE ═══ --><section class="section active" id="agentes">  <div class="sec-title">📊 Métricas Gerais — Resultado por Agente</div>  <div class="agent-summary" id="agSummary"></div>  <div class="agent-table-wrap">    <table id="agTable">      <thead>        <tr>          <th onclick="sortTable('ldap')">LDAP <span class="sort">↕</span></th>          <th onclick="sortTable('leader')">Leader <span class="sort">↕</span></th>          <th onclick="sortTable('canal')">Canal/Turno <span class="sort">↕</span></th>          <th onclick="sortTable('mes')">Mês <span class="sort">↕</span></th>          <th onclick="sortTable('cs')">CSAT% <span class="sort">↕</span></th>          <th onclick="sortTable('tdi')">TDI% <span class="sort">↕</span></th>          <th onclick="sortTable('pr')">Produtividade <span class="sort">↕</span></th>          <th onclick="sortTable('tmo')">TMO (min) <span class="sort">⇕</span></th>          <th onclick="sortTable('ss')">Pesquisas CSAT</th>        </tr>      </thead>      <tbody id="agBody"></tbody>    </table>  </div></section><!-- ═══ CSAT ═══ --><section class="section" id="csat">  <div class="page">    <div class="sec-title">⭐ CSAT — Satisfação do Cliente por Agente</div>    <div id="csat_summary" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"></div>    <div class="card">      <div class="card-t" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">        <span>Resultado por LDAP — <span id="csat_count" style="color:var(--blue);font-weight:900">0</span> registros</span>        <div style="display:flex;gap:8px;align-items:center">          <label style="font-size:10.5px;font-weight:700;color:var(--muted)">Ordenar por</label>          <select id="csat_sort" onchange="renderCsatTable()" style="padding:3px 7px;border:1.5px solid var(--border);border-radius:7px;font-size:11.5px">            <option value="csat_pct">CSAT% ↓</option>            <option value="surveys">Pesquisas ↓</option>            <option value="ldap">LDAP A-Z</option>          </select>        </div>      </div>      <div id="csat_table_wrap" style="margin-top:10px;overflow-x:auto"></div>    </div>  </div></section><!-- ═══ TMO ═══ --><section class="section" id="tmo_tab">  <div class="sec-title">⏱️ TMO — Tempo Médio Operacional</div>  <div id="gb_tmo_tab"></div>  <div id="cg_tmo_tab" class="combo-grid"></div>  <div class="leg">    <div class="li"><div class="ld" style="background:#3483FA"></div>CHAT TM</div>    <div class="li"><div class="ld" style="background:#FF7B00"></div>CHAT TT</div>    <div class="li"><div class="ld" style="background:#00A650"></div>C2C</div>  </div>  <div class="grid2">    <div class="card"><div class="card-t">TMO Total (min) — evolução mensal</div><div class="cw"><canvas id="ef_tmo"></canvas></div></div>    <div class="card"><div class="card-t">TMO por Canal de Atendimento (min)</div><div class="cw"><canvas id="ef_tmoC"></canvas></div></div>  </div>  <!-- ABERTURA POR PROCESSO -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 Abertura por Processo — TMO médio mensal (min)</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução TMO por Processo</p><div class="cw"><canvas id="tmo_proc_chart"></canvas></div></div>      <div id="tmo_proc_table" style="overflow-y:auto;max-height:280px"></div>    </div>  </div>  <!-- TMO ON vs OFF -->  <div class="card" style="margin-top:14px">    <div class="card-t">⚡ Tempo de Casos ON (chat/c2c) vs OFF (mail) por mês</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">TMO ON (min) — CHAT e C2C</p><div class="cw"><canvas id="tmo_on_chart"></canvas></div></div>      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">TMO OFF/mail (min)</p><div class="cw"><canvas id="tmo_off_chart"></canvas></div></div>    </div>    <div id="tmo_on_off_table" style="margin-top:12px"></div>  </div>  <!-- CASOS TMO EXCEDIDO -->  <div class="card" style="margin-top:14px">    <div class="card-t">🔴 Casos com TMO Excedido (acima de ${
 TMO_THRESHOLD}
  min) — por canal/turno</div>    <div id="tmo_excedido_content"></div>  </div>  <!-- DIAGNÓSTICO POR PROCESSO -->  <div style="margin-top:14px">    <div class="sec-title" style="font-size:13px;margin-bottom:10px">🔍 Diagnóstico — Impacto no TMO por Processo</div>    <div id="tmo_diag"></div>  </div>  <div style="margin-top:16px"><div id="ldap_tmo_tab"></div></div></section><!-- ═══ TMO AGENTES ═══ --><section class="section" id="tmo_agente">  <div class="sec-title">👤 TMO Agentes — Tempo Médio por Agente</div>  <div id="tmoagt_kpi" class="gband" style="border-top-color:#8B5CF6"></div>  <div class="grid2" style="margin-top:14px">    <div class="card">      <div class="card-t">📊 TMO médio por Canal (mês selecionado)</div>      <div id="tmoagt_canal"></div>    </div>    <div class="card">      <div class="card-t">🏆 Ranking por Líder — TMO médio ponderado</div>      <div id="tmoagt_leader"></div>    </div>  </div>  <div class="card" style="margin-top:14px">    <div class="card-t" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">      <span>👤 TMO por Agente (LDAP) — <span id="tmoagt_count" style="color:#8B5CF6;font-weight:900">0</span> agentes</span>      <div style="display:flex;gap:8px;align-items:center">        <label style="font-size:10.5px;font-weight:700;color:var(--muted)">Ordenar por</label>        <select id="tmoagt_sort" onchange="renderTmoAgtLdap()" style="padding:3px 7px;border:1.5px solid var(--border);border-radius:7px;font-size:11.5px">          <option value="tmo_total">TMO Total ↓</option>          <option value="tmo_on">TMO ON ↓</option>          <option value="tmo_off">TMO OFF ↓</option>          <option value="casos_on">Casos ON ↓</option>          <option value="ldap">LDAP A-Z</option>        </select>      </div>    </div>    <div id="tmoagt_ldap" style="margin-top:10px;overflow-x:auto"></div>  </div>  <div class="alert b" style="margin-top:14px">    ℹ️ <span>TMO ON = casos via CHAT e C2C · TMO OFF = casos via e-mail · TMO Total = média ponderada por casos · Fonte: BT_CX_REP_METRICS_CS</span>  </div></section><!-- ═══ PRODUTIVIDADE ═══ --><section class="section" id="produ_tab">  <div class="sec-title">⚡ Produtividade</div>  <div id="gb_produ_tab"></div>  <div id="diag_ldap_produ_tab"></div>  <div id="cg_produ_tab" class="combo-grid"></div>  <div class="leg">    <div class="li"><div class="ld" style="background:#3483FA"></div>CHAT TM</div>    <div class="li"><div class="ld" style="background:#FF7B00"></div>CHAT TT</div>    <div class="li"><div class="ld" style="background:#00A650"></div>C2C</div>  </div>  <!-- ABERTURA POR PROCESSO -->  <div class="card" style="margin-top:14px">    <div class="card-t">📋 Abertura por Processo — Produtividade Total mensal</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Evolução da Produtividade por Processo</p><div class="cw"><canvas id="produ_proc_chart"></canvas></div></div>      <div id="produ_proc_table" style="overflow-y:auto;max-height:280px"></div>    </div>  </div>  <!-- PRODU ON / OFF / GERAL -->  <div class="card" style="margin-top:14px">    <div class="card-t">⚡ Produtividade ON (chat/c2c) · OFF (mail) · Geral — evolução mensal</div>    <div class="grid2">      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Produ ON vs OFF — canal/turno</p><div class="cw"><canvas id="ef_proOn"></canvas></div></div>      <div><p style="font-size:11px;font-weight:700;margin-bottom:8px">Produ Geral — canal/turno</p><div class="cw"><canvas id="ef_proOff"></canvas></div></div>    </div>    <div class="card" style="margin-top:12px;box-shadow:none;border:1px solid var(--border)">      <div class="card-t">Volume de Casos ON vs OFF e Produ ON% vs OFF%</div>      <div class="grid2">        <div><div class="cw sm"><canvas id="ef_casosOnOff"></canvas></div></div>        <div><div class="cw sm"><canvas id="ef_proOnOffPct"></canvas></div></div>      </div>    </div>  </div>  <!-- PRODU POR PROCESSO: ON vs OFF -->  <div class="card" style="margin-top:14px">    <div class="card-t">📊 Produtividade ON vs OFF por Processo — Maio/26*</div>    <div id="produ_proc_on_off_table"></div>  </div>  <!-- CASOS COM TMO EXCEDIDO (impacta produtividade) -->  <div class="card" style="margin-top:14px">    <div class="card-t">🔴 Casos com TMO Excedido — impacto na Produtividade (threshold: ${
 TMO_THRESHOLD}
@@ -1656,11 +1656,7 @@ function assignQuartilesByGroup(rows, key, higherBetter, srvKey){
   });
 }
 function computeAllQuartiles(rows){
-  assignQuartilesByGroup(rows, 'CS',  true);        // CSAT:          maior = melhor
-  assignQuartilesByGroup(rows, 'TDI', false);       // TDI:           menor = melhor
-  assignQuartilesByGroup(rows, 'PR',  true);        // Produtividade: maior = melhor
-  assignQuartilesByGroup(rows, 'TMO', false);       // TMO:           menor = melhor
-  assignQuartilesByGroup(rows, 'EM',  true);        // Estilo Meli:   maior = melhor
+  // mantido vazio — aba Métricas Gerais usa threshold de meta, não quartis
 }
 // ─── assignQuartiles (agrupa por CANAL+TURNO — todos os líderes do mesmo combo competem juntos) ──
 function assignQuartiles(rows, key, higherBetter){
@@ -1860,82 +1856,59 @@ function renderAgentTable(){
     r.CS  = cs ? cs.pct    : null;
     r.SS  = cs ? cs.surveys: null;
   });
-  const _refMesAT=F.mes||MONTHS[MONTHS.length-1];
-  const _refQAT=ALL.filter(r=>r.MES===_refMesAT&&r.TURNO!=='TMAD').map(r=>{
-    const k=r.MES+'|'+r.LDAP+'|'+r.TURNO;
-    const cs=_csatMap[r.MES+'|'+r.LDAP];
-    return {...r, TMO:(_tmoMap[k]!=null)?+_tmoMap[k]:null, CS:cs?cs.pct:null, EM:r.EM};
-  });
-  computeAllQuartiles(_refQAT);
-  const _qmapAT={};
-  _refQAT.forEach(r=>{_qmapAT[r.LDAP+'|'+r.CANAL+'|'+r.TURNO]=r;});
-  rows.forEach(r=>{
-    const s=_qmapAT[r.LDAP+'|'+r.CANAL+'|'+r.TURNO];
-    r._q_CS=s?s._q_CS:null; r._q_TDI=s?s._q_TDI:null;
-    r._q_PR=s?s._q_PR:null; r._q_TMO=s?s._q_TMO:null; r._q_EM=s?s._q_EM:null;
-  });
-  const Q = {q1:0,q2:0,q3:0,q4:0};
-  rows.forEach(r=>{ if(r._q_CS){Q['q'+r._q_CS]++}});
+
   document.getElementById('fcount').textContent = `${rows.length} registros`;
-  document.getElementById('agSummary').innerHTML = `    <div class="as-pill q1"><span>${Q.q1}</span>Q1 CSAT</div>    <div class="as-pill q2"><span>${Q.q2}</span>Q2 CSAT</div>    <div class="as-pill q3"><span>${Q.q3}</span>Q3 CSAT</div>    <div class="as-pill q4"><span>${Q.q4}</span>Q4 CSAT</div>    <div class="as-pill"><span>${rows.filter(r=>r.CS!=null).length}</span>c/ CSAT</div>  `;
-  const keyMap = {ldap:'LDAP',leader:'LEADER',canal:'CANAL',turno:'TURNO',mes:'MES',cs:'CS',tdi:'TDI',pr:'PR',tmo:'TMO',em:'EM',ss:'SS'};
+
+  // Summary: totais em meta
+  const refMes = F.mes || MONTHS[MONTHS.length-1];
+  const refRows = rows.filter(r => r.MES === refMes && r.TURNO !== 'TMAD');
+  const inMetaCSAT  = refRows.filter(r => r.CS  != null && r.CS  >= 85).length;
+  const inMetaTDI   = refRows.filter(r => r.TDI != null && r.TDI <= 5).length;
+  const inMetaPR    = refRows.filter(r => r.PR  != null && r.PR  >= 3.7).length;
+  const inMetaTMO   = refRows.filter(r => r.TMO != null && r.TMO <= 27).length;
+  const total = refRows.length || 1;
+  document.getElementById('agSummary').innerHTML = `
+    <div class="as-pill" style="background:#DCFCE7;color:#15803D"><span>${inMetaCSAT}/${total}</span>CSAT ≥85%</div>
+    <div class="as-pill" style="background:#DCFCE7;color:#15803D"><span>${inMetaPR}/${total}</span>Produ ≥3,7</div>
+    <div class="as-pill" style="background:#FEF3C7;color:#92400E"><span>${inMetaTMO}/${total}</span>TMO ≤27 min</div>
+    <div class="as-pill" style="background:#DCFCE7;color:#15803D"><span>${inMetaTDI}/${total}</span>TDI ≤5%</div>
+  `;
+
+  const keyMap = {ldap:'LDAP',leader:'LEADER',canal:'CANAL',turno:'TURNO',mes:'MES',cs:'CS',tdi:'TDI',pr:'PR',tmo:'TMO',ss:'SS'};
   const sKey = keyMap[sortCol] || 'CS';
   rows.sort((a,b)=>{
     const av=a[sKey]??-Infinity, bv=b[sKey]??-Infinity;
     return sortAsc ? (av>bv?1:-1) : (av<bv?1:-1);
   });
-  document.querySelectorAll('#agTable th .sort').forEach(s=>s.textContent='↕');
-  document.querySelectorAll('#agTable th.sorted').forEach(s=>s.classList.remove('sorted'));
+
   const tb = document.getElementById('agBody');
   const nd = '<span style="color:#CBD5E1">—</span>';
-  const CSAT_T = 85;
+
+  // Helpers de cor por threshold absoluto
+  function csColor(v){return v==null?'':v>=85?'#059669':v>=70?'#D97706':'#DC2626';}
+  function tdiColor(v){return v==null?'':v<=5?'#059669':v<=6.5?'#D97706':'#DC2626';}
+  function prColor(v){return v==null?'':v>=3.7?'#059669':v>=3?'#D97706':'#DC2626';}
+  function tmoColor(v){return v==null?'':v<=27?'#059669':v<=30?'#D97706':'#DC2626';}
+
   tb.innerHTML = rows.map(r=>{
-    const csPct = r.CS!=null?`<strong style="color:${r.CS>=CSAT_T?'#00A650':r.CS>=70?'#E65100':'#C62828'}">${r.CS.toFixed(1)}%</strong>`:nd;
-    const emV = r.EM!=null?`${r.EM}%`:nd;
-    return `<tr>    <td><strong>${r.LDAP}</strong></td>    <td>${r.LEADER||'—'}</td>    <td>${canalBadge(r.CANAL,r.TURNO)}</td>    <td>${r.MES}</td>    <td>${csPct}</td><td>${qb(r._q_CS)}</td>    <td>${r.TDI!=null?r.TDI.toFixed(2)+'%':nd}</td><td>${qb(r._q_TDI)}</td>    <td>${r.PR!=null?r.PR.toFixed(2):nd}</td><td>${qb(r._q_PR)}</td>    <td>${r.TMO!=null?r.TMO.toFixed(2):nd}</td><td>${qb(r._q_TMO)}</td>    <td>${emV}</td>    <td style="color:#64748B">${r.SS||0}</td>  </tr>`;
+    const csV  = r.CS!=null?`<strong style="color:${csColor(r.CS)}">${r.CS.toFixed(1)}%</strong>`:nd;
+    const tdiV = r.TDI!=null?`<strong style="color:${tdiColor(r.TDI)}">${r.TDI.toFixed(2)}%</strong>`:nd;
+    const prV  = r.PR!=null?`<strong style="color:${prColor(r.PR)}">${r.PR.toFixed(2)}</strong>`:nd;
+    const tmoV = r.TMO!=null?`<strong style="color:${tmoColor(r.TMO)}">${r.TMO.toFixed(2)}</strong>`:nd;
+    return `<tr>
+      <td><strong>${r.LDAP}</strong></td>
+      <td>${r.LEADER||'—'}</td>
+      <td>${canalBadge(r.CANAL,r.TURNO)}</td>
+      <td>${r.MES}</td>
+      <td>${csV}</td>
+      <td>${tdiV}</td>
+      <td>${prV}</td>
+      <td>${tmoV}</td>
+      <td style="color:#64748B">${r.SS||0}</td>
+    </tr>`;
   }).join('');
 }
-function renderCsatTable(){
-  const el = document.getElementById('csat_table_wrap');
-  if(!el) return;
-  const refMes = F.mes || MONTHS[MONTHS.length-1];
-  let data = CSAT_LDAP.filter(r=>{
-    if(F.mes && r.mes!==F.mes) return false;
-    if(F.canal && r.canal!==F.canal && r.canal!==('MULTICANAL '+F.canal)) return false;
-    if(F.leader && r.leader!==F.leader) return false;
-    if(F.ldap && r.ldap!==F.ldap) return false;
-    return true;
-  });
-  const countEl = document.getElementById('csat_count');
-  if(countEl) countEl.textContent = data.length;
-  const sortKey = document.getElementById('csat_sort')?.value||'csat_pct';
-  data.sort((a,b)=>{
-    if(sortKey==='ldap') return a.ldap.localeCompare(b.ldap);
-    return (b[sortKey]??-Infinity)-(a[sortKey]??-Infinity);
-  });
-  const refData = CSAT_LDAP.filter(r=>r.mes===refMes).filter(r=>r.csat_pct!=null);
-  refData.sort((a,b)=>b.csat_pct-a.csat_pct);
-  const n=refData.length, base=Math.floor(n/4), extra=n%4;
-  const b1=base+(extra>=1?1:0),b2=b1+base+(extra>=2?1:0),b3=b2+base+(extra>=3?1:0);
-  const qmap={};
-  refData.forEach((r,i)=>{ qmap[r.ldap+'|'+r.mes]=i<b1?1:i<b2?2:i<b3?3:4; });
-  const nd='<span style="color:#CBD5E1">—</span>';
-  const CSAT_T=85;
-  const rows=data.map(r=>{
-    const q=qmap[r.ldap+'|'+r.mes];
-    const pct=r.csat_pct;
-    const pctFmt=pct!=null?`<strong style="color:${pct>=CSAT_T?'#00A650':pct>=70?'#E65100':'#C62828'}">${pct.toFixed(1)}%</strong>`:nd;
-    const canalLabel=(r.canal||'').replace('MULTICANAL ','');
-    return `<tr><td><strong>${r.ldap}</strong></td><td>${r.leader||'—'}</td><td>${canalBadge(canalLabel,r.turno)}</td><td>${r.mes}</td><td style="text-align:center">${pctFmt}</td><td style="text-align:center">${qb(q)}</td><td style="text-align:center;color:#64748B">${r.surveys||0}</td></tr>`;
-  }).join('');
-  el.innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr style="background:#F8FAFC"><th style="padding:7px;text-align:left">LDAP</th><th style="padding:7px;text-align:left">Leader</th><th style="padding:7px;text-align:left">Canal</th><th style="padding:7px;text-align:left">Mês</th><th style="padding:7px;text-align:center">CSAT%</th><th style="padding:7px;text-align:center">Q CSAT</th><th style="padding:7px;text-align:center">Pesquisas</th></tr></thead><tbody>${rows||'<tr><td colspan=7 style="text-align:center;color:#94A3B8;padding:20px">Sem dados de CSAT disponíveis</td></tr>'}</tbody></table>`;
-  const byQ={1:0,2:0,3:0,4:0};
-  data.forEach(r=>{const q=qmap[r.ldap+'|'+r.mes];if(q)byQ[q]++;});
-  const withData=data.filter(r=>r.csat_pct!=null);
-  const avgCsat=withData.length?withData.reduce((s,r)=>s+(r.csat_pct||0),0)/withData.length:null;
-  const sumEl=document.getElementById('csat_summary');
-  if(sumEl) sumEl.innerHTML=`<div class="as-pill q1"><span>${byQ[1]}</span>Q1 CSAT</div><div class="as-pill q2"><span>${byQ[2]}</span>Q2 CSAT</div><div class="as-pill q3"><span>${byQ[3]}</span>Q3 CSAT</div><div class="as-pill q4"><span>${byQ[4]}</span>Q4 CSAT</div>${avgCsat!=null?`<div class="as-pill"><span>${avgCsat.toFixed(1)}%</span>Média CSAT</div>`:''}`;
-}
+
 function sortTable(col){
  if(sortCol===col) sortAsc=!sortAsc;
  else {
